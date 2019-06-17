@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_15"
+    android:id="@+id/cons"
+    android:background="@color/white">
+
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_issue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/dialog_bg"
+        android:drawableRight="@drawable/ic_drop_down"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:stateListAnimator="@animator/us_button_selector"
+        android:hint="@string/issue"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_14"
+        app:customFont="@string/fontBold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <EditText
+        android:id="@+id/et_issue_des"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_120"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/dialog_bg"
+        android:gravity="top|left"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_5"
+        android:text=""
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_issue"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#ffffff"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingTop="@dimen/dp_2"
+        android:paddingRight="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_2"
+        android:text="@string/discribe_issue"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintLeft_toLeftOf="@+id/et_issue_des"
+        app:layout_constraintTop_toBottomOf="@+id/tv_issue"
+        />
+
+    <com.virtual.customervendor.customview.CustomButton
+        android:id="@+id/btn_send_help"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/btn_bg_click"
+        android:drawablePadding="@dimen/dp_8"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/dp_50"
+        android:layout_marginRight="@dimen/dp_50"
+        android:text="@string/send"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_issue_des" />
+
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_email"-->
+    <!--android:layout_width="@dimen/dp_100"-->
+    <!--android:layout_height="@dimen/dp_100"-->
+    <!--android:layout_marginTop="@dimen/dp_20"-->
+    <!--android:src="@drawable/app_icon"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+
+    <!--/>-->
+
+    <!--<com.virtual.customervendor.customview.CustomTextView-->
+    <!--android:id="@+id/tv_txt_below_link"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/dp_25"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Click on the below link to reach us :"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="@dimen/sp_13"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/iv_email" />-->
+
+
+    <!--<com.virtual.customervendor.customview.CustomTextView-->
+    <!--android:id="@+id/tv_email_link"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/dp_8"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingBottom="@dimen/dp_5"-->
+    <!--android:paddingLeft="@dimen/dp_15"-->
+    <!--android:paddingRight="@dimen/dp_15"-->
+    <!--android:text="@string/txt_support_mail"-->
+    <!--android:textColor="@color/colorAccent"-->
+    <!--android:textSize="@dimen/sp_15"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_txt_below_link" />-->
+
+    <!--<com.virtual.customervendor.customview.CustomTextView-->
+    <!--android:id="@+id/tv_txt_or"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/dp_15"-->
+    <!--android:background="@drawable/border_circle"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="@dimen/dp_8"-->
+    <!--android:text="OR"-->
+    <!--android:textColor="@color/colorAccent"-->
+    <!--android:textSize="@dimen/sp_15"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_email_link" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginLeft="@dimen/dp_15"-->
+    <!--android:layout_marginRight="@dimen/dp_8"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/tv_txt_or"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toLeftOf="@+id/tv_txt_or"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/tv_txt_or"-->
+
+    <!--/>-->
+
+
+    <!--<View-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginLeft="@dimen/dp_8"-->
+    <!--android:layout_marginRight="@dimen/dp_15"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/tv_txt_or"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/tv_txt_or"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/tv_txt_or"-->
+
+    <!--/>-->
+
+
+    <!--<com.virtual.customervendor.customview.CustomTextView-->
+    <!--android:id="@+id/tv_txt_call_us"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/dp_15"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Call Us On :"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="@dimen/sp_13"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_txt_or" />-->
+
+
+    <!--<com.virtual.customervendor.customview.CustomButton-->
+    <!--android:id="@+id/btn_contact_no"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/dp_10"-->
+    <!--android:background="@drawable/btn_bg_click"-->
+    <!--android:drawablePadding="@dimen/dp_8"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingLeft="@dimen/dp_15"-->
+    <!--android:paddingRight="@dimen/dp_15"-->
+    <!--android:text="+91- 0000000000"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/sp_15"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_txt_call_us" />-->
+
+
+</android.support.constraint.ConstraintLayout>

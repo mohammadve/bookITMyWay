@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:id="@+id/ev_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:padding="@dimen/dp_2"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/viewPager"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/ed_startloc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        android:theme="@style/StyleTextInputLayout"
+        app:customFont="@string/fontBold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ed_sighttime"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/ed_sighttime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        android:theme="@style/StyleTextInputLayout"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/ed_startloc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
+
+
+

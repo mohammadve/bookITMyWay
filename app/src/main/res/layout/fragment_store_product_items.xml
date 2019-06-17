@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/start_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_upload"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/place_holder_banner"
+            app:layout_constraintDimensionRatio="2:1" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@+id/img_upload" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+

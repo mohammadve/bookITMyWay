@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_store"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/store_items"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_excursion"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/excursion"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_store" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/tickes_fpr_events"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_excursion" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

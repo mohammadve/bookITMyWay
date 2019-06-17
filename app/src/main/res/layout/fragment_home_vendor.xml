@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/cons"
+    android:layout_height="match_parent">
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:background="@drawable/edittext_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:stateListAnimator="@animator/us_button_selector"
+        android:text="@string/create_offer"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_20"
+        app:customFont="@string/fontBold"
+        android:drawableRight="@drawable/ic_right_theme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:text="@string/your_offer"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt" />
+
+
+</android.support.constraint.ConstraintLayout>

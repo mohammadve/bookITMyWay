@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:foreground="?selectableItemBackground"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/ivUserPic"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:contentDescription="@string/navigation_header"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/place_holder_round" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:text="Restaurant Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintBottom_toBottomOf="@+id/ivUserPic"
+        app:layout_constraintLeft_toRightOf="@+id/ivUserPic"
+        app:layout_constraintTop_toTopOf="@+id/ivUserPic" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_follow_unfollow"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/btn_bg_click"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:stateListAnimator="@animator/us_button_selector"
+        android:tag="unfollow"
+        android:text="@string/unfollow"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontBold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivUserPic" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sp_1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/menu_bg_color_cccccc"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserPic" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

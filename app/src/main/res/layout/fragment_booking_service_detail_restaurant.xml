@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nest"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/dp_30">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_upload"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/place_holder_banner"
+            app:layout_constraintDimensionRatio=".85:1"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio=".85:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_follow_unfollow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:tag="@string/follow"
+            android:text="@string/follow"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_upload" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/bname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_follow_unfollow">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_bname"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_bname"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bname" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bname">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_bcontact"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_bcontact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_phone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_email"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_email"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_address"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_address"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/city"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_city"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_city"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_region"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/region"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_region"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_region"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_region"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <!--<com.virtual.customervendor.customview.CustomTextView-->
+        <!--android:id="@+id/ed_region"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/dp_30"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--android:layout_marginRight="@dimen/dp_30"-->
+        <!--android:text="@string/region"-->
+        <!--android:textColor="@color/text2_color_7d7d7d"-->
+        <!--android:textSize="@dimen/sp_14"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/address" />-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/region" />
+
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/ed_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@null"
+            android:focusable="false"
+            android:text="@string/service_information"
+            android:textColor="@color/text1_color_101010"
+            android:textColorHint="@color/menu_bg_color_cccccc"
+            android:textSize="@dimen/sp_18"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/region" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ttable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_service">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_table"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tables"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_table"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_table"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_table"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/avperson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ttable">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_person"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_seat_per_table"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_person"
+                app:layout_constraintHorizontal_weight="2"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_person"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_person"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/avcost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avperson">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_cost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_cost_per_person"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_avcost"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_avcost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_cost"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/avslottime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avcost">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_slot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_slot_time"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_slot"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_slot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_slot"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/serday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avslottime">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_serday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/service_day"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_day"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_serday"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/sertime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serday">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_sertime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/service_time"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_sertime"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_sertime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_sertime"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sertime">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ed_desc"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/ed_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toRightOf="@+id/t_desc"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc" />
+
+
+
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/next"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

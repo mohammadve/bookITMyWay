@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:stripe="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".commonActivity.PaymentActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
+
+    <com.stripe.android.view.CardMultilineWidget
+        android:id="@+id/card_input_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_40"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:shouldShowPostalCode="false"
+        stripe:cardTextErrorColor="@color/colorAccent"
+        stripe:cardTint="@color/colorAccent" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_make_payment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:background="@drawable/btn_bg_click"
+        android:gravity="center"
+        android:stateListAnimator="@animator/us_button_selector"
+        android:text="@string/make_payment"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/sp_20"
+        app:customFont="@string/fontBold"
+        app:layout_constraintTop_toBottomOf="@+id/card_input_widget"
+
+        />
+</android.support.constraint.ConstraintLayout>

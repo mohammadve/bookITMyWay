@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_loc"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/place_holder_list" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/name"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/coupon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bname">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_coupon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/coupon_code"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_coupon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_coupon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/validfrom"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_coupon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/discount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coupon">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/discount_percent"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_discount"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/name"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_discount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/validfrom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/discount">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/validfrom"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_from"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/validfrom"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_from"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/validto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/validfrom">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/validto"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_to"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/name"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_to"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintLeft_toRightOf="@+id/img_loc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/validto">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/t_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_desc"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/name"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_14"
+            android:theme="@style/StyleTextInputLayout"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/t_desc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/txt_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingRight="@dimen/dp_2"
+        android:paddingBottom="@dimen/dp_2"
+        android:text="@string/apply"
+        android:textColor="@color/themecolor_022E8D"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontBold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desc" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sp_1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/menu_bg_color_cccccc"
+        app:layout_constraintTop_toBottomOf="@+id/txt_apply" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+
+
+

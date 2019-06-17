@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/themecolor_022E8D</item>
+        <item name="android:timePickerStyle">@style/Widget.MyApp.TimePicker</item>
+    </style>
+
+    <style name="Widget.MyApp.TimePicker" parent="android:Widget.Material.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+</resources>

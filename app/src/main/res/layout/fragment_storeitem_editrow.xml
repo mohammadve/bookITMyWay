@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start_lay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_itemname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:focusable="true"
+        android:imeOptions="actionNext"
+        android:theme="@style/StyleTextInputLayout"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/til_price">
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/ed_itemname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="@string/item_name"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textColorHint="@color/menu_bg_color_cccccc"
+            app:customFont="@string/fontRegular" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:focusable="true"
+        android:imeOptions="actionNext"
+        android:theme="@style/StyleTextInputLayout"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/til_itemname"
+        app:layout_constraintRight_toLeftOf="@+id/rl">
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/ed_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/price"
+            android:inputType="number"
+            android:focusable="true"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textColorHint="@color/menu_bg_color_cccccc"
+            app:customFont="@string/fontRegular" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/til_price"
+        app:layout_constraintLeft_toRightOf="@+id/til_price"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:foreground="?selectableItemBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/ic_clear"
+             />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:foreground="?selectableItemBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/ic_update"
+            />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
+
+
+
+

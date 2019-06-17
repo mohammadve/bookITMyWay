@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <!--</group>-->
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"
+            app:actionLayout="@layout/custom_navigation_row" />
+        <!--<item-->
+        <!--android:id="@+id/nav_profile"-->
+        <!--android:title="@string/my_profile" />-->
+        <item
+            android:id="@+id/nav_booking"
+
+            android:title="@string/bookings" />
+        <item
+            android:id="@+id/nav_purchase"
+
+            android:title="@string/purchase_history" />
+        <item
+            android:id="@+id/nav_settings"
+
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_about"
+
+            android:title="@string/about" />
+        <!--</group>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_help"-->
+
+            <!--android:title="@string/help" />-->
+    </group>
+
+
+</menu>

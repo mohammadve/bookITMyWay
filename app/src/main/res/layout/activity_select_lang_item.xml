@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_10">
+
+    <android.support.v7.widget.AppCompatRadioButton
+        android:id="@+id/rad_taxi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/taxi"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sp_1"
+        android:background="@color/menu_bg_color_cccccc"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintTop_toBottomOf="@+id/rad_taxi" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

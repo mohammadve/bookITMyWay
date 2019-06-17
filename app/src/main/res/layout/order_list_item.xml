@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5"
+  >
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/ordernumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/ordercount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginBottom="@dimen/dp_2"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ordernumber"  />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ordercount"  />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/orderdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="Restaurant Name"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontThin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ordernumber" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="@string/view"
+        android:textColor="@color/themecolor_022E8D"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/datetime"
+        app:layout_constraintTop_toTopOf="@+id/img_loc" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sp_1"
+        android:background="@color/menu_bg_color_cccccc"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

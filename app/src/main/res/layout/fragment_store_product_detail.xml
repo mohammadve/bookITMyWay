@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/start_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_upload"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/place_holder_banner"
+            app:layout_constraintDimensionRatio="2:1" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="2:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_itemname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:focusable="true"
+            android:hint="@string/item_name"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_18"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_20"
+            android:focusable="true"
+            android:hint="@string/price"
+            android:maxLength="4"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintTop_toBottomOf="@+id/ed_itemname" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_20"
+            android:focusable="true"
+            android:hint="@string/description"
+            android:inputType="text"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_18"
+            app:customFont="@string/fontThin"
+            app:layout_constraintTop_toBottomOf="@+id/ed_price" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/hint_bname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="@string/choose_fromyourside"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_18"
+            android:visibility="visible"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_desc" />
+
+
+
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chkone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/check_box_selector"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            android:checked="false"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:text="@string/physio_fitnesstrainer"
+            app:customFont="@string/fontRegular"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hint_bname" />
+
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chktwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/check_box_selector"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            android:checked="false"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:text="@string/physio_fitnesstrainer"
+            app:customFont="@string/fontRegular"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chkone" />
+
+
+
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chktwo" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/calcu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_10"
+
+            app:layout_constraintTop_toBottomOf="@+id/chktwo">
+
+            <ImageView
+                android:id="@+id/minus_img"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_remove_circle_outline_black"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/minus_img" />
+
+            <ImageView
+                android:id="@+id/plus_img"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_add_circle_outline_black"
+                app:layout_constraintLeft_toRightOf="@+id/tv_quantity" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$5.00"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_20"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/addtocart"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calcu" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

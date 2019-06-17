@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar_appbar" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/text_color_white">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_upload"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:scaleType="fitXY"
+                android:src="@drawable/place_holder_banner"
+                app:layout_constraintDimensionRatio=".85:1" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio=".85:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:src="@drawable/camera_alt_black"
+                android:tint="@color/themecolor_022E8D"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/img_upload"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/layoutDots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_upload">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_title">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/discount_percent"
+                    android:inputType="number"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_startdtae"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_price">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_startdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/start_date"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_enddate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_startdtae">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_enddate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/end_date"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_coupen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_enddate">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_coupen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/coupen_code"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="6"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:theme="@style/StyleTextInputLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_coupen">
+
+                <com.virtual.customervendor.customview.CustomEditText
+                    android:id="@+id/ed_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description"
+                    android:inputType="text"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    app:customFont="@string/fontRegular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/btn_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="@dimen/dp_40"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:background="@drawable/btn_bg_click"
+                android:gravity="center"
+                android:stateListAnimator="@animator/us_button_selector"
+                android:text="@string/create"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/sp_20"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_desc" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

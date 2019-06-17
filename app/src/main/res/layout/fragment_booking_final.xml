@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    android:background="@color/white"
+    android:id="@+id/cons"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/dp_30"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20">
+
+        <com.virtual.customervendor.customview.BubbleImageView
+            android:id="@+id/imgBusiness"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_90"
+            android:scaleType="centerCrop"
+            android:src="@drawable/place_holder_list"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/region"
+            app:layout_constraintTop_toTopOf="@id/bname"
+            app:siArrowPosition="right"
+            app:siSquare="true"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/bname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            app:layout_constraintLeft_toRightOf="@+id/imgBusiness"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBusiness">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/txtBusiness"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtBusiness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toRightOf="@+id/t_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/city"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/region"
+            app:layout_constraintLeft_toRightOf="@+id/imgBusiness"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bname">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/city"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/txtcity"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtcity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toRightOf="@+id/t_city"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/region"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBusiness"
+            app:layout_constraintLeft_toRightOf="@+id/imgBusiness"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/t_region"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_no"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/txtregion"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtregion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/name"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintLeft_toRightOf="@+id/t_region"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_15"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgBusiness" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_jouhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/journey"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgBusiness" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/from"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_jouhead" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_jou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_horizontal"
+            android:text="@string/business_contact_number"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/from" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/too"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_jou" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_tojou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_horizontal"
+            android:text="@string/business_contact_number"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_tojou" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_datehead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/date"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_tojou" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_horizontal"
+            android:text="@string/business_contact_number"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_datehead" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_date" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_timeh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/time"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_date" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_horizontal"
+            android:text="@string/business_contact_number"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_timeh" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_time" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_inshead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="Special Instuctions"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_time" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/business_contact_number"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_inshead" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_15"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_desc" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txtorderprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/order_price"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_desc" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txtdistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_desc" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_orderprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/order_price"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtorderprice" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/offerprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/offer_price"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_desc" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_offerprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/offer_price"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/offerprice" />
+
+        <View
+            android:id="@+id/vee"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_offerprice" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txttax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/taxamt"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_orderprice" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/order_price"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txttax" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/totalprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/total_amount"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_offerprice" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/ed_toatlprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_horizontal"
+            android:text="@string/offer_price"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalprice" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sp_1"
+            android:layout_marginTop="@dimen/dp_15"
+            android:background="@color/location_bg_e5e5e5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_tax" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/PaymentOption_taxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/select_paymentOption"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontThin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_tax" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_payment_option_taxi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PaymentOption_taxi">
+
+            <RadioButton
+                android:id="@+id/rb_pay_now_taxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:checked="false"
+                android:text="@string/pay_now"
+                android:textSize="@dimen/sp_16" />
+
+            <RadioButton
+                android:id="@+id/rb_pay_later_taxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:text="@string/pay_later"
+                android:textSize="@dimen/sp_16" />
+        </RadioGroup>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_60"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/confirm_booking"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PaymentOption_taxi" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

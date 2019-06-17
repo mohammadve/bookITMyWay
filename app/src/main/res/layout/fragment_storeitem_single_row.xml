@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/start_lay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
+
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:id="@+id/til_itemname"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="@dimen/dp_10"-->
+    <!--android:focusable="true"-->
+    <!--android:imeOptions="actionNext"-->
+    <!--android:theme="@style/StyleTextInputLayout"-->
+    <!--app:layout_constraintHorizontal_weight="2"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toLeftOf="@+id/til_price">-->
+
+    <!--<com.virtual.customervendor.customview.CustomEditText-->
+    <!--android:id="@+id/ed_itemname"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:focusable="true"-->
+    <!--android:hint="@string/item_name"-->
+    <!--android:inputType="text"-->
+    <!--android:textColor="@color/text2_color_7d7d7d"-->
+    <!--android:textColorHint="@color/menu_bg_color_cccccc"-->
+    <!--app:customFont="@string/fontRegular" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:id="@+id/til_price"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/dp_10"-->
+    <!--android:focusable="true"-->
+    <!--android:imeOptions="actionNext"-->
+    <!--android:theme="@style/StyleTextInputLayout"-->
+    <!--app:layout_constraintHorizontal_weight="1"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/til_itemname"-->
+    <!--app:layout_constraintRight_toLeftOf="@+id/img_cancel">-->
+
+    <!--<com.virtual.customervendor.customview.CustomEditText-->
+    <!--android:id="@+id/ed_price"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/price"-->
+    <!--android:inputType="number"-->
+    <!--android:textColor="@color/text2_color_7d7d7d"-->
+    <!--android:textColorHint="@color/menu_bg_color_cccccc"-->
+    <!--app:customFont="@string/fontRegular" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <com.virtual.customervendor.customview.CustomEditText
+        android:id="@+id/ed_itemname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:focusable="true"
+        android:hint="@string/item_name"
+        android:inputType="text"
+        android:textSize="@dimen/sp_16"
+        android:background="@null"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textColorHint="@color/menu_bg_color_cccccc"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="2.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ed_quan" />
+
+
+    <com.virtual.customervendor.customview.CustomEditText
+        android:id="@+id/ed_quan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Quan"
+        android:inputType="number"
+        android:background="@null"
+        android:gravity="center"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textColorHint="@color/menu_bg_color_cccccc"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/ed_itemname"
+        app:layout_constraintRight_toLeftOf="@+id/ed_price" />
+
+
+    <com.virtual.customervendor.customview.CustomEditText
+        android:id="@+id/ed_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/price"
+        android:inputType="number"
+        android:background="@null"
+        android:textSize="@dimen/sp_16"
+        android:gravity="center"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textColorHint="@color/menu_bg_color_cccccc"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/ed_quan"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_price"
+        app:layout_constraintLeft_toRightOf="@+id/ed_price"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_clear" />
+</android.support.constraint.ConstraintLayout>
+
+
+
+

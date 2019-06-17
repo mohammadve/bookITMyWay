@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/text_color_white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
+
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:text="@string/transport_text_header"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_taxi"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/taxi"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_title" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_limos"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/limos"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_taxi" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_tour"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/tour_bus"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_limos" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_sight"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/sight_seeing"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_tour" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_other"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:drawableRight="@drawable/ic_right_theme"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/other"
+        android:visibility="gone"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_sight" />
+
+
+</android.support.constraint.ConstraintLayout>

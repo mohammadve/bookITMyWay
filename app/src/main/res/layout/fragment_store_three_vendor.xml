@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_30">
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center_horizontal"
+        android:text="@string/add_few_items_to_your_food_menu_nyou_can_add_change_delete_items_later"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_food_three"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_30"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/addmore"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/addmore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:drawableLeft="@drawable/ic_add_more"
+        android:gravity="center_vertical"
+        android:text="@string/add_more"
+        android:textColor="@color/themecolor_022E8D"
+        app:customFont="@string/fontBold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_40"
+        android:background="@drawable/btn_bg_click"
+        android:gravity="center"
+        android:stateListAnimator="@animator/us_button_selector"
+        android:text="@string/next"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/sp_20"
+        app:customFont="@string/fontBold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+
+
+

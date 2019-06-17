@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5">
+
+
+    <com.virtual.customervendor.customview.BubbleImageView
+        android:id="@+id/ivUserPic"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        android:scaleType="centerCrop"
+        android:src="@drawable/place_holder_list"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bname"
+        app:siArrowPosition="right"
+        app:siSquare="true"/>
+
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:text="Restaurant Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintBottom_toBottomOf="@+id/ivUserPic"
+        app:layout_constraintLeft_toRightOf="@+id/ivUserPic"
+        app:layout_constraintTop_toTopOf="@+id/ivUserPic" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sp_1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/menu_bg_color_cccccc"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserPic" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

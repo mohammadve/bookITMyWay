@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+
+    <!--<com.virtual.customer_vendor.customview.CustomTextView-->
+        <!--android:id="@+id/txt_changepass"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_45"-->
+        <!--android:layout_marginLeft="@dimen/dp_50"-->
+        <!--android:layout_marginRight="@dimen/dp_50"-->
+        <!--android:layout_marginTop="@dimen/dp_60"-->
+        <!--android:background="@drawable/edittext_bg"-->
+        <!--android:drawableRight="@drawable/right_black"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:padding="@dimen/dp_6"-->
+        <!--android:text="Change Password"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--<com.virtual.customer_vendor.customview.CustomTextView-->
+        <!--android:id="@+id/txt_notification"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/dp_50"-->
+        <!--android:layout_marginTop="@dimen/dp_20"-->
+        <!--android:text="Notification"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/txt_changepass" />-->
+
+    <!--<android.support.v7.widget.SwitchCompat-->
+        <!--android:id="@+id/sw_switch"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="@dimen/dp_50"-->
+        <!--app:layout_constraintBaseline_toBaselineOf="@+id/txt_notification"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/txt_changepass" />-->
+
+
+</android.support.constraint.ConstraintLayout>

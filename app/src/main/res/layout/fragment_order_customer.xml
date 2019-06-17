@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/cons"
+    android:layout_height="match_parent"
+  >
+
+    <RelativeLayout
+        android:id="@+id/rl_searchView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/findloaction_edittext_bg"
+        android:orientation="horizontal"
+        >
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/et_searchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:hint="@string/search_by_order_no_vendor_name"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textColorHint="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFontet="@string/fontRegular" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_search" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_clearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:tint="@color/text_color_white"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_today" />
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_searchView" />
+
+</android.support.constraint.ConstraintLayout>

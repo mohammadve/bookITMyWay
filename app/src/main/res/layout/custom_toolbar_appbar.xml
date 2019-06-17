@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        android:background="@color/text_color_white"
+        android:elevation="@dimen/dp_3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:foreground="?selectableItemBackground"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_arrow_back_theme" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/tv_toolbarTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:text="Toolbar Text"
+                android:textColor="@color/themecolor_022E8D"
+                android:textSize="@dimen/sp_20"
+                app:customFont="@string/fontBold" />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar_appbar" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_30"
+
+            app:layout_constraintBottom_toTopOf="@+id/addmore"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txt_drink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:text="@string/drinks"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_18"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_drink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_drink" />
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/addmore_drink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:drawableLeft="@drawable/ic_add_more"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dp_5"
+                android:text="@string/add_more"
+                android:textColor="@color/themecolor_022E8D"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_drink" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txt_apptizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/appetizers"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_18"
+                app:customFont="@string/fontBold"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addmore_drink" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_apptizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_apptizer" />
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/addmore_appetizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:drawableLeft="@drawable/ic_add_more"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dp_5"
+                android:text="@string/add_more"
+                android:textColor="@color/themecolor_022E8D"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_apptizer" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txt_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/main_menu"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_18"
+                app:customFont="@string/fontBold"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addmore_appetizer" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_food" />
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/addmore_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:drawableLeft="@drawable/ic_add_more"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dp_5"
+                android:text="@string/add_more"
+                android:textColor="@color/themecolor_022E8D"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_food" />
+
+
+
+
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txt_dessert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_30"
+                android:text="@string/dessert"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_18"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addmore_food" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_dessert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_dessert" />
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/addmore_dessert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:drawableLeft="@drawable/ic_add_more"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dp_5"
+                android:text="@string/add_more"
+                android:textColor="@color/themecolor_022E8D"
+                app:customFont="@string/fontBold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_dessert" />
+
+            <!--<com.virtual.customervendor.customview.CustomTextView-->
+            <!--android:id="@+id/btn_save"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp_50"-->
+            <!--android:layout_marginLeft="@dimen/dp_40"-->
+            <!--android:layout_marginRight="@dimen/dp_40"-->
+            <!--android:layout_marginTop="@dimen/dp_20"-->
+            <!--android:background="@drawable/btn_bg_click"-->
+            <!--android:gravity="center"-->
+            <!--android:stateListAnimator="@animator/us_button_selector"-->
+            <!--android:text="@string/save"-->
+            <!--android:textColor="@color/text_color_white"-->
+            <!--android:textSize="@dimen/sp_20"-->
+            <!--app:customFont="@string/fontBold"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/addmore_dessert" />-->
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

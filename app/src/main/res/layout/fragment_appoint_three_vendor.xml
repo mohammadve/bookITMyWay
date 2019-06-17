@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cons"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingTop="@dimen/dp_10"
+
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dp_10">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:gravity="center_horizontal"
+            android:text="@string/txt_health_service_menu"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_servicemenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/service_menu"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_days" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_timing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_servicemenu" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/addmore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawableLeft="@drawable/ic_add_more"
+            android:gravity="center_vertical"
+            android:text="@string/add_more"
+            android:textColor="@color/themecolor_022E8D"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_timing" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:focusable="true"
+            android:imeOptions="actionNext"
+            android:theme="@style/StyleTextInputLayout"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addmore">
+
+            <com.virtual.customervendor.customview.CustomEditText
+                android:id="@+id/ed_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_drop_down"
+                android:focusable="true"
+                android:hint="@string/description"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textColorHint="@color/menu_bg_color_cccccc"
+                app:customFont="@string/fontRegular" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/next"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addmore" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+
+

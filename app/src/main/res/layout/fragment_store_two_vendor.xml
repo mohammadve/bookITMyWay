@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nest"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_30">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_storecategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:focusable="true"
+            android:imeOptions="actionNext"
+            android:theme="@style/StyleTextInputLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_upload">
+
+            <com.virtual.customervendor.customview.CustomEditText
+                android:id="@+id/ed_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_drop_down"
+                android:focusable="false"
+                android:hint="@string/store_category"
+                android:inputType="text"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textColorHint="@color/menu_bg_color_cccccc"
+                app:customFont="@string/fontRegular" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/days_of_service"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_storecategory" />
+
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chk_alldays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:button="@drawable/check_box_selector"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="@string/all_days"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_days" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cons_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            app:layout_constraintTop_toBottomOf="@+id/chk_alldays">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/monday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/chk_tuesday" />
+
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/tuesday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_monday"
+                app:layout_constraintRight_toLeftOf="@+id/chk_wednesday" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/wednesday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_tuesday"
+                app:layout_constraintRight_toLeftOf="@+id/chk_thursday" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/thursday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_wednesday"
+                app:layout_constraintRight_toLeftOf="@id/chk_friday" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/friday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_thursday"
+                app:layout_constraintRight_toLeftOf="@id/chk_saturday" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/saturday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_friday"
+                app:layout_constraintRight_toLeftOf="@+id/chk_sunday" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/chk_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="@string/saturday"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toRightOf="@+id/chk_saturday"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/bussines_hours"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cons_day" />
+
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chk_24time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:button="@drawable/check_box_selector"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="@string/_24_hrs"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_hours" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_starttime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:focusable="true"
+            android:imeOptions="actionNext"
+            android:theme="@style/StyleTextInputLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chk_24time">
+
+            <com.virtual.customervendor.customview.CustomEditText
+                android:id="@+id/ed_starttime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_drop_down"
+                android:focusable="false"
+                android:hint="@string/start_time"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textColorHint="@color/menu_bg_color_cccccc"
+                app:customFont="@string/fontRegular" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_closetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:focusable="true"
+            android:imeOptions="actionNext"
+            android:theme="@style/StyleTextInputLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_starttime">
+
+            <com.virtual.customervendor.customview.CustomEditText
+                android:id="@+id/ed_closingtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_drop_down"
+                android:focusable="false"
+                android:hint="@string/closing_time"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textColorHint="@color/menu_bg_color_cccccc"
+                app:customFont="@string/fontRegular" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_servicearea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/service_area"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_closetime" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_stadium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/stadium"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_servicearea" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_stadium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_stadium" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/addstadium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:drawableLeft="@drawable/ic_add_more"
+            android:gravity="center_vertical"
+            android:text="@string/add_more"
+            android:textColor="@color/themecolor_022E8D"
+            app:customFont="@string/fontBold"
+            app:layout_constraintTop_toBottomOf="@+id/rv_stadium"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_arena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/arena"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addstadium" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_arena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_arena" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/addarena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:drawableLeft="@drawable/ic_add_more"
+            android:gravity="center_vertical"
+            android:text="@string/add_more"
+            android:textColor="@color/themecolor_022E8D"
+            app:customFont="@string/fontBold"
+            app:layout_constraintTop_toBottomOf="@+id/rv_arena"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="@string/other"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addarena" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_others" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/addother"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:drawableLeft="@drawable/ic_add_more"
+            android:gravity="center_vertical"
+            android:text="@string/add_more"
+            android:textColor="@color/themecolor_022E8D"
+            app:customFont="@string/fontBold"
+            app:layout_constraintTop_toBottomOf="@+id/rv_other"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:focusable="true"
+            android:imeOptions="actionNext"
+            android:theme="@style/StyleTextInputLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addother">
+
+            <com.virtual.customervendor.customview.CustomEditText
+                android:id="@+id/ed_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description"
+                android:inputType="text"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textColorHint="@color/menu_bg_color_cccccc"
+                app:customFont="@string/fontRegular" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/next"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toTopOf="@+id/signin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_desc" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+
+
+

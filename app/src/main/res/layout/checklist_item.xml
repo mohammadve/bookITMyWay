@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_10"
+        android:text="item"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        app:customFont="@string/fontBold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0.50"
+        android:background="#afaeae" />
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar_appbar" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/category"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50"
+            android:background="@drawable/dialog_bg"
+            android:drawableRight="@drawable/ic_drop_down"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/search_by_category"
+            android:paddingLeft="@dimen/dp_5"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:textAllCaps="true"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/country"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/country"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:background="@drawable/dialog_bg"
+            android:drawableRight="@drawable/ic_drop_down"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/search_by_country"
+            android:paddingLeft="@dimen/dp_5"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontBold"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/category"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/searchview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/dialog_bg"
+            android:drawableRight="@drawable/ic_search"
+            android:focusable="true"
+
+            android:hint="@string/search"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_5"
+            android:textColor="@color/text2_color_7d7d7d"
+            app:layout_constraintTop_toBottomOf="@+id/category" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/nodatafound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_60"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/no_data_found"
+            android:textColor="@color/menu_bg_color_cccccc"
+            android:textSize="@dimen/sp_16"
+            android:visibility="gone"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchview" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/searchview" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_20"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchview" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

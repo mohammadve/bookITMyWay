@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_10">
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_item_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_18"
+        android:theme="@style/StyleTextInputLayout"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_quantity"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_addone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        android:theme="@style/StyleTextInputLayout"
+        android:visibility="gone"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_addtwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        android:theme="@style/StyleTextInputLayout"
+        android:visibility="gone"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addone" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="2"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/tv_item_name"
+        app:layout_constraintRight_toLeftOf="@+id/tv_price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="2"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/tv_quantity"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

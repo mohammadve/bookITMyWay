@@ -1,0 +1,44 @@
+package com.virtual.customervendor.model.request
+
+import com.virtual.customervendor.model.*
+import java.io.Serializable
+
+class VendorStoreServiceRequest(
+        var business_images: ArrayList<BusinessImage> = ArrayList(),
+        var action: String? = null,
+        var image_url: String? = null,
+        var business_id: Int? = null,
+        var service_id: String? = null,
+        var business_name: String? = null,
+        var business_contactno: String? = null,
+        var country_code: String? = null,
+        var dial_code: String? = null,
+        var business_email: String? = null,
+        var business_city_id: CityModel = CityModel(),
+        var business_region_id: RegionModel = RegionModel(),
+        var business_address: String? = null,
+        var business_tax: String? = null,
+        var business_category_id: String? = null,
+        var store_category_id: String? = null,
+        var storecategory: String? = null,
+        var business_subcategory_id: String? = null,
+        var all_day: String? = null,
+        var sun: String? = null,
+        var mon: String? = null,
+        var tue: String? = null,
+        var wed: String? = null,
+        var thu: String? = null,
+        var fri: String? = null,
+        var sat: String? = null,
+        var is_24_hours_open: String? = null,
+        var start_time: String? = null,
+        var close_time: String? = null,
+        var stadium_address: ArrayList<StoreItemLocationModel> = ArrayList(),
+        var arena_address: ArrayList<StoreItemLocationModel> = ArrayList(),
+        var other_address: ArrayList<StoreItemLocationModel> = ArrayList(),
+        var store_items: ArrayList<ItemPriceStoreModel> = ArrayList(),
+        var description: String? = null) : Serializable {
+    override fun toString(): String {
+        return "VendorStoreServiceRequest(business_images=$business_images, action=$action, image_url=$image_url, business_id=$business_id, service_id=$service_id, business_name=$business_name, business_contactno=$business_contactno, country_code=$country_code, dial_code=$dial_code, business_email=$business_email, business_city_id=$business_city_id, business_region_id=$business_region_id, business_address=$business_address, business_tax=$business_tax, business_category_id=$business_category_id, store_category_id=$store_category_id, storecategory=$storecategory, business_subcategory_id=$business_subcategory_id, all_day=$all_day, sun=$sun, mon=$mon, tue=$tue, wed=$wed, thu=$thu, fri=$fri, sat=$sat, is_24_hours_open=$is_24_hours_open, start_time=$start_time, close_time=$close_time, stadium_address=$stadium_address, arena_address=$arena_address, other_address=$other_address, store_items=$store_items, description=$description)"
+    }
+}

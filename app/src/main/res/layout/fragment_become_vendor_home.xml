@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_cord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_header"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@drawable/splash_logo"
+
+            />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30"
+            android:gravity="center_vertical"
+            android:text="@string/home_text"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_header" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_upload"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_30"
+            android:scaleType="centerCrop"
+            android:src="@drawable/my_app_banner"
+            app:layout_constraintDimensionRatio="6:2"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txt_steps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_2"
+            android:text="@string/home_text_steps"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_upload" />
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_40"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/lets_start"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="@dimen/dp_30"
+            app:layout_constraintRight_toRightOf="parent"
+             />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

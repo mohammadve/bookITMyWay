@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_5"
+    android:paddingBottom="@dimen/dp_5">
+
+
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="abc restaurants"
+        android:textColor="@color/text2_color_7d7d7d"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_share"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_25"
+        android:rotation="180"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_share_black_24dp" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+

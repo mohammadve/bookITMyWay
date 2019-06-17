@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/text_color_white"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:gravity="center_horizontal"
+            android:text="@string/enter_otp"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_22"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center_horizontal"
+            android:text="We have sent you a OTP on your \nMobile Number/Email ID"
+            android:textColor="@color/text2_color_7d7d7d"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+        <LinearLayout
+            android:id="@+id/ll_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text2">
+            <com.virtual.customervendor.customview.PinView
+                android:id="@+id/ed_pin1"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:inputType="number"
+                android:padding="@dimen/dp_5"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="18sp"
+                app:cursorColor="@color/colorAccent"
+                app:cursorWidth="2dp"
+                app:itemCount="4"
+                app:itemHeight="@dimen/dp_50"
+                app:itemRadius="@dimen/dp_5"
+                app:itemSpacing="@dimen/dp_10"
+                app:itemWidth="@dimen/dp_60"
+                app:lineColor="@color/text2_color_7d7d7d"
+                app:lineWidth="1dp"
+                app:viewType="rectangle"/>
+        </LinearLayout>
+
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_60"
+            android:background="@drawable/btn_bg_click"
+            android:gravity="center"
+            android:stateListAnimator="@animator/us_button_selector"
+            android:text="@string/verify"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/sp_20"
+            app:customFont="@string/fontBold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_otp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
