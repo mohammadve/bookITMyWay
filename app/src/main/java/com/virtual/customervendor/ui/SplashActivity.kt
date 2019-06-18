@@ -22,6 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_splash.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
+import com.virtual.customervendor.commonActivity.TimeManagerActivity
 
 
 class SplashActivity : AppCompatActivity() {
@@ -59,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
                     finish()
                 } else {
-                    var intent: Intent = Intent(this@SplashActivity, DashBoardActivity::class.java)
+                    var intent: Intent = Intent(this@SplashActivity, TimeManagerActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)

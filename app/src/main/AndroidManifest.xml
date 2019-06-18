@@ -17,6 +17,8 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".commonActivity.TimeManagerActivity"></activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/appicon" />
@@ -39,16 +41,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Customer -->
+        </activity> <!-- Customer -->
         <activity
             android:name=".customer.ui.activity.DashBoardActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".customer.ui.activity.RestaurantActivity"
-            android:screenOrientation="portrait" />
-        <!-- <activity -->
+            android:screenOrientation="portrait" /> <!-- <activity -->
         <!-- android:name=".customer.ui.activity.DoctorAppointmentActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
         <activity
@@ -63,24 +62,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.ui.activity.SelectVendorActivity"
-            android:screenOrientation="portrait" />
-        <!-- <activity -->
+            android:screenOrientation="portrait" /> <!-- <activity -->
         <!-- android:name=".customer.ui.activity.AppointmentsActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".customer.ui.activity.TableBookingActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
             android:name=".customer.ui.activity.ParkingValetActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".customer.ui.activity.BookRideActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- Vendor -->
+            android:screenOrientation="portrait" /> <!-- Vendor -->
         <activity
             android:name=".vendor.ui.activity.SetLanguageActivity"
             android:screenOrientation="portrait" />
@@ -167,9 +162,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".vendor.ui.activity.VendorNailsActivity"
-            android:screenOrientation="portrait"
-
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".vendor.ui.activity.VendorMassagePhysioActivity"
             android:screenOrientation="portrait"
@@ -274,11 +267,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.ui.activity.BookAppointmentMassageActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- ####################################### -->
-
-
+            android:screenOrientation="portrait" /> <!-- ####################################### -->
         <!-- Fressco MultipleImages -->
         <activity
             android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
@@ -290,10 +279,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.ui.activity.CustomerOrderDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- end Fressco -->
-
+            android:screenOrientation="portrait" /> <!-- end Fressco -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -337,23 +323,20 @@
             android:name=".vendor.ui.activity.VendorAddRestaurantItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentCompat" />
-        <activity android:name=".commonActivity.TermsAndConditionActivityVendor" />
-
-        <!--<activity android:name="com.google.zxing.client.android.CaptureActivity"-->
-            <!--android:screenOrientation="landscape"-->
-            <!--android:configChanges="orientation|keyboardHidden"-->
-            <!--android:theme="@android:style/Theme.NoTitleBar.Fullscreen"-->
-            <!--android:windowSoftInputMode="stateAlwaysHidden">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.DEFAULT"/>-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.zxing.client.android.SCAN"/>-->
-                <!--<category android:name="android.intent.category.DEFAULT"/>-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
+        <activity android:name=".commonActivity.TermsAndConditionActivityVendor" /> <!-- <activity android:name="com.google.zxing.client.android.CaptureActivity" -->
+        <!-- android:screenOrientation="landscape" -->
+        <!-- android:configChanges="orientation|keyboardHidden" -->
+        <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
+        <!-- android:windowSoftInputMode="stateAlwaysHidden"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN"/> -->
+        <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.zxing.client.android.SCAN"/> -->
+        <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="95ff198dfa870c2e61bfb991f39cf794a714f986" />

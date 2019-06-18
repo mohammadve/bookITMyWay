@@ -229,7 +229,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
         chk_24time.setOnCheckedChangeListener(this)
     }
 
-
     fun handleAlldays(isChecked: Boolean) {
         if (isChecked) {
             if (chk_monday.isChecked()) chk_monday.isChecked = false
