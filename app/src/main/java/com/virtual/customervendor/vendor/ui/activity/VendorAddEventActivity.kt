@@ -215,7 +215,8 @@ class VendorAddEventActivity : BaseActivity(), View.OnClickListener, ViewPagerIt
 
     private fun putAllDataToFieldMap() {
         vendorEventDetail.name = ed_eventname.text.toString()
-        vendorEventDetail.total_tickets = ed_ticketcount.text.toString()
+
+        vendorEventDetail.total_tickets = ed_ticketcount.text.toString().toInt()
         vendorEventDetail.ticket_price = ed_eventprice.text.toString()
         vendorEventDetail.start_date = ed_startdate.text.toString()
         vendorEventDetail.end_date = ed_enddate.text.toString()

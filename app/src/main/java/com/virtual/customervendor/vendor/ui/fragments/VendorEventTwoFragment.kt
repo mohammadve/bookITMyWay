@@ -135,7 +135,7 @@ class VendorEventTwoFragment : Fragment(), View.OnClickListener, ViewPagerItemCl
 
         } else if (context is VendorEventsDetailActivity) {
             vendorEventDetail.name = ed_eventname.text.toString()
-            vendorEventDetail.total_tickets = ed_ticketcount.text.toString()
+            vendorEventDetail.total_tickets = ed_ticketcount.text.toString().toInt()
             vendorEventDetail.ticket_price = ed_eventprice.text.toString()
             vendorEventDetail.start_date = ed_startdate.text.toString()
             vendorEventDetail.end_date = ed_enddate.text.toString()
@@ -168,7 +168,7 @@ class VendorEventTwoFragment : Fragment(), View.OnClickListener, ViewPagerItemCl
                 }
             } else if (context is VendorEventsDetailActivity) {
                 ed_eventname.setText(vendorEventDetail.name)
-                ed_ticketcount.setText(vendorEventDetail.total_tickets)
+                ed_ticketcount.setText(""+vendorEventDetail.total_tickets)
                 ed_eventprice.setText(vendorEventDetail.ticket_price)
                 ed_startdate.setText(vendorEventDetail.start_date)
                 ed_enddate.setText(vendorEventDetail.end_date)

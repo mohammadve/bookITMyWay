@@ -311,7 +311,11 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Observable<CustomerOrderResponse> getBusinessOrderList(@Header("Authorization") String auth, @Query(AppKeys.BUSINESS_ID) String business_id,
                                                            @Query(AppKeys.OFFSET) int offset, @Query(AppKeys.CATEGORY_ID) int ctegoryId,
-                                                           @Query(AppKeys.SUBCATEGORY_ID) int subCtegoryId, @Query(AppKeys.ORDER_TYPE) String order_type);
+                                                           @Query(AppKeys.SUBCATEGORY_ID) int subCtegoryId, @Query(AppKeys.ORDER_TYPE) String order_type,
+                                                           @Query(AppKeys.ORDER_KEYWORD) String key,@Query(AppKeys.ORDER_FILTERTYPE) String filtertype,
+                                                           @Query(AppKeys.ORDER_FROM_DATE) String fromdate,@Query(AppKeys.ORDER_TO_DATE) String todate
+
+    );
 
 
     @POST(AppConstants.BUSINESS_ORDER_DETAIL)

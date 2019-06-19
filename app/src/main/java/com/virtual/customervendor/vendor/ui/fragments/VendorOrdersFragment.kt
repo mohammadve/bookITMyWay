@@ -1,17 +1,26 @@
 package com.virtual.customervendor.vendor.ui.fragments
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PopupMenu
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.EditText
+import android.widget.TextView
 import com.google.zxing.integration.android.IntentIntegrator
+import com.jakewharton.rxbinding.widget.RxTextView
+import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.customer.ui.adapter.OrderadapterVendor
 import com.virtual.customervendor.listener.PagingListeners
@@ -29,8 +38,10 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_orderslist_vendor.*
 import org.json.JSONException
+import java.util.concurrent.TimeUnit
 
 class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
+
 
     var orderAdapter: OrderadapterVendor? = null
     val TAG: String = VendorOrdersFragment::class.java.simpleName
@@ -40,15 +51,118 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
     var category_id: String = String()
     var subcategory_id: String = String()
     var isShowNoData: Boolean = true
+    var filterType = ""
+    var fromDate = ""
+    var toDate = ""
     private var qrScan: IntentIntegrator? = null
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.imageclick -> {
                 qrScan = IntentIntegrator(activity!!);
                 qrScan!!.initiateScan();
             }
+            R.id.ll_FilterView -> {
+                showPopUpMenuForFilter(v);
+            }
         }
+    }
+
+    private fun showPopUpMenuForFilter(v: View) {
+
+        var popup: PopupMenu = PopupMenu(context!!, v)
+        //Inflating the Popup using xml file
+        popup.getMenuInflater().inflate(R.menu.filter_popup_menu, popup.getMenu());
+
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.m_all -> {
+                    filterType = ""
+                    et_filterText.setText("All")
+
+                    getVendorOrderList(businessId, 0)
+                    //Toast.makeText(activity, "You Clicked : " + item.title, Toast.LENGTH_SHORT).show()
+                }
+                R.id.m_today -> {
+                    filterType = "ondate"
+                    et_filterText.setText(item.title)
+
+
+                    getVendorOrderList(businessId, 0)
+                }
+                R.id.m_week -> {
+                    filterType = "onweek"
+                    et_filterText.setText(item.title)
+
+                    getVendorOrderList(businessId, 0)
+                }
+                R.id.m_monthly -> {
+                    filterType = "onmonth"
+                    et_filterText.setText(item.title)
+
+                    getVendorOrderList(businessId, 0)
+                }
+                R.id.m_custom -> {
+                    filterType = "custom"
+                    showDatePickerDialog()
+
+                }
+
+            }
+            true
+        })
+
+
+
+
+        popup.show()
+    }
+
+    private fun showDatePickerDialog() {
+        val delayDialog = Dialog(activity)
+        delayDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        delayDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        delayDialog.setContentView(R.layout.filter_date_pick_layout)
+        delayDialog.setCancelable(false)
+        delayDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+
+        val tv_txt_ok = delayDialog.findViewById<TextView>(R.id.tv_txt_ok)
+        val tv_from_date = delayDialog.findViewById<TextView>(R.id.tv_from_date)
+        val tv_to_date = delayDialog.findViewById<TextView>(R.id.tv_to_date)
+        val tv_txt_cancel = delayDialog.findViewById<TextView>(R.id.tv_txt_cancel)
+
+        tv_txt_ok.setOnClickListener {
+
+            if (tv_from_date.text.toString().trim().isEmpty() || tv_to_date.text.toString().trim().isEmpty()) {
+                UiValidator.displayMsgSnack(coordinator, activity, "Please select date first")
+
+            } else {
+                fromDate = tv_from_date.text.toString().trim()
+                toDate = tv_to_date.text.toString().trim()
+                et_filterText.setText(fromDate + " to " + toDate)
+                getVendorOrderList(businessId, 0)
+                delayDialog.dismiss()
+
+            }
+
+        }
+        tv_txt_cancel.setOnClickListener {
+            delayDialog.dismiss()
+
+        }
+        tv_from_date.setOnClickListener {
+            AppUtill.getDateForFilter(tv_from_date, activity!!, null)
+        }
+        tv_to_date.setOnClickListener {
+            if (tv_from_date.text.toString().trim().isEmpty()) {
+                UiValidator.displayMsgSnack(coordinator, activity, "Select From date first")
+            } else {
+                AppUtill.getDateForFilter(tv_to_date, activity!!, tv_from_date.text.toString().trim())
+            }
+
+        }
+        delayDialog.show()
     }
 
 
@@ -65,6 +179,8 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
 
     fun initView(view: View) {
         imageclick.setOnClickListener(this)
+        ll_FilterView.setOnClickListener(this)
+
         createAdapterView()
     }
 
@@ -84,58 +200,13 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
 
         getBusinessID()
 
-        if(SharedPreferenceManager.getCategoryId() == AppConstants.CAT_EVENT_TICKET){
+        if (SharedPreferenceManager.getCategoryId() == AppConstants.CAT_EVENT_TICKET) {
             imageclick.visibility = View.VISIBLE
-        }else{
-            imageclick.visibility = View.GONE
-        }
-    }
-
-    fun getVendorOrderList(businessID: String, offset: Int) {
-        if (AppUtils.isInternetConnected(activity)) {
-            ProgressDialogLoader.progressDialogCreation(getActivity(), getString(R.string.please_wait))
-            apiService?.getBusinessOrderList("Bearer " + SharedPreferenceManager.getAuthToken(), businessID, offset, SharedPreferenceManager.getCategoryId(), SharedPreferenceManager.getSubcategoryId(), "current_orders")
-
-                    ?.subscribeOn(Schedulers.io())
-                    ?.observeOn(AndroidSchedulers.mainThread())
-                    ?.subscribe(object : Observer<CustomerOrderResponse> {
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onNext(detailResponse: CustomerOrderResponse) {
-                            AppLog.e(TAG, detailResponse.toString())
-                            ProgressDialogLoader.progressDialogDismiss()
-                            if (detailResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-                                if (detailResponse.data.size > 0) {
-//                                    if (nodata.visibility == View.VISIBLE)
-//                                        nodata.visibility = View.GONE
-                                    list.addAll(detailResponse.data)
-                                    orderAdapter?.notifyDataSetChanged()
-                                    isShowNoData = false
-                                } else {
-//                                    if (isShowNoData)
-//                                        nodata.visibility = View.VISIBLE
-                                }
-                            } else {
-                                UiValidator.displayMsgSnack(coordinator, activity, detailResponse.message)
-                                if (isShowNoData)
-                                    nodata.visibility = View.VISIBLE
-
-                            }
-                        }
-
-                        override fun onError(e: Throwable) {
-                            handleError(e)
-                            if (isShowNoData)
-                                nodata.visibility = View.VISIBLE
-
-                        }
-
-                        override fun onComplete() {
-                        }
-                    })
+            et_searchText.hint = resources.getString(R.string.search_by_order_no_or_event_name)
         } else {
-            UiValidator.displayMsgSnack(coordinator, activity, getString(R.string.no_internet_connection))
+            imageclick.visibility = View.GONE
+            et_searchText.hint = resources.getString(R.string.search_by_order_no_or_customer_name)
+
         }
     }
 
@@ -144,10 +215,97 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-                val searchText = editable.toString()
-                orderAdapter!!.filter.filter(searchText)
+                // searchText = editable.toString()
+//                orderAdapter!!.filter.filter(searchText)
+                // getVendorOrderList(businessId, 0,searchText)
             }
         })
+    }
+
+    fun getVendorOrderList(businessID: String, offset: Int) {
+        if (AppUtils.isInternetConnected(activity)) {
+
+            val obs = RxTextView.textChanges(et_searchText)
+                    //.filter { charSequence -> charSequence.length > 0 }
+                    .debounce(500, TimeUnit.MILLISECONDS)
+                    .map<String> { charSequence -> charSequence.toString() }
+            obs.subscribe { string ->
+
+
+                activity?.runOnUiThread {
+                    progress_serch_order.visibility = View.VISIBLE
+                    //  ProgressDialogLoader.progressDialogCreation(getActivity(), getString(R.string.please_wait))
+                }
+
+                if (!filterType.equals("custom")) {
+                    fromDate = ""
+                    toDate = ""
+                }
+
+
+                apiService?.getBusinessOrderList("Bearer " + SharedPreferenceManager.getAuthToken(), businessID,
+                        offset, SharedPreferenceManager.getCategoryId(), SharedPreferenceManager.getSubcategoryId(),
+                        "current_orders", string, filterType, fromDate, toDate)
+
+                        ?.subscribeOn(Schedulers.io())
+                        ?.observeOn(AndroidSchedulers.mainThread())
+                        ?.subscribe(object : Observer<CustomerOrderResponse> {
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onNext(detailResponse: CustomerOrderResponse) {
+                                AppLog.e(TAG, detailResponse.toString())
+                                ProgressDialogLoader.progressDialogDismiss()
+                                progress_serch_order.visibility = View.GONE
+
+                                if (detailResponse.status.equals(AppConstants.KEY_SUCCESS)) {
+                                    if (offset == 0) {
+                                        list.clear()
+                                        orderAdapter?.notifyDataSetChanged()
+                                    }
+                                    if (detailResponse.data.size > 0) {
+
+//                                    if (nodata.visibility == View.VISIBLE)
+                                        nodata.visibility = View.GONE
+                                        list.addAll(detailResponse.data)
+                                        orderAdapter?.notifyDataSetChanged()
+                                        isShowNoData = false
+                                    } else {
+//                                    if (isShowNoData)
+                                        if (offset == 0) {
+                                            nodata.visibility = View.VISIBLE
+                                        }
+//
+                                    }
+
+                                } else {
+                                    UiValidator.displayMsgSnack(coordinator, activity, detailResponse.message)
+                                    if (isShowNoData)
+                                        nodata.visibility = View.VISIBLE
+
+                                }
+                            }
+
+                            override fun onError(e: Throwable) {
+                                progress_serch_order.visibility = View.GONE
+
+                                handleError(e)
+                                if (isShowNoData)
+                                    nodata.visibility = View.VISIBLE
+
+                            }
+
+                            override fun onComplete() {
+                            }
+                        })
+
+
+            }
+
+
+        } else {
+            UiValidator.displayMsgSnack(coordinator, activity, getString(R.string.no_internet_connection))
+        }
     }
 
     private fun handleError(t: Throwable) {
@@ -199,13 +357,16 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
                 }
             }
         }
+
         getVendorOrderList(businessId, 0)
 
         performSearch()
     }
 
     override fun onFinishListener() {
-        getVendorOrderList(businessId, list.size)
+        if (list.size > 4) {
+            getVendorOrderList(businessId, list.size)
+        }
     }
 
     override fun onFinishListener(type: Int) {
@@ -218,7 +379,7 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
             AppLog.e("Tsear", "onActivityResult.toString()")
             list.clear()
             getVendorOrderList(businessId, 0)
-        }else {
+        } else {
             var result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (result != null) {
                 //if qrcode has nothing in it
@@ -260,9 +421,9 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
                             ProgressDialogLoader.progressDialogDismiss()
                             UiValidator.displayMsgSnack(coordinator, activity, detailResponse.message)
                             if (detailResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-                                if(detailResponse.data.status == "1"){
+                                if (detailResponse.data.status == "1") {
                                     UiValidator.displayMsgSnack(coordinator, activity, getString(R.string.already_used))
-                                }else if(detailResponse.data.status == "0"){
+                                } else if (detailResponse.data.status == "0") {
                                     var intent: Intent = Intent(activity!!, VendorOrderDetailActivity::class.java)
                                     intent.putExtra("orderid", detailResponse.data!!.order_id)
                                     intent.putExtra("barcode", true);
@@ -286,7 +447,6 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
             UiValidator.displayMsgSnack(coordinator, activity, getString(R.string.no_internet_connection))
         }
     }
-
 
 
 }

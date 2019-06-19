@@ -18,7 +18,7 @@ object ApiClient {
     val client: Retrofit get() {
         val logging = HttpLoggingInterceptor()
 // set your desired log level
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.level = HttpLoggingInterceptor.Level.BODY
 
         val okHttpClient = OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -30,6 +30,7 @@ object ApiClient {
                 retrofit = Retrofit.Builder().baseUrl(AppConstants.BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .client(okHttpClient)
                         .build()
             }
             return this!!.retrofit!!

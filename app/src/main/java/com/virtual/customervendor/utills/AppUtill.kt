@@ -8,10 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.text.Editable
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TimePicker
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.virtual.customervendor.R
@@ -76,6 +73,67 @@ class AppUtill {
 //            datepicker.datePicker.isSelected()
             datepicker.show()
         }
+
+
+        fun getDateForFilter(textView: TextView, context: Context,dateStr : String? ) {
+
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            if(dateStr!=null){
+                val sdf = SimpleDateFormat("yyyy-MM-dd")
+                val date = sdf.parse(dateStr)
+
+                c.time = date
+            }
+
+
+
+
+            val dpd = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                c.set(Calendar.YEAR, year)
+                c.set(Calendar.MONTH, monthOfYear)
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                textView.text = Editable.Factory.getInstance().newEditable(SimpleDateFormat("yyyy-MM-dd").format(c.time))
+            }
+
+            val datepicker = DatePickerDialog(context, dpd, year, month, day)
+            datepicker.getDatePicker().setMinDate(c.getTimeInMillis())
+//            datepicker.datePicker.isSelected()
+            datepicker.show()
+        }
+
+        fun getBackDateForFilter(textView: TextView, context: Context,dateStr : String? ) {
+
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            if(dateStr!=null){
+                val sdf = SimpleDateFormat("yyyy-MM-dd")
+                val date = sdf.parse(dateStr)
+
+                c.time = date
+            }
+
+
+
+
+            val dpd = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                c.set(Calendar.YEAR, year)
+                c.set(Calendar.MONTH, monthOfYear)
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                textView.text = Editable.Factory.getInstance().newEditable(SimpleDateFormat("yyyy-MM-dd").format(c.time))
+            }
+
+            val datepicker = DatePickerDialog(context, dpd, year, month, day)
+            datepicker.getDatePicker().setMaxDate(c.getTimeInMillis())
+//            datepicker.datePicker.isSelected()
+            datepicker.show()
+        }
+
+
 
 
         fun getDateText(textView: EditText, context: Context) {
