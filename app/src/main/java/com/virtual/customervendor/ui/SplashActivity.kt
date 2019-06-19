@@ -60,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
                     finish()
                 } else {
-                    var intent: Intent = Intent(this@SplashActivity, TimeManagerActivity::class.java)
+                    var intent: Intent = Intent(this@SplashActivity, DashBoardActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
@@ -103,6 +103,7 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 var intent: Intent = Intent(this@SplashActivity, DashBoardActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,false);
                 startActivity(intent)
                 SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
                 finish()
@@ -115,8 +116,6 @@ class SplashActivity : AppCompatActivity() {
 
 
     fun getCountryCode() {
-
-
         if (AppUtils.isInternetConnected(this)) {
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
             apiInterface!!.getCountryCode()!!.subscribeOn(Schedulers.io())
@@ -168,5 +167,6 @@ class SplashActivity : AppCompatActivity() {
             AppLog.e(TAG, t?.message)
         }
     }
+
 
 }

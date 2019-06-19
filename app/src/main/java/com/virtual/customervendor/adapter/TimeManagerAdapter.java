@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 
 import com.virtual.customervendor.R;
 import com.virtual.customervendor.model.DayAviliability;
@@ -34,19 +35,52 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DayAviliability aviliability=aviliabilities.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final DayAviliability aviliability=aviliabilities.get(position);
         if(isMultiSlots)
+            holder.btnAddMore.setVisibility(View.VISIBLE);
+        else
             holder.btnAddMore.setVisibility(View.GONE);
 
         holder.cbDay.setChecked(aviliability.isSeleted());
         holder.cbDay.setText(aviliability.getName());
 
-        SlotsAdapter adapter=new SlotsAdapter(aviliabilities.get(position).getSlots());
+        final SlotsAdapter adapter=new SlotsAdapter(aviliabilities.get(position).getSlots());
         LinearLayoutManager manager=new LinearLayoutManager(holder.itemView.getContext(),LinearLayoutManager.VERTICAL,false);
         holder.recyclerView.setLayoutManager(manager);
         holder.recyclerView.setItemAnimator(new DefaultItemAnimator());
         holder.recyclerView.setAdapter(adapter);
+
+        if(aviliability.isSeleted()){
+            holder.btnAddMore.setVisibility(View.VISIBLE);
+            holder.recyclerView.setVisibility(View.VISIBLE);
+        }else {
+            holder.btnAddMore.setVisibility(View.GONE);
+            holder.recyclerView.setVisibility(View.GONE);
+        }
+
+        holder.cbDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                holder.cbDay.setChecked(isChecked);
+                aviliability.setSeleted(isChecked);
+                if(isChecked){
+                    holder.btnAddMore.setVisibility(View.VISIBLE);
+                    holder.recyclerView.setVisibility(View.VISIBLE);
+                }else {
+                    holder.btnAddMore.setVisibility(View.GONE);
+                    holder.recyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+        holder.btnAddMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aviliability.addSlot("","");
+                adapter.notifyDataSetChanged();
+            }
+        });
+
 
     }
 

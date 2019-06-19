@@ -1,8 +1,9 @@
 package com.virtual.customervendor.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DayAviliability {
+public class DayAviliability implements Serializable {
     private String name;
     private boolean isSeleted;
     private ArrayList<TimeSlot> slots=new ArrayList();
@@ -30,22 +31,24 @@ public class DayAviliability {
 
     public ArrayList<TimeSlot> getSlots() {
         if(slots.size()<=0)
-            slots.add(new TimeSlot(""," "," "));
+            slots.add(new TimeSlot("",""));
         return slots;
+    }
+    public void addSlot(String startTime,String stopTime){
+        slots.add(new TimeSlot(startTime,stopTime));
     }
 
     public void setSlots(ArrayList<TimeSlot> slots) {
         this.slots = slots;
     }
 
-    public class TimeSlot{
+    public class TimeSlot implements Serializable{
 
-        private String startTime,stopTime,description;
+        private String startTime,stopTime;
 
-        public TimeSlot(String startTime, String stopTime, String description) {
+        public TimeSlot(String startTime, String stopTime) {
             this.startTime = startTime;
             this.stopTime = stopTime;
-            this.description = description;
         }
 
         public String getStartTime() {
@@ -62,14 +65,6 @@ public class DayAviliability {
 
         public void setStopTime(String stopTime) {
             this.stopTime = stopTime;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
         }
     }
 }

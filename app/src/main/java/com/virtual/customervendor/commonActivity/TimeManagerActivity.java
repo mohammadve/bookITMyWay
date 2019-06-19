@@ -1,9 +1,11 @@
 package com.virtual.customervendor.commonActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.virtual.customervendor.R;
 import com.virtual.customervendor.adapter.TimeManagerAdapter;
@@ -18,6 +20,7 @@ public class TimeManagerActivity extends BaseActivity implements TimeManagerAdap
     public static final int REQUEST_CODE=201;
     public static final int RESULT_CODE=202;
     public static final String KEY_Multi_Slots="isMultiSlots";
+    public static final String KEY_TIME_SLOTS_LIST="selectedTimeSlots";
 
     private RecyclerView recyclerView;
     private TimeManagerAdapter adapter;
@@ -43,7 +46,11 @@ public class TimeManagerActivity extends BaseActivity implements TimeManagerAdap
     }
 
     private void init(){
-//        isMultiSlots=getIntent().getExtras().getBoolean(KEY_Multi_Slots);
+        try {
+            isMultiSlots=getIntent().getExtras().getBoolean(KEY_Multi_Slots);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         CustomTextView tv_toolbarTitleText=findViewById(R.id.tv_toolbarTitleText);
         tv_toolbarTitleText.setText("Select Aviliability");
         recyclerView=findViewById(R.id.recyclerView);
@@ -53,10 +60,24 @@ public class TimeManagerActivity extends BaseActivity implements TimeManagerAdap
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
     public void onSlotSelection() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent data=new Intent();
+        data.putExtra(KEY_TIME_SLOTS_LIST,aviliabilities);
+        setResult(RESULT_CODE,data);
+        super.onBackPressed();
     }
 }
