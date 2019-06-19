@@ -40,7 +40,9 @@ class VendorEventsDetailFragment : Fragment(), View.OnClickListener, ViewPagerIt
         try {
             ed_eventname.setText(eventRequest.name)
             ed_price.setText(AppUtils.getRegisterRateWithSymbol(eventRequest.ticket_price))
-            txt_ticket.setText(eventRequest.total_tickets)
+            txt_ticket.setText("" + eventRequest.total_tickets)
+            tv_remaining_no_of_ticket.text = "" + (eventRequest.total_tickets - eventRequest.ticket_booked)
+
             ed_sdate.setText(eventRequest.start_date)
             ed_edate.setText(eventRequest.end_date)
             ed_stime.setText(eventRequest.start_time)

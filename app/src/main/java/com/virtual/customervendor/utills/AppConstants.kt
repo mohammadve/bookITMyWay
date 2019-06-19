@@ -39,8 +39,8 @@ class AppConstants {
 
 
         /*urls*/
-//        val DEV_BASE_URL = "http://115.112.129.194:7575/my-app/api/"//old
-        val DEV_BASE_URL = "https://bookitmyway.com/panel/api/" //new
+        val DEV_BASE_URL = "https://bookitmyway.com/paneltest/api/"//tesing base url
+//        val DEV_BASE_URL = "https://bookitmyway.com/panel/api/" //live base url
 
         //http://172.16.200.38/my-app/api
         val BASE_URL = DEV_BASE_URL
@@ -180,9 +180,9 @@ class AppConstants {
         const val CAT_STORE_SELLER = 6
         const val SUBCAT_STORE_SELLER = 0
 
-//        const val STRIPE_KEY = "pk_test_IKI2kAgTcd5D9LL4Nv7uc7ZT"; //test
+              const val STRIPE_KEY = "pk_test_IKI2kAgTcd5D9LL4Nv7uc7ZT"; //test
 
-        const val STRIPE_KEY =   "pk_live_3oBerVycojWx2X3SgDkE3Jop" //live
+        //   const val STRIPE_KEY =   "pk_live_3oBerVycojWx2X3SgDkE3Jop" //live
 
 
         const val NOTIFICATION_DATA = "notification_data"

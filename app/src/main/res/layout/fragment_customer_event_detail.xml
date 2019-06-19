@@ -180,6 +180,47 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ev_remaining_ticketcount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ev_ticketcount">
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/r_t_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/total_remaining_numbers_of_tickets"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_remaining_no_of_ticket"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/tv_remaining_no_of_ticket"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:text="@string/price"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@+id/r_t_number"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/ev_startdate"
@@ -190,7 +231,7 @@
             android:layout_marginRight="@dimen/dp_20"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ev_ticketcount">
+            app:layout_constraintTop_toBottomOf="@+id/ev_remaining_ticketcount">
 
             <com.virtual.customervendor.customview.CustomTextView
                 android:id="@+id/t_startdate"

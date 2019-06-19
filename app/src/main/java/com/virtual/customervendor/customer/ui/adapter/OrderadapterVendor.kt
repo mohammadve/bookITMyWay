@@ -130,7 +130,7 @@ class OrderadapterVendor(val pagingListener: PagingListeners, val mContext: Cont
             } else {
                 val filteredList = ArrayList<CustomerOrderModel>()
                 for (bean in filterlist) {
-                    if (bean.order_id?.toLowerCase()?.contains(charString)!! || bean.customer_name?.toLowerCase()?.contains(charString)!! || bean.order_id?.toLowerCase()?.contains(charString)!!) {
+                    if (bean.order_id?.toLowerCase()?.contains(charString)!! || bean.customer_name?.toLowerCase()?.contains(charString)!! || bean.order_id?.toLowerCase()?.contains(charString)!!|| bean.name?.toLowerCase()?.contains(charString)!!) {
                         filteredList.add(bean)
                     }
                 }

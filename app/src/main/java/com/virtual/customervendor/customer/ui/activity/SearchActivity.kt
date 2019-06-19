@@ -147,12 +147,12 @@ class SearchActivity : BaseActivity(), View.OnClickListener, CountryDialogFragme
                     .filter { charSequence -> charSequence.length > 0 }
                     .debounce(300, TimeUnit.MILLISECONDS)
                     .map<String> { charSequence -> charSequence.toString() }
-            obs.subscribe { string ->
+                obs.subscribe { string ->
 
-                runOnUiThread {
-                    progress.visibility = View.VISIBLE
-                    nodatafound.visibility = View.GONE
-                }
+                    runOnUiThread {
+                        progress.visibility = View.VISIBLE
+                        nodatafound.visibility = View.GONE
+                    }
 
 
                 ProgressDialogLoader.progressDialogCreation(this@SearchActivity, resources.getString(R.string.please_wait))

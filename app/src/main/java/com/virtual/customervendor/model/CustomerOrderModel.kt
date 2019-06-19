@@ -18,6 +18,7 @@ class CustomerOrderModel(
         var vendor_name: String? = null,
 
         var business_name: String? = null,
+        var name: String? = null,
 
         var date: String? = null,
         var time: String? = null,

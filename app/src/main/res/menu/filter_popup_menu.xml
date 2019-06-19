@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/m_all"
+        android:orderInCategory="100"
+        android:title="All" />
+    <item
+        android:id="@+id/m_today"
+        android:orderInCategory="101"
+        android:title="Today" />
+    <item
+        android:id="@+id/m_week"
+        android:orderInCategory="101"
+        android:title="Weekly" />
+
+    <item
+        android:id="@+id/m_monthly"
+        android:orderInCategory="101"
+        android:title="Monthly" />
+    <item
+        android:id="@+id/m_custom"
+        android:orderInCategory="101"
+        android:title="Custom" />
+</menu>

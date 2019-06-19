@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_40"
+    android:layout_marginRight="@dimen/dp_40"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_10"
+   >
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_txt_title"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:text="Select Date"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/tv_from_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/white"
+            android:hint="From (YYYY-MM-DD)"
+            android:editable="false"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="@dimen/sp_13" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/tv_to_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:editable="false"
+
+            android:gravity="center"
+            android:hint="To (YYYY-MM-DD)"
+            android:padding="@dimen/dp_5"
+
+
+            android:textColor="@color/defaultTextColor"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0.50"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/mdtp_light_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/tv_txt_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp_16" />
+
+        <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/tv_txt_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ok"
+
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+</LinearLayout>

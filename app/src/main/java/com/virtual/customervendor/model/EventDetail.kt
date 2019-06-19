@@ -11,7 +11,8 @@ data class EventDetail(
         var business_id: String? = null,
         var name: String? = null,
         var ticket_price: String? = null,
-        var total_tickets: String? = null,
+        var total_tickets: Int = 0,
+        var ticket_booked: Int = 0,
         var start_date: String? = null,
         var end_date: String? = null,
         var start_time: String? = null,
@@ -20,6 +21,6 @@ data class EventDetail(
         var venue: String = "",
         var event_images: ArrayList<BusinessImage> = ArrayList()) : Serializable {
     override fun toString(): String {
-        return "EventDetail(action=$action, business_category_id=$business_category_id, business_subcategory_id=$business_subcategory_id, service_id=$service_id, business_id=$business_id, name=$name, ticket_price=$ticket_price, total_tickets=$total_tickets, start_date=$start_date, end_date=$end_date, start_time=$start_time, close_time=$close_time, description=$description, venue='$venue', event_images=$event_images)"
+        return "EventDetail(action=$action, business_category_id=$business_category_id, business_subcategory_id=$business_subcategory_id, service_id=$service_id, business_id=$business_id, name=$name, ticket_price=$ticket_price, total_tickets=$total_tickets, ticket_booked=$ticket_booked, start_date=$start_date, end_date=$end_date, start_time=$start_time, close_time=$close_time, description=$description, venue='$venue', event_images=$event_images)"
     }
 }

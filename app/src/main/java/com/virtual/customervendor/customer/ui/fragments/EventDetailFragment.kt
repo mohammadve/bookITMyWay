@@ -47,7 +47,8 @@ class EventDetailFragment : Fragment(), View.OnClickListener, ViewPagerItemClick
         eventDetail = (activity as EventsActivity).eventDetail()
         tv_event_name.text = eventDetail.name
         tv_fee.text = AppUtils.getRateWithSymbol(eventDetail.ticket_price)
-        tv_no_of_ticket.text = eventDetail.total_tickets
+        tv_no_of_ticket.text = "" + eventDetail.total_tickets
+        tv_remaining_no_of_ticket.text = "" + (eventDetail.total_tickets - eventDetail.ticket_booked)
 
         tv_startdate.text = eventDetail.start_date
         tv_enddate.text = eventDetail.end_date
