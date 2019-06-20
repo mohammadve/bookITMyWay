@@ -22,8 +22,16 @@ import java.util.Date;
 
 public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.ViewHolder>{
     private ArrayList<DayAviliability.TimeSlot> slots;
-    public SlotsAdapter(ArrayList<DayAviliability.TimeSlot> slots) {
+    private boolean isSameSlots;
+    private SameSlotsObserver slotsObserver;
+
+    public interface SameSlotsObserver{
+        void notifyAllDays();
+    }
+    public  SlotsAdapter(ArrayList<DayAviliability.TimeSlot> slots,boolean isSameSlots,SameSlotsObserver slotsObserver) {
         this.slots = slots;
+        this.isSameSlots = isSameSlots;
+        this.slotsObserver = slotsObserver;
     }
 
     @NonNull
@@ -43,8 +51,7 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.ViewHolder>{
         holder.imgRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                slots.remove(timeSlot);
-                notifyDataSetChanged();
+                removeSlot(timeSlot);
             }
         });
 
@@ -61,13 +68,16 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.ViewHolder>{
                                     time="";
                                     timeSlot.setStartTime(time);
                                     UiValidator.displayMsg(context,"Please select a valid slot");
-                                }
-                            }
+                                }else if(timeSlot.getStopTime().length()>4 && isSameSlots)
+                                    slotsObserver.notifyAllDays();
+                            }else if(isSameSlots)
+                                slotsObserver.notifyAllDays();
                         holder.edtStartTime.setText(time);
                     }
                 });
             }
         });
+
         holder.edtClosingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,14 +91,24 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.ViewHolder>{
                                     time = "";
                                     timeSlot.setStopTime(time);
                                     UiValidator.displayMsg(context,"Please select a valid slot");
-                                }
-                            }
+                                }else if(timeSlot.getStartTime().length()>4 && isSameSlots)
+                                    slotsObserver.notifyAllDays();
+                            }else if(isSameSlots)
+                                slotsObserver.notifyAllDays();
                         holder.edtClosingTime.setText(time);
                     }
                 });
             }
         });
     }
+
+    private void removeSlot(DayAviliability.TimeSlot slot){
+        slots.remove(slot);
+        if(isSameSlots)
+            slotsObserver.notifyAllDays();
+        notifyDataSetChanged();
+    }
+
     private boolean isValidSlot(DayAviliability.TimeSlot timeSlot , Context context){// check weather start time is not greater then stop time
         SimpleDateFormat format=new SimpleDateFormat("hh:mm");
         if(timeSlot.getStartTime().length()>1 && timeSlot.getStopTime().length()>1){

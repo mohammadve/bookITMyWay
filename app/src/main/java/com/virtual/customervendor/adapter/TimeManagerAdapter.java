@@ -10,21 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-
 import com.virtual.customervendor.R;
 import com.virtual.customervendor.model.DayAviliability;
 
 import java.util.ArrayList;
 
-public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.ViewHolder> {
+public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.ViewHolder> implements SlotsAdapter.SameSlotsObserver {
     private ArrayList<DayAviliability> aviliabilities;
-    private SlotsListener listener;
-    private boolean isMultiSlots;
+    private boolean isMultiSlots,isSameSlots;
 
-    public TimeManagerAdapter(ArrayList<DayAviliability> aviliabilities, SlotsListener listener, boolean isMultiSlots) {
+    public TimeManagerAdapter(ArrayList<DayAviliability> aviliabilities, boolean isMultiSlots, boolean isSameSlots) {
         this.aviliabilities = aviliabilities;
-        this.listener = listener;
         this.isMultiSlots = isMultiSlots;
+        this.isSameSlots = isSameSlots;
+    }
+
+    public void setSameSlots(boolean sameSlots) {
+        isSameSlots = sameSlots;
     }
 
     @NonNull
@@ -45,53 +47,81 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
         holder.cbDay.setChecked(aviliability.isSeleted());
         holder.cbDay.setText(aviliability.getName());
 
-        final SlotsAdapter adapter=new SlotsAdapter(aviliabilities.get(position).getSlots());
+        final SlotsAdapter adapter=new SlotsAdapter(aviliabilities.get(position).getSlots(),isSameSlots,this);
         LinearLayoutManager manager=new LinearLayoutManager(holder.itemView.getContext(),LinearLayoutManager.VERTICAL,false);
         holder.recyclerView.setLayoutManager(manager);
         holder.recyclerView.setItemAnimator(new DefaultItemAnimator());
         holder.recyclerView.setAdapter(adapter);
 
-        if(aviliability.isSeleted()){
-            holder.btnAddMore.setVisibility(View.VISIBLE);
-            holder.recyclerView.setVisibility(View.VISIBLE);
-        }else {
-            holder.btnAddMore.setVisibility(View.GONE);
-            holder.recyclerView.setVisibility(View.GONE);
-        }
+//        if(aviliability.isSeleted()){
+//            holder.recyclerView.setVisibility(View.VISIBLE);
+//            if(isMultiSlots)
+//                holder.btnAddMore.setVisibility(View.VISIBLE);
+//            else
+//                holder.btnAddMore.setVisibility(View.GONE);
+//        }else {
+//            holder.btnAddMore.setVisibility(View.GONE);
+//            holder.recyclerView.setVisibility(View.GONE);
+//        }
+        toggleViews(aviliability.isSeleted(),holder);
 
         holder.cbDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isSameSlots && !isChecked)
+                    isChecked=true;
                 holder.cbDay.setChecked(isChecked);
                 aviliability.setSeleted(isChecked);
-                if(isChecked){
-                    holder.btnAddMore.setVisibility(View.VISIBLE);
-                    holder.recyclerView.setVisibility(View.VISIBLE);
-                }else {
-                    holder.btnAddMore.setVisibility(View.GONE);
-                    holder.recyclerView.setVisibility(View.GONE);
-                }
+                toggleViews(isChecked,holder);
+//                if(isChecked){
+//                    if(isMultiSlots)
+//                        holder.btnAddMore.setVisibility(View.VISIBLE);
+//                    else
+//                        holder.btnAddMore.setVisibility(View.GONE);
+//
+//                    holder.recyclerView.setVisibility(View.VISIBLE);
+//                }else {
+//                    holder.btnAddMore.setVisibility(View.GONE);
+//                    holder.recyclerView.setVisibility(View.GONE);
+//                }
             }
         });
         holder.btnAddMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 aviliability.addSlot("","");
-                adapter.notifyDataSetChanged();
+                if (isSameSlots)
+                    notifyDataSetChanged();
+                else
+                    adapter.notifyDataSetChanged();
             }
         });
 
 
     }
+    private void toggleViews(boolean isShow, ViewHolder holder){
+        if(isShow){
+            if(isMultiSlots)
+                holder.btnAddMore.setVisibility(View.VISIBLE);
+            else
+                holder.btnAddMore.setVisibility(View.GONE);
 
+            holder.recyclerView.setVisibility(View.VISIBLE);
+        }else {
+            holder.btnAddMore.setVisibility(View.GONE);
+            holder.recyclerView.setVisibility(View.GONE);
+        }
+    }
     @Override
     public int getItemCount() {
         return aviliabilities.size();
     }
 
-    public interface SlotsListener{
-        void onSlotSelection();
+    @Override
+    public void notifyAllDays() {
+        notifyDataSetChanged();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         private AppCompatCheckBox cbDay;
         private RecyclerView recyclerView;

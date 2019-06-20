@@ -6,11 +6,16 @@ import java.util.ArrayList;
 public class DayAviliability implements Serializable {
     private String name;
     private boolean isSeleted;
-    private ArrayList<TimeSlot> slots=new ArrayList();
+    private ArrayList<TimeSlot> slots;
 
     public DayAviliability(String name, boolean isSeleted) {
         this.name = name;
         this.isSeleted = isSeleted;
+    }
+    public DayAviliability(String name, boolean isSeleted,ArrayList<TimeSlot> slots) {
+        this.name = name;
+        this.isSeleted = isSeleted;
+        this.slots = slots;
     }
 
     public String getName() {
@@ -30,6 +35,8 @@ public class DayAviliability implements Serializable {
     }
 
     public ArrayList<TimeSlot> getSlots() {
+        if(slots==null)
+            slots=new ArrayList<>();
         if(slots.size()<=0)
             slots.add(new TimeSlot("",""));
         return slots;
