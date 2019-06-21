@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import com.virtual.customervendor.R;
 import com.virtual.customervendor.model.DayAviliability;
+import com.virtual.customervendor.utills.UiValidator;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final DayAviliability aviliability=aviliabilities.get(position);
         if(isMultiSlots)
             holder.btnAddMore.setVisibility(View.VISIBLE);
@@ -89,11 +90,15 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
         holder.btnAddMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                aviliability.addSlot("","");
-                if (isSameSlots)
-                    notifyDataSetChanged();
-                else
-                    adapter.notifyDataSetChanged();
+                int index=aviliability.getSlots().size()-1;
+                if(aviliability.getSlots().get(index).getStartTime()!="" && aviliability.getSlots().get(index).getStopTime()!="") {
+                    aviliability.addSlot("", "");
+                    if (isSameSlots)
+                        notifyDataSetChanged();
+                    else
+                        adapter.notifyDataSetChanged();
+                }else
+                    UiValidator.displayMsg(holder.itemView.getContext(),"Please select slot first!");
             }
         });
 

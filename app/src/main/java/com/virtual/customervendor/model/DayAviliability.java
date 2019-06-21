@@ -4,74 +4,73 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DayAviliability implements Serializable {
-    private String name;
-    private boolean isSeleted;
-    private ArrayList<TimeSlot> slots;
+    private String day;
+    private boolean dayValue;
+    private ArrayList<TimeSlot> timeSlot;
 
     public DayAviliability(String name, boolean isSeleted) {
-        this.name = name;
-        this.isSeleted = isSeleted;
+        this.day = name;
+        this.dayValue = isSeleted;
     }
     public DayAviliability(String name, boolean isSeleted,ArrayList<TimeSlot> slots) {
-        this.name = name;
-        this.isSeleted = isSeleted;
-        this.slots = slots;
+        this.day = name;
+        this.dayValue = isSeleted;
+        this.timeSlot = slots;
     }
 
     public String getName() {
-        return name;
+        return day;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.day = name;
     }
 
     public boolean isSeleted() {
-        return isSeleted;
+        return dayValue;
     }
 
     public void setSeleted(boolean seleted) {
-        isSeleted = seleted;
+        dayValue = seleted;
     }
 
     public ArrayList<TimeSlot> getSlots() {
-        if(slots==null)
-            slots=new ArrayList<>();
-        if(slots.size()<=0)
-            slots.add(new TimeSlot("",""));
-        return slots;
+        if(timeSlot ==null)
+            timeSlot =new ArrayList<>();
+        if(timeSlot.size()<=0)
+            timeSlot.add(new TimeSlot("",""));
+        return timeSlot;
     }
     public void addSlot(String startTime,String stopTime){
-        slots.add(new TimeSlot(startTime,stopTime));
+        timeSlot.add(new TimeSlot(startTime,stopTime));
     }
 
     public void setSlots(ArrayList<TimeSlot> slots) {
-        this.slots = slots;
+        this.timeSlot = slots;
     }
 
     public class TimeSlot implements Serializable{
 
-        private String startTime,stopTime;
-
+        private String start_time,end_time;
         public TimeSlot(String startTime, String stopTime) {
-            this.startTime = startTime;
-            this.stopTime = stopTime;
+            this.start_time = startTime;
+            this.end_time = stopTime;
         }
 
         public String getStartTime() {
-            return startTime;
+            return start_time;
         }
 
         public void setStartTime(String startTime) {
-            this.startTime = startTime;
+            this.start_time = startTime;
         }
 
         public String getStopTime() {
-            return stopTime;
+            return end_time;
         }
 
         public void setStopTime(String stopTime) {
-            this.stopTime = stopTime;
+            this.end_time = stopTime;
         }
     }
 }

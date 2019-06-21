@@ -22,6 +22,7 @@ public class TimeManagerActivity extends BaseActivity {
     public static final int REQUEST_CODE=201;
     public static final int RESULT_CODE=202;
     public static final String KEY_Multi_Slots="isMultiSlots";
+    public static final String KEY_ALL_DAY_SAME="allDaySameSlots";
     public static final String KEY_TIME_SLOTS_LIST="selectedTimeSlots";
 
     private RecyclerView recyclerView;
@@ -89,22 +90,22 @@ public class TimeManagerActivity extends BaseActivity {
         aviliabilities.clear();
         if (isSameSlots) {
             ArrayList<DayAviliability.TimeSlot> slots=new ArrayList<>();
-            aviliabilities.add(new DayAviliability("Mon", true,slots));
-            aviliabilities.add(new DayAviliability("Tue", true,slots));
-            aviliabilities.add(new DayAviliability("Wed", true,slots));
-            aviliabilities.add(new DayAviliability("Thu", true,slots));
-            aviliabilities.add(new DayAviliability("Fri", true,slots));
-            aviliabilities.add(new DayAviliability("Sat", true,slots));
-            aviliabilities.add(new DayAviliability("Sun", true,slots));
+            aviliabilities.add(new DayAviliability("Monday", true,slots));
+            aviliabilities.add(new DayAviliability("Tuesday", true,slots));
+            aviliabilities.add(new DayAviliability("Wednesday", true,slots));
+            aviliabilities.add(new DayAviliability("Thursday", true,slots));
+            aviliabilities.add(new DayAviliability("Friday", true,slots));
+            aviliabilities.add(new DayAviliability("Saturday", true,slots));
+            aviliabilities.add(new DayAviliability("Sunday", true,slots));
 
         } else {
-            aviliabilities.add(new DayAviliability("Mon", false));
-            aviliabilities.add(new DayAviliability("Tue", false));
-            aviliabilities.add(new DayAviliability("Wed", false));
-            aviliabilities.add(new DayAviliability("Thu", false));
-            aviliabilities.add(new DayAviliability("Fri", false));
-            aviliabilities.add(new DayAviliability("Sat", false));
-            aviliabilities.add(new DayAviliability("Sun", false));
+            aviliabilities.add(new DayAviliability("Monday", false));
+            aviliabilities.add(new DayAviliability("Tuesday", false));
+            aviliabilities.add(new DayAviliability("Wednesday", false));
+            aviliabilities.add(new DayAviliability("Thursday", false));
+            aviliabilities.add(new DayAviliability("Friday", false));
+            aviliabilities.add(new DayAviliability("Saturday", false));
+            aviliabilities.add(new DayAviliability("Sunday", false));
         }
     }
 
@@ -112,6 +113,7 @@ public class TimeManagerActivity extends BaseActivity {
     public void onBackPressed() {
         Intent data=new Intent();
         data.putExtra(KEY_TIME_SLOTS_LIST,aviliabilities);
+        data.putExtra(KEY_ALL_DAY_SAME,isSameSlots?1:0);
         setResult(RESULT_CODE,data);
         super.onBackPressed();
     }

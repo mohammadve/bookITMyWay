@@ -28,6 +28,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
     var datetime: String? = null
     var manager: FragmentManager? = null
     val list: ArrayList<OfferModel> = java.util.ArrayList()
+    var dateTime: ArrayList<DayAviliability> = java.util.ArrayList()
     var count: Int = 0
     var TAG: String = VendorTaxiTwoFragment::class.java.simpleName
     var taxi_Service_Request = Ven_Taxi_Service_Request()
@@ -97,7 +98,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             }
             R.id.txtDays -> {
                 var intent =Intent(activity,TimeManagerActivity::class.java)
-                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,false)
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,true)
 //                intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,ArrayList<DayAviliability>)
                 startActivityForResult(intent,TimeManagerActivity.REQUEST_CODE)
             }
@@ -107,7 +108,9 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==TimeManagerActivity.REQUEST_CODE && resultCode==TimeManagerActivity.RESULT_CODE){
-            var abilities=data?.getSerializableExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST) as ArrayList<DayAviliability>
+            dateTime=data?.getSerializableExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST) as ArrayList<DayAviliability>
+            taxi_Service_Request.dateTime=dateTime
+            taxi_Service_Request.all_day= data?.getIntExtra(TimeManagerActivity.KEY_ALL_DAY_SAME,0).toString()
         }
 
     }
@@ -386,6 +389,11 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 //                return
 //            }
 //        }
+        if(!isValidTimeSlots()) {
+            UiValidator.displayMsg(context, "Please enter a valid time slots")
+            return
+        }
+
         if (ed_desc.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
             return
@@ -398,6 +406,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 
         if (activity is VendorTaxiActivity) {
             putAllDataToFieldMap(taxi_Service_Request)
+
             if ((activity as VendorTaxiActivity).isFromedit()) {
                 (activity as VendorTaxiActivity).hitApiEdit(taxi_Service_Request)
             } else {
@@ -418,6 +427,15 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
                 (activity as VendorTourBusActivity).setDisplayFragment(3, activity!!.resources.getString(R.string.review_your_bussiness), false)
             }
         }
+    }
+
+    private fun isValidTimeSlots(): Boolean {
+        for (i in 0..taxi_Service_Request.dateTime.size){
+            if(taxi_Service_Request.dateTime[i].isSeleted && taxi_Service_Request.dateTime[i].slots.size>0)
+                if(taxi_Service_Request.dateTime[i].slots[0].startTime.length>0 && taxi_Service_Request.dateTime[i].slots[0].stopTime.length>0 )
+                    return true
+        }
+        return false
     }
 
 
