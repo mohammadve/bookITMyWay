@@ -7,7 +7,7 @@ import com.virtual.customervendor.MyApp
 import com.virtual.customervendor.R
 import com.virtual.customervendor.utills.AppLog
 
-public abstract  class BaseActivity : AppCompatActivity() {
+abstract  class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ public abstract  class BaseActivity : AppCompatActivity() {
 
     private val TAG = "BaseActivity"
 
-    protected override fun attachBaseContext(base: Context) {
+    override fun attachBaseContext(base: Context) {
         super.attachBaseContext(MyApp.localeManager.setLocale(base))
         AppLog.d(TAG, "attachBaseContext")
     }

@@ -31,13 +31,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.virtual.customervendor.listener.TimeListener;
 import com.virtual.customervendor.managers.CachingManager;
 import com.virtual.customervendor.managers.SharedPreferenceManager;
+import com.virtual.customervendor.model.DayAviliability;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -194,6 +197,40 @@ public class AppUtils {
         }
         return ssb;
 
+    }
+
+    public static boolean validateTimeSlot(ArrayList<DayAviliability.TimeSlot> slots, DayAviliability.TimeSlot timeSlot,boolean isStartTime) {
+
+        SimpleDateFormat format=new SimpleDateFormat("hh:mm");
+
+        for (DayAviliability.TimeSlot slot :slots) {
+            if (slot != timeSlot){
+                String selectedTime;
+                if(isStartTime) {
+                    selectedTime = timeSlot.getStartTime();
+                } else {
+                    selectedTime = timeSlot.getStopTime();
+                }
+                try {
+                    Date dateTimeStart=format.parse(slot.getStartTime());
+                    Date dateTimeStop=format.parse(slot.getStopTime());
+                    Date dateSelected=format.parse(selectedTime);
+
+                    if(dateSelected.compareTo(dateTimeStart)==0 || dateSelected.compareTo(dateTimeStop)==0)
+                        return false;
+                    else if (dateSelected.compareTo(dateTimeStart) > 0 && dateSelected.compareTo(dateTimeStop)<0)
+                        return false;
+                    else
+                        return true;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     static class MySpannable extends ClickableSpan {
@@ -382,7 +419,27 @@ public class AppUtils {
         }, 0, 0, true
         ).show();
     }
+    public static void getTimeNew(Context context, final TimeListener listener) {
+        new TimePickerDialogFixedNougatSpinner(context, AlertDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
+                String min = "";
+                String hour = "";
 
+                if (hours < 10) {
+                    hour = "0" + hours;
+                } else
+                    hour = "" + hours;
+
+                if (minutes < 10) {
+                    min = "0" + minutes;
+                } else
+                    min = "" + minutes;
+                listener.onTimeSelect("" + hour + ":" + min);
+            }
+        }, 0, 0, true
+        ).show();
+    }
     public static void updateLanguageResources(Context context, String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);

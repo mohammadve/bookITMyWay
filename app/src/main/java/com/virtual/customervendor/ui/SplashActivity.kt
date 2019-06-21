@@ -22,6 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_splash.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
+import com.virtual.customervendor.commonActivity.TimeManagerActivity
 
 
 class SplashActivity : AppCompatActivity() {
@@ -102,6 +103,7 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 var intent: Intent = Intent(this@SplashActivity, DashBoardActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,false);
                 startActivity(intent)
                 SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
                 finish()
@@ -114,8 +116,6 @@ class SplashActivity : AppCompatActivity() {
 
 
     fun getCountryCode() {
-
-
         if (AppUtils.isInternetConnected(this)) {
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
             apiInterface!!.getCountryCode()!!.subscribeOn(Schedulers.io())
@@ -167,5 +167,6 @@ class SplashActivity : AppCompatActivity() {
             AppLog.e(TAG, t?.message)
         }
     }
+
 
 }

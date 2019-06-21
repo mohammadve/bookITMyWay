@@ -87,6 +87,7 @@ class VendorTaxiOneFragment : Fragment(), View.OnClickListener, ViewPagerItemCli
             }
             R.id.btn_next -> {
                 validateField()
+//                (activity as VendorTaxiActivity).setDisplayFragment(2, activity!!.resources.getString(R.string.service_information), false)
             }
             R.id.ed_area -> {
                 ed_address.requestFocus()
