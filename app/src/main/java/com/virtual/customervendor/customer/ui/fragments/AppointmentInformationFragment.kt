@@ -33,12 +33,13 @@ import kotlin.collections.ArrayList
 
 class AppointmentInformationFragment : Fragment(), View.OnClickListener {
     var selected_service_adapter: SelectedServiceAdapter? = null
-
+    var selectedTimeSlot: CustomerTimeModel = CustomerTimeModel()
     var servicemenu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
     var timeSlotList: ArrayList<CustomerTimeModel> = ArrayList<CustomerTimeModel>()
     fun updateSelectedTime(bean: CustomerTimeModel, cityResponse: ArrayList<CustomerTimeModel>) {
         timeSlotList = cityResponse
         if (bean != null) {
+            selectedTimeSlot = bean
             ed_time.setText(bean.slot)
 
         }
@@ -179,10 +180,65 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!ed_time.text.toString().isEmpty())
-                    if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
-                        UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
-                        ed_time.setText("")
+
+                    if (activity !is BookAppointmentDoctorActivity && servicemenu.size > 1) {
+                        if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
+                            UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                            ed_time.setText("")
+                        } else {
+
+
+                            var pos = 10000
+                            var x = 0;
+                            while (x < timeSlotList.size) {
+
+                                if (timeSlotList.get(x).slot.equals(selectedTimeSlot.slot)) {
+                                    pos = x
+                                    break
+                                }
+                                x++
+                            }
+
+                            var isTimeSlotFree = false
+
+                            var i = 0
+                           /* while (i < servicemenu.size) {
+
+                                if( (pos+i) == servicemenu.size){
+                                    isTimeSlotFree = false
+                                    break
+                                }
+
+                                if (timeSlotList.get(pos + i) != null) {
+
+                                    if (timeSlotList.get(pos + i).remain > 0) {
+                                        isTimeSlotFree = true
+                                    } else {
+                                        isTimeSlotFree = false
+                                        break
+                                    }
+
+
+                                }
+
+                                i++
+                            }*/
+
+
+                            if (!isTimeSlotFree) {
+                                UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                                ed_time.setText("")
+                            }
+
+                        }
+
+                    } else {
+                        if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
+                            UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                            ed_time.setText("")
+                        }
                     }
+
             }
         })
 

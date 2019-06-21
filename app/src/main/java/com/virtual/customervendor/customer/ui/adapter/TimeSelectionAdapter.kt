@@ -24,7 +24,7 @@ class TimeSelectionAdapter(val mContext: Context, val cityModellist: ArrayList<C
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: ResultItemViewHolder, position: Int) {
-        holder.bind(mContext, lisData[position])
+        holder.bind(mContext, lisData[position],position)
     }
 
 
@@ -35,9 +35,9 @@ class TimeSelectionAdapter(val mContext: Context, val cityModellist: ArrayList<C
 
     class ResultItemViewHolder(itemView: View, val clickListener: (CustomerTimeModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(mContext: Context, offModel: CustomerTimeModel) {
+        fun bind(mContext: Context, offModel: CustomerTimeModel,pos: Int) {
             itemView.txt_title.text = offModel.slot
-            itemView.txt_remain.text = offModel.remain +" / "+offModel.totalseat
+            itemView.txt_remain.text = offModel.remain.toString() +" / "+ offModel.totalseat
             if (offModel.status.equals("1")) {
                 itemView.setClickable(true)
                 itemView.setOnClickListener { clickListener(offModel) }
