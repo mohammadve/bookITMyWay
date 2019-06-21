@@ -214,6 +214,7 @@ class HomeFragment : Fragment(), View.OnClickListener, ViewPagerItemClickedCusto
             SharedPreferenceManager.setCustomerName(detailResponse.user_name)
             SharedPreferenceManager.setCustomerImage(detailResponse.profile_pic)
 
+        try {
             (context as DashBoardActivity).updateProfile()
             initViewPager(detailResponse.data)
             list = detailResponse.data
@@ -245,7 +246,9 @@ class HomeFragment : Fragment(), View.OnClickListener, ViewPagerItemClickedCusto
                     img_upload5.setOnClickListener(this)
                 }
             }
+        }catch (ex : Exception){
 
+        }
         } else {
             UiValidator.displayMsg(activity, detailResponse.message)
         }

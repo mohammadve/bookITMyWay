@@ -112,7 +112,7 @@ class TimeDialogFragment : DialogFragment(), View.OnClickListener {
         rv_countryList = mView.findViewById(R.id.rv_countryList) as RecyclerView
 
         timeSelectionAdapter = TimeSelectionAdapter(activity!!, cityResponse) { offerModel ->
-            mCitySelectionInterface!!.selectedTimeUpdate(offerModel, this!!.fromWhere)
+            mCitySelectionInterface!!.selectedTimeUpdate(offerModel, this!!.fromWhere,cityResponse)
         }
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rv_countryList?.layoutManager = manager
@@ -180,6 +180,6 @@ class TimeDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     interface timeSelectionInterface {
-        fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?)
+        fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?, cityResponse: ArrayList<CustomerTimeModel>)
     }
 }

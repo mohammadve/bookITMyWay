@@ -12,12 +12,10 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.EditText
 import android.widget.ProgressBar
-import com.google.gson.Gson
 import com.virtual.customervendor.R
 import com.virtual.customervendor.customer.ui.adapter.ServiceSelectionAdapterMulti
 import com.virtual.customervendor.customview.CustomEditText
 import com.virtual.customervendor.model.ItemPriceModel
-import com.virtual.customervendor.model.VendorServiceDetailModel
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.AppLog
 
@@ -63,7 +61,7 @@ class ServiceSlectionDialogFragmentMulti : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater.inflate(R.layout.fragment_vehicle_dialog_multi, container, false)
+        mView = inflater.inflate(R.layout.fragment_service_selection_dialog_multi, container, false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 //        dialog.window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -82,7 +80,17 @@ class ServiceSlectionDialogFragmentMulti : DialogFragment() {
 //        progress_select_region = mView!!.findViewById(R.id.progress_select_region) as ProgressBar
 
         tv_ok_btn!!.setOnClickListener {
-            mregionSelectionInterface!!.done(serviceModelList, this!!.fromWhere)
+
+
+            val filledList: ArrayList<ItemPriceModel> = ArrayList()
+
+            for (temp in serviceModelList) {
+                if (temp.isSelected) {
+                    filledList.add(temp)
+
+                }
+            }
+            mregionSelectionInterface!!.done(filledList, this!!.fromWhere)
             dismiss()
         }
         serviceSelectionAdapterMulti = ServiceSelectionAdapterMulti(activity!!, servicemenu) { serviceModel ->

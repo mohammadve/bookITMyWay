@@ -80,6 +80,12 @@ class VendorHistoryActivity : BaseActivity(), View.OnClickListener, PagingListen
                 }
                 R.id.m_today -> {
                     filterType = "ondate"
+                    val c = Calendar.getInstance()
+                    c.add(Calendar.DAY_OF_MONTH, -1)
+                    SimpleDateFormat("yyyy-MM-dd").format(c.time)
+
+                    fromDate =    SimpleDateFormat("yyyy-MM-dd").format(c.time)
+                    toDate =   SimpleDateFormat("yyyy-MM-dd").format(c.time)
                     et_filterText.setText(item.title)
 
 
@@ -98,7 +104,7 @@ class VendorHistoryActivity : BaseActivity(), View.OnClickListener, PagingListen
                     getVendorOrderList(businessId, 0)
                 }
                 R.id.m_custom -> {
-                    filterType = "custom"
+                    filterType = "ondate"
                     showDatePickerDialog()
 
                 }
@@ -230,7 +236,7 @@ class VendorHistoryActivity : BaseActivity(), View.OnClickListener, PagingListen
                     //  ProgressDialogLoader.progressDialogCreation(getActivity(), getString(R.string.please_wait))
                 }
 
-                if (!filterType.equals("custom")) {
+                if (!filterType.equals("ondate")) {
                     fromDate = ""
                     toDate = ""
                 }

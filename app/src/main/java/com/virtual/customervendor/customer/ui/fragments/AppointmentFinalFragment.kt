@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.PaymentActivity
 import com.virtual.customervendor.customer.ui.activity.*
+import com.virtual.customervendor.customer.ui.adapter.SelectedServiceAdapter
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.ApplyOfferModel
 import com.virtual.customervendor.model.VendorServiceDetailModel
@@ -24,11 +26,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_appointment_final.*
+import kotlinx.android.synthetic.main.fragment_appointment_final.btn_next
+import kotlinx.android.synthetic.main.fragment_appointment_final.cons
+import kotlinx.android.synthetic.main.fragment_appointment_final.ed_date
+import kotlinx.android.synthetic.main.fragment_appointment_final.ed_time
+import kotlinx.android.synthetic.main.fragment_appointment_final.rv_selected_service
+import kotlinx.android.synthetic.main.fragment_appointment_information.*
 
 
 class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     //Changes By Himanshu Starts
 
+    private lateinit var selected_service_adapter: SelectedServiceAdapter
     private val ACTIVITY_REQUEST_CODE: Int = 1114
     var selectedId: Int = 0
     var taxAmt = String()
@@ -148,12 +157,27 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             request = (activity as BookAppointmentHairActivity).getFieldMap()
             sunCategoryId = AppConstants.SUBCAT_HEALTH_HAIR
             applyOfferModel = (activity as BookAppointmentHairActivity).applyOfferModel
+
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentHairActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
         } else if (activity is BookAppointmentMassageActivity) {
             info = (activity as BookAppointmentMassageActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentMassageActivity).getFieldMap()
             sunCategoryId = AppConstants.SUBCAT_HEALTH_PHYSIO
             applyOfferModel = (activity as BookAppointmentMassageActivity).applyOfferModel
 
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentMassageActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
 
         } else if (activity is BookAppointmentNailActivity) {
             info = (activity as BookAppointmentNailActivity).getbusinessDetailModel()
@@ -164,6 +188,16 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             PaymentOption_appointment.visibility = View.GONE
             radio.visibility = View.GONE
             radioGroup_payment_option_appointment.visibility = View.GONE
+
+
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentNailActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
+
         }
         setData()
     }

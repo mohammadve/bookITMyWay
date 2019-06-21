@@ -228,7 +228,7 @@ class TableBookingActivity : BaseActivity(), View.OnClickListener, RegionDialogF
         }
     }
 
-    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?) {
+    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?, cityResponse: ArrayList<CustomerTimeModel>) {
         AppLog.e(TAG, bean.toString())
         if (timeDialogFragment != null) {
             timeDialogFragment!!.dismiss()

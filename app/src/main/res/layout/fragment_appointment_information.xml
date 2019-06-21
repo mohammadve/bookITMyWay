@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,9 +67,21 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:textColor="@color/text2_color_7d7d7d"
                 android:textColorHint="@color/menu_bg_color_cccccc"
-                app:customFont="@string/fontRegular" />
+                app:customFont="@string/fontRegular"
+                android:visibility="gone"/>
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_selected_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_30"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/servicees" />
 
         <com.virtual.customervendor.customview.CustomTextView
             android:id="@+id/tv_service_selected"
@@ -84,7 +95,7 @@
             android:textSize="@dimen/sp_16"
             app:customFont="@string/fontRegular"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/servicees" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_selected_service" />
 
 
         <android.support.v7.widget.RecyclerView

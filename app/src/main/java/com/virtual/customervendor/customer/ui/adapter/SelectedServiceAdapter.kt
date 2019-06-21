@@ -13,10 +13,10 @@ import com.virtual.customervendor.R
 import com.virtual.customervendor.model.ItemPriceModel
 import com.virtual.customervendor.model.OfferModel
 import com.virtual.customervendor.utills.AppUtils
-import kotlinx.android.synthetic.main.fragment_dialog_service_selection_item_multi.view.*
+import kotlinx.android.synthetic.main.selected_service_item.view.*
 
 
-class ServiceSelectionAdapterMulti(val mContext: Context, val offermodel: ArrayList<ItemPriceModel>, val clickListener: (ArrayList<ItemPriceModel>) -> Unit) : RecyclerView.Adapter<ServiceSelectionAdapterMulti.ResultItemViewHolder>(), Filterable {
+class SelectedServiceAdapter(val mContext: Context, val offermodel: ArrayList<ItemPriceModel>, val clickListener: (ArrayList<ItemPriceModel>) -> Unit) : RecyclerView.Adapter<SelectedServiceAdapter.ResultItemViewHolder>(), Filterable {
     private var filterdata: FilterText = FilterText()
 
     var lisData: ArrayList<ItemPriceModel> = offermodel
@@ -24,7 +24,7 @@ class ServiceSelectionAdapterMulti(val mContext: Context, val offermodel: ArrayL
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultItemViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.fragment_dialog_service_selection_item_multi, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.selected_service_item, parent, false)
         return ResultItemViewHolder(view, clickListener)
     }
 
@@ -53,13 +53,7 @@ class ServiceSelectionAdapterMulti(val mContext: Context, val offermodel: ArrayL
                 itemView.txt_title.visibility = View.VISIBLE
                 itemView.txt_title.text = serviceModelList.get(position).itemName
                 itemView.tv_price.text = AppUtils.getRateWithSymbol(serviceModelList.get(position).itemPrice)
-                if (serviceModelList.get(position).isSelected) {
-                    itemView.txt_title.isChecked = true
-                    clickListener(serviceModelList)
 
-                } else {
-                    itemView.txt_title.isChecked = false
-                }
 //
 //
 
@@ -71,6 +65,7 @@ class ServiceSelectionAdapterMulti(val mContext: Context, val offermodel: ArrayL
             } else {
                 itemView.tv_noCountrySearch.visibility = View.VISIBLE
                 itemView.txt_title.visibility = View.GONE
+                itemView.tv_price.visibility = View.GONE
                 itemView.setClickable(false)
             }
         }
