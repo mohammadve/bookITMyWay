@@ -30,6 +30,8 @@ class AppKeys {
         const val ORDER_FILTERTYPE = "filtertype"
         const val OFFSET = "offset"
         const val SERVICE_ID = "service_id"
+        const val SERVICES_NAME = "subservice_name"
+        const val SERVICES_TIME = "subservice_book_time"
         const val PRODUCT_CATEGORY = "product_category"
         const val BUSINESS_ID = "business_id"
         const val OFFER_BUSINESS_ID = "busines_id"

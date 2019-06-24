@@ -9,13 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.PaymentActivity
-import com.virtual.customervendor.customer.ui.activity.*
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentDoctorActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentHairActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentMassageActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentNailActivity
 import com.virtual.customervendor.customer.ui.adapter.SelectedServiceAdapter
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.ApplyOfferModel
+import com.virtual.customervendor.model.ItemPriceModel
 import com.virtual.customervendor.model.VendorServiceDetailModel
 import com.virtual.customervendor.model.response.CustomerBookingResponse
 import com.virtual.customervendor.networks.ApiClient
@@ -26,12 +31,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_appointment_final.*
-import kotlinx.android.synthetic.main.fragment_appointment_final.btn_next
-import kotlinx.android.synthetic.main.fragment_appointment_final.cons
-import kotlinx.android.synthetic.main.fragment_appointment_final.ed_date
-import kotlinx.android.synthetic.main.fragment_appointment_final.ed_time
-import kotlinx.android.synthetic.main.fragment_appointment_final.rv_selected_service
-import kotlinx.android.synthetic.main.fragment_appointment_information.*
 
 
 class AppointmentFinalFragment : Fragment(), View.OnClickListener {
@@ -42,6 +41,8 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     var selectedId: Int = 0
     var taxAmt = String()
     var totalAmt = String()
+    var selectedServiceMenu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
+
     //Changes By Himanshu ends
     override fun onClick(v: View?) {
 
@@ -165,6 +166,10 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
 
             rv_selected_service?.layoutManager = manager
             rv_selected_service?.adapter = selected_service_adapter
+
+            selectedServiceMenu = (activity as BookAppointmentHairActivity).serviceSelectedItems
+
+
         } else if (activity is BookAppointmentMassageActivity) {
             info = (activity as BookAppointmentMassageActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentMassageActivity).getFieldMap()
@@ -178,6 +183,8 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
 
             rv_selected_service?.layoutManager = manager
             rv_selected_service?.adapter = selected_service_adapter
+            selectedServiceMenu = (activity as BookAppointmentMassageActivity).serviceSelectedItems
+
 
         } else if (activity is BookAppointmentNailActivity) {
             info = (activity as BookAppointmentNailActivity).getbusinessDetailModel()
@@ -197,6 +204,9 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
 
             rv_selected_service?.layoutManager = manager
             rv_selected_service?.adapter = selected_service_adapter
+
+            selectedServiceMenu = (activity as BookAppointmentNailActivity).serviceSelectedItems
+
 
         }
         setData()
@@ -236,6 +246,27 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     }
 
     fun hitApi() {
+
+        if (activity is BookAppointmentHairActivity || activity is BookAppointmentMassageActivity || activity is BookAppointmentNailActivity) {
+            var serviceStrings =""
+            var serviceTimingStrings =""
+            for (item in selectedServiceMenu) {
+                serviceStrings= serviceStrings+","+ item.itemName
+                serviceTimingStrings=serviceTimingStrings+","+ item.serviceTime
+
+            }
+
+            serviceStrings=   serviceStrings.substring(1,serviceStrings.length)
+            serviceTimingStrings=   serviceTimingStrings.substring(1,serviceTimingStrings.length)
+
+            var serviceJson = Gson().toJson(serviceStrings)
+            var serviceTimeJson = Gson().toJson(serviceTimingStrings)
+            apirequest.put(AppKeys.SERVICES_NAME, serviceJson)
+            apirequest.put(AppKeys.SERVICES_TIME, serviceTimeJson)
+
+        }
+
+
         apirequest.put(AppKeys.SERVICE_ID, info.service_id.toString())
         apirequest.put(AppKeys.BUSINESS_ID, info.businessData.business_id.toString())
         apirequest.put(AppKeys.CATEGORY_ID, AppConstants.CAT_HEALTH_BODYCARE.toString())

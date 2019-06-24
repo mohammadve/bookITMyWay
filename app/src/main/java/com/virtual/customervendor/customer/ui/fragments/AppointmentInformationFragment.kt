@@ -182,6 +182,8 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
                 if (!ed_time.text.toString().isEmpty())
 
                     if (activity !is BookAppointmentDoctorActivity && servicemenu.size > 1) {
+
+
                         if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
                             UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
                             ed_time.setText("")
@@ -189,7 +191,7 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
 
                             var pos = 10000
-                            var x = 0;
+                            var x = 0
                             while (x < timeSlotList.size) {
 
                                 if (timeSlotList.get(x).slot.equals(selectedTimeSlot.slot)) {
@@ -202,9 +204,9 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
                             var isTimeSlotFree = false
 
                             var i = 0
-                           /* while (i < servicemenu.size) {
+                            while (i < servicemenu.size) {
 
-                                if( (pos+i) == servicemenu.size){
+                                if ((pos + i) == timeSlotList.size) {
                                     isTimeSlotFree = false
                                     break
                                 }
@@ -213,6 +215,7 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
                                     if (timeSlotList.get(pos + i).remain > 0) {
                                         isTimeSlotFree = true
+                                        servicemenu.get(i).serviceTime = timeSlotList.get(pos + i).slot
                                     } else {
                                         isTimeSlotFree = false
                                         break
@@ -222,12 +225,22 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
                                 }
 
                                 i++
-                            }*/
+                            }
 
 
                             if (!isTimeSlotFree) {
                                 UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
                                 ed_time.setText("")
+                            } else {
+                                if (activity is BookAppointmentHairActivity) {
+                                    (activity as BookAppointmentHairActivity).serviceSelectedItems = servicemenu
+
+                                } else if (activity is BookAppointmentMassageActivity) {
+                                    (activity as BookAppointmentMassageActivity).serviceSelectedItems = servicemenu
+
+                                } else if (activity is BookAppointmentNailActivity) {
+                                    (activity as BookAppointmentNailActivity).serviceSelectedItems = servicemenu
+                                }
                             }
 
                         }
@@ -266,6 +279,12 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
             }
         }
 
+
+        if (servicemenu.size == 0) {
+            UiValidator.setValidationError(servicees, getString(R.string.field_required))
+            return
+        }
+
         if (ed_date.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_date, getString(R.string.field_required))
             return
@@ -273,6 +292,7 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
         if (til_date.isErrorEnabled()) {
             UiValidator.disableValidationError(til_date)
         }
+
         if (ed_time.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_time, getString(R.string.field_required))
             return
@@ -434,6 +454,11 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
     }
 
     fun updateSelectedServiceList(bean: ArrayList<ItemPriceModel>) {
+        if(servicemenu.size>0){
+          //  UiValidator.displayMsgSnack(cons, activity, "Please sel")
+            ed_time.setText("")
+        }
+
         servicemenu = bean
         // selected_service_adapter?.notifyDataSetChanged()
         if (activity is BookAppointmentHairActivity) {
@@ -451,10 +476,16 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
 
         }
+
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         rv_selected_service?.layoutManager = manager
         rv_selected_service?.adapter = selected_service_adapter
+        if (servicemenu.size > 0) {
+            if (servicees.isErrorEnabled()) {
+                UiValidator.disableValidationError(servicees)
+            }
+        }
     }
 
 }
