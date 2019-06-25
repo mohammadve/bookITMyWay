@@ -26,13 +26,13 @@ import com.virtual.customervendor.utills.SlideAnimationUtill
 
 class BookAppointmentMassageActivity : BaseActivity(), View.OnClickListener, RegionDialogFragmentSingle.SingleRegionSelectionInterface, TimeDialogFragment.timeSelectionInterface , CountryDialogFragment.countrySelectionInterface {
     var countryDialogFragment: CountryDialogFragment? = null
-    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?) {
+    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?, cityResponse: ArrayList<CustomerTimeModel>) {
         AppLog.e(TAG, bean.toString())
         if (timeDialogFragment != null) {
             timeDialogFragment!!.dismiss()
             val fragment = manager!!.findFragmentById(R.id.flContentnew)
             if (fragment != null && fragment.isVisible) {
-                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean)
+                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean,cityResponse)
             }
         }
     }
@@ -51,6 +51,7 @@ class BookAppointmentMassageActivity : BaseActivity(), View.OnClickListener, Reg
     var timeDialogFragment: TimeDialogFragment? = null
     var customerTimeSlotRequest: CustomerTimeSlotRequest = CustomerTimeSlotRequest()
     var serviceSlectionDialogFragmentMulti: ServiceSlectionDialogFragmentMulti? = null
+    var serviceSelectedItems: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
 
     var isFromSearch: Boolean = false
     var searchModel = SearchModel()

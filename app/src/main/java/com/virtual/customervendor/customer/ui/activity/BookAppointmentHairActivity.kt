@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -21,20 +22,30 @@ import com.virtual.customervendor.utills.AppConstants
 import com.virtual.customervendor.utills.AppLog
 import com.virtual.customervendor.utills.AppUtils
 import com.virtual.customervendor.utills.SlideAnimationUtill
+import com.virtual.customervendor.vendor.ui.fragments.VendorTaxiTwoFragment
 
 class BookAppointmentHairActivity : BaseActivity(), View.OnClickListener, RegionDialogFragmentSingle.SingleRegionSelectionInterface, TimeDialogFragment.timeSelectionInterface, CountryDialogFragment.countrySelectionInterface, ServiceSlectionDialogFragmentMulti.MultiServiceSelectionInterfaceService {
     override fun done(bean: ArrayList<ItemPriceModel>, fromWhere: String?) {
 
+        AppLog.e("@@Selected services","----"+bean.toString())
+        AppLog.e(TAG, bean.toString())
+
+            val fragment = manager!!.findFragmentById(R.id.flContentnew)
+            if (fragment != null && fragment.isVisible) {
+                if (fragment is AppointmentInformationFragment) fragment.updateSelectedServiceList(bean)
+
+        }
+
     }
 
     var countryDialogFragment: CountryDialogFragment? = null
-    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?) {
+    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?, cityResponse: ArrayList<CustomerTimeModel>) {
         AppLog.e(TAG, bean.toString())
         if (timeDialogFragment != null) {
             timeDialogFragment!!.dismiss()
             val fragment = manager!!.findFragmentById(R.id.flContentnew)
             if (fragment != null && fragment.isVisible) {
-                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean)
+                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean,cityResponse)
             }
         }
     }
@@ -50,6 +61,7 @@ class BookAppointmentHairActivity : BaseActivity(), View.OnClickListener, Region
     var fieldmap: MutableMap<String, String> = mutableMapOf()
     var businessDetailModel: VendorServiceDetailModel = VendorServiceDetailModel()
     var applyOfferModel = ApplyOfferModel()
+    var serviceSelectedItems: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
 
     var timeDialogFragment: TimeDialogFragment? = null
     var customerTimeSlotRequest: CustomerTimeSlotRequest = CustomerTimeSlotRequest()

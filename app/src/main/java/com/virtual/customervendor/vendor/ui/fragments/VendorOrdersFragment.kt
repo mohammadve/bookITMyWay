@@ -38,7 +38,10 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_orderslist_vendor.*
 import org.json.JSONException
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
 
@@ -86,7 +89,12 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
                 R.id.m_today -> {
                     filterType = "ondate"
                     et_filterText.setText(item.title)
+                    val c = Calendar.getInstance()
+                    c.add(Calendar.DAY_OF_MONTH, -1)
+                    SimpleDateFormat("yyyy-MM-dd").format(c.time)
 
+                    fromDate =    SimpleDateFormat("yyyy-MM-dd").format(c.time)
+                    toDate =   SimpleDateFormat("yyyy-MM-dd").format(c.time)
 
                     getVendorOrderList(businessId, 0)
                 }
@@ -103,7 +111,7 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
                     getVendorOrderList(businessId, 0)
                 }
                 R.id.m_custom -> {
-                    filterType = "custom"
+                    filterType = "ondate"
                     showDatePickerDialog()
 
                 }
@@ -237,7 +245,7 @@ class VendorOrdersFragment : Fragment(), View.OnClickListener, PagingListeners {
                     //  ProgressDialogLoader.progressDialogCreation(getActivity(), getString(R.string.please_wait))
                 }
 
-                if (!filterType.equals("custom")) {
+                if (!filterType.equals("ondate")) {
                     fromDate = ""
                     toDate = ""
                 }

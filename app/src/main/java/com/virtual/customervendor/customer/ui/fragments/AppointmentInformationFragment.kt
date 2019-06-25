@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.customer.ui.activity.*
+import com.virtual.customervendor.customer.ui.adapter.SelectedServiceAdapter
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.*
 import com.virtual.customervendor.model.response.ApplyOfferResponse
@@ -27,11 +29,17 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_appointment_information.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AppointmentInformationFragment : Fragment(), View.OnClickListener {
-
-    fun updateSelectedTime(bean: CustomerTimeModel) {
+    var selected_service_adapter: SelectedServiceAdapter? = null
+    var selectedTimeSlot: CustomerTimeModel = CustomerTimeModel()
+    var servicemenu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
+    var timeSlotList: ArrayList<CustomerTimeModel> = ArrayList<CustomerTimeModel>()
+    fun updateSelectedTime(bean: CustomerTimeModel, cityResponse: ArrayList<CustomerTimeModel>) {
+        timeSlotList = cityResponse
         if (bean != null) {
+            selectedTimeSlot = bean
             ed_time.setText(bean.slot)
 
         }
@@ -96,10 +104,7 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.ed_services -> {
-
-                if (activity is BookAppointmentDoctorActivity)
-//                    (activity as BookAppointmentDoctorActivity).showTimeSelectionDialog(ed_services.text.toString())
-                else if (activity is BookAppointmentHairActivity)
+                if (activity is BookAppointmentHairActivity)
                     (activity as BookAppointmentHairActivity).showServiceSelectionDialogMulti(ed_services.text.toString())
                 else if (activity is BookAppointmentNailActivity)
                     (activity as BookAppointmentNailActivity).showServiceSelectionDialogMulti(ed_services.text.toString())
@@ -134,17 +139,23 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
         if (activity is BookAppointmentDoctorActivity) {
             til_appreason.visibility = View.VISIBLE
+            ed_services.visibility = View.GONE
+
             businessDetailModel = (activity as BookAppointmentDoctorActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentDoctorActivity).getFieldMap()
         } else if (activity is BookAppointmentHairActivity) {
             businessDetailModel = (activity as BookAppointmentHairActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentHairActivity).getFieldMap()
+            ed_services.visibility = View.VISIBLE
         } else if (activity is BookAppointmentMassageActivity) {
             businessDetailModel = (activity as BookAppointmentMassageActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentMassageActivity).getFieldMap()
+            ed_services.visibility = View.VISIBLE
         } else if (activity is BookAppointmentNailActivity) {
             businessDetailModel = (activity as BookAppointmentNailActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentNailActivity).getFieldMap()
+            ed_services.visibility = View.VISIBLE
+
         }
         initView()
     }
@@ -169,12 +180,90 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!ed_time.text.toString().isEmpty())
-                    if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
-                        UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
-                        ed_time.setText("")
+
+                    if (activity !is BookAppointmentDoctorActivity && servicemenu.size > 1) {
+
+
+                        if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
+                            UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                            ed_time.setText("")
+                        } else {
+
+
+                            var pos = 10000
+                            var x = 0
+                            while (x < timeSlotList.size) {
+
+                                if (timeSlotList.get(x).slot.equals(selectedTimeSlot.slot)) {
+                                    pos = x
+                                    break
+                                }
+                                x++
+                            }
+
+                            var isTimeSlotFree = false
+
+                            var i = 0
+                            while (i < servicemenu.size) {
+
+                                if ((pos + i) == timeSlotList.size) {
+                                    isTimeSlotFree = false
+                                    break
+                                }
+
+                                if (timeSlotList.get(pos + i) != null) {
+
+                                    if (timeSlotList.get(pos + i).remain > 0) {
+                                        isTimeSlotFree = true
+                                        servicemenu.get(i).serviceTime = timeSlotList.get(pos + i).slot
+                                    } else {
+                                        isTimeSlotFree = false
+                                        break
+                                    }
+
+
+                                }
+
+                                i++
+                            }
+
+
+                            if (!isTimeSlotFree) {
+                                UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                                ed_time.setText("")
+                            } else {
+                                if (activity is BookAppointmentHairActivity) {
+                                    (activity as BookAppointmentHairActivity).serviceSelectedItems = servicemenu
+
+                                } else if (activity is BookAppointmentMassageActivity) {
+                                    (activity as BookAppointmentMassageActivity).serviceSelectedItems = servicemenu
+
+                                } else if (activity is BookAppointmentNailActivity) {
+                                    (activity as BookAppointmentNailActivity).serviceSelectedItems = servicemenu
+                                }
+                            }
+
+                        }
+
+                    } else {
+                        if (AppUtill.isTimeGreater(ed_date.text.toString() + " " + ed_time.text.toString())) {
+                            UiValidator.displayMsgSnack(cons, activity, getString(R.string.choose_valid_time_slot))
+                            ed_time.setText("")
+                        }
                     }
+
             }
         })
+
+        selected_service_adapter = SelectedServiceAdapter(activity!!, servicemenu) { serviceModel ->
+            // serviceModelList = serviceModel
+
+
+        }
+        val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        rv_selected_service?.layoutManager = manager
+        rv_selected_service?.adapter = selected_service_adapter
     }
 
     fun validateField(from: String) {
@@ -190,6 +279,12 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
             }
         }
 
+
+        if (servicemenu.size == 0) {
+            UiValidator.setValidationError(servicees, getString(R.string.field_required))
+            return
+        }
+
         if (ed_date.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_date, getString(R.string.field_required))
             return
@@ -197,6 +292,7 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
         if (til_date.isErrorEnabled()) {
             UiValidator.disableValidationError(til_date)
         }
+
         if (ed_time.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_time, getString(R.string.field_required))
             return
@@ -241,8 +337,9 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
             }
         } else if (activity is BookAppointmentNailActivity) {
             if (from.equals(AppConstants.CAL_OFFER)) {
-                if (!ed_coupon.text.toString().isEmpty())
-                    getOfferPrice() else {
+                if (!ed_coupon.text.toString().isEmpty()) {
+                    getOfferPrice()
+                } else {
                     UiValidator.displayMsgSnack(nest, activity, resources.getString(R.string.nocoupon_code))
                 }
             } else if (from.equals(AppConstants.CAL_NEXT)) {
@@ -292,7 +389,23 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getOfferPrice() {
-        val orderprice = (businessDetailModel.fees_per_visit)
+        var orderprice: String? = ""
+        var tempPrice = 0
+        if (activity is BookAppointmentDoctorActivity) {
+            orderprice = (businessDetailModel.fees_per_visit)
+
+        } else {
+            (activity as BookAppointmentNailActivity).serviceSelectedItems
+            for (temp in (activity as BookAppointmentNailActivity).serviceSelectedItems) {
+
+                var tempPrice = tempPrice + temp.itemPrice.toFloat()
+
+            }
+            orderprice = tempPrice.toString()
+
+        }
+
+
         val business_id = businessDetailModel.businessData.business_id.toString()
         val coupon = ed_coupon.text.toString()
         if (AppUtils.isInternetConnected(activity)) {
@@ -337,6 +450,41 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
         } else {
             UiValidator.displayMsgSnack(cons, activity, getString(R.string.no_internet_connection))
+        }
+    }
+
+    fun updateSelectedServiceList(bean: ArrayList<ItemPriceModel>) {
+        if(servicemenu.size>0){
+          //  UiValidator.displayMsgSnack(cons, activity, "Please sel")
+            ed_time.setText("")
+        }
+
+        servicemenu = bean
+        // selected_service_adapter?.notifyDataSetChanged()
+        if (activity is BookAppointmentHairActivity) {
+            (activity as BookAppointmentHairActivity).serviceSelectedItems = servicemenu
+
+        } else if (activity is BookAppointmentMassageActivity) {
+            (activity as BookAppointmentMassageActivity).serviceSelectedItems = servicemenu
+
+        } else if (activity is BookAppointmentNailActivity) {
+            (activity as BookAppointmentNailActivity).serviceSelectedItems = servicemenu
+        }
+
+        selected_service_adapter = SelectedServiceAdapter(activity!!, servicemenu) { serviceModel ->
+            // serviceModelList = serviceModel
+
+
+        }
+
+        val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        rv_selected_service?.layoutManager = manager
+        rv_selected_service?.adapter = selected_service_adapter
+        if (servicemenu.size > 0) {
+            if (servicees.isErrorEnabled()) {
+                UiValidator.disableValidationError(servicees)
+            }
         }
     }
 

@@ -5,7 +5,7 @@ import java.io.Serializable
 class CustomerTimeModel(
         var slot: String? = null,
         var status: String? = null,
-        var remain: String? = null,
+        var remain: Int = 0,
         var totalseat: String? = null
 
 

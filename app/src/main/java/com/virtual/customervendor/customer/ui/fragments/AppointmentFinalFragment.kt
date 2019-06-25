@@ -4,16 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.PaymentActivity
-import com.virtual.customervendor.customer.ui.activity.*
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentDoctorActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentHairActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentMassageActivity
+import com.virtual.customervendor.customer.ui.activity.BookAppointmentNailActivity
+import com.virtual.customervendor.customer.ui.adapter.SelectedServiceAdapter
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.ApplyOfferModel
+import com.virtual.customervendor.model.ItemPriceModel
 import com.virtual.customervendor.model.VendorServiceDetailModel
 import com.virtual.customervendor.model.response.CustomerBookingResponse
 import com.virtual.customervendor.networks.ApiClient
@@ -29,10 +36,13 @@ import kotlinx.android.synthetic.main.fragment_appointment_final.*
 class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     //Changes By Himanshu Starts
 
+    private lateinit var selected_service_adapter: SelectedServiceAdapter
     private val ACTIVITY_REQUEST_CODE: Int = 1114
     var selectedId: Int = 0
     var taxAmt = String()
     var totalAmt = String()
+    var selectedServiceMenu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
+
     //Changes By Himanshu ends
     override fun onClick(v: View?) {
 
@@ -148,11 +158,32 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             request = (activity as BookAppointmentHairActivity).getFieldMap()
             sunCategoryId = AppConstants.SUBCAT_HEALTH_HAIR
             applyOfferModel = (activity as BookAppointmentHairActivity).applyOfferModel
+
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentHairActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
+
+            selectedServiceMenu = (activity as BookAppointmentHairActivity).serviceSelectedItems
+
+
         } else if (activity is BookAppointmentMassageActivity) {
             info = (activity as BookAppointmentMassageActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentMassageActivity).getFieldMap()
             sunCategoryId = AppConstants.SUBCAT_HEALTH_PHYSIO
             applyOfferModel = (activity as BookAppointmentMassageActivity).applyOfferModel
+
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentMassageActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
+            selectedServiceMenu = (activity as BookAppointmentMassageActivity).serviceSelectedItems
 
 
         } else if (activity is BookAppointmentNailActivity) {
@@ -164,6 +195,19 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             PaymentOption_appointment.visibility = View.GONE
             radio.visibility = View.GONE
             radioGroup_payment_option_appointment.visibility = View.GONE
+
+
+            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentNailActivity).serviceSelectedItems) { serviceModel ->
+                // serviceModelList = serviceModel
+            }
+            val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            rv_selected_service?.layoutManager = manager
+            rv_selected_service?.adapter = selected_service_adapter
+
+            selectedServiceMenu = (activity as BookAppointmentNailActivity).serviceSelectedItems
+
+
         }
         setData()
     }
@@ -202,6 +246,27 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     }
 
     fun hitApi() {
+
+        if (activity is BookAppointmentHairActivity || activity is BookAppointmentMassageActivity || activity is BookAppointmentNailActivity) {
+            var serviceStrings =""
+            var serviceTimingStrings =""
+            for (item in selectedServiceMenu) {
+                serviceStrings= serviceStrings+","+ item.itemName
+                serviceTimingStrings=serviceTimingStrings+","+ item.serviceTime
+
+            }
+
+            serviceStrings=   serviceStrings.substring(1,serviceStrings.length)
+            serviceTimingStrings=   serviceTimingStrings.substring(1,serviceTimingStrings.length)
+
+            var serviceJson = Gson().toJson(serviceStrings)
+            var serviceTimeJson = Gson().toJson(serviceTimingStrings)
+            apirequest.put(AppKeys.SERVICES_NAME, serviceJson)
+            apirequest.put(AppKeys.SERVICES_TIME, serviceTimeJson)
+
+        }
+
+
         apirequest.put(AppKeys.SERVICE_ID, info.service_id.toString())
         apirequest.put(AppKeys.BUSINESS_ID, info.businessData.business_id.toString())
         apirequest.put(AppKeys.CATEGORY_ID, AppConstants.CAT_HEALTH_BODYCARE.toString())

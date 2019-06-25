@@ -29,16 +29,21 @@ import com.virtual.customervendor.utills.SlideAnimationUtill
 class BookAppointmentNailActivity : BaseActivity(), View.OnClickListener, RegionDialogFragmentSingle.SingleRegionSelectionInterface, TimeDialogFragment.timeSelectionInterface, CountryDialogFragment.countrySelectionInterface, ServiceSlectionDialogFragmentMulti.MultiServiceSelectionInterfaceService {
     override fun done(bean: ArrayList<ItemPriceModel>, fromWhere: String?) {
         Log.e("Value on click", "" + bean.toString())
+        val fragment = manager!!.findFragmentById(R.id.flContentnew)
+        if (fragment != null && fragment.isVisible) {
+            if (fragment is AppointmentInformationFragment) fragment.updateSelectedServiceList(bean)
+
+        }
     }
 
     var countryDialogFragment: CountryDialogFragment? = null
-    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?) {
+    override fun selectedTimeUpdate(bean: CustomerTimeModel, fromWhere: String?, cityResponse: ArrayList<CustomerTimeModel>) {
         AppLog.e(TAG, bean.toString())
         if (timeDialogFragment != null) {
             timeDialogFragment!!.dismiss()
             val fragment = manager!!.findFragmentById(R.id.flContentnew)
             if (fragment != null && fragment.isVisible) {
-                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean)
+                if (fragment is AppointmentInformationFragment) fragment.updateSelectedTime(bean,cityResponse)
             }
         }
     }
@@ -59,7 +64,7 @@ class BookAppointmentNailActivity : BaseActivity(), View.OnClickListener, Region
     var isFromSearch: Boolean = false
     var searchModel = SearchModel()
     var serviceSlectionDialogFragmentMulti: ServiceSlectionDialogFragmentMulti? = null
-
+    var serviceSelectedItems: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back -> {
