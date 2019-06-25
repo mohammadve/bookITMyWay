@@ -58,6 +58,8 @@ public class DayAviliability implements Serializable {
         }
 
         public String getStartTime() {
+            if(start_time==null)
+                start_time="";
             return start_time;
         }
 
@@ -66,6 +68,8 @@ public class DayAviliability implements Serializable {
         }
 
         public String getStopTime() {
+            if(end_time==null)
+                end_time="";
             return end_time;
         }
 

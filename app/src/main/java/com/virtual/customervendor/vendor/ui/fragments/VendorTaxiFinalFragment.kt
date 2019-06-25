@@ -15,6 +15,7 @@ import com.virtual.customervendor.commonActivity.TermsAndConditionActivityVendor
 import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.DayAviliability
 import com.virtual.customervendor.model.OfferModel
 import com.virtual.customervendor.model.RegionModel
 import com.virtual.customervendor.model.request.Ven_Taxi_Service_Request
@@ -133,32 +134,41 @@ class VendorTaxiFinalFragment : Fragment(), View.OnClickListener, ViewPagerItemC
             data.append(regionModel.regionname)
         }
         ed_service.setText(data.toString())
-        if (AppUtils.getStatusBoolean(taxi_Service_Request.all_day)) {
-            chk_alldays.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
-            cons_day.visibility = View.GONE
-        } else {
-            chk_alldays.visibility = View.GONE
-            chk_monday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.mon)
-            chk_tuesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.tue)
-            chk_wednesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.wed)
-            chk_thursday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.thu)
-            chk_friday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.fri)
-            chk_saturday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sat)
-            chk_sunday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sun)
-        }
 
-        if (AppUtils.getStatusBoolean(taxi_Service_Request.is_24_hours_open)) {
-            ed_starttime.visibility = View.GONE
-            txt_starttime.visibility = View.GONE
-            ed_closingtime.visibility = View.GONE
-            txt_closingtime.visibility = View.GONE
-            chk_24time.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.is_24_hours_open)
-        } else {
-            chk_24time.visibility = View.GONE
-            ed_starttime.setText(taxi_Service_Request.start_time)
-            ed_closingtime.setText(taxi_Service_Request.close_time)
-        }
+//        if (AppUtils.getStatusBoolean(taxi_Service_Request.all_day)) {
+//            chk_alldays.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+//            cons_day.visibility = View.GONE
+//        } else {
+//            chk_alldays.visibility = View.GONE
+//            chk_monday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.mon)
+//            chk_tuesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.tue)
+//            chk_wednesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.wed)
+//            chk_thursday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.thu)
+//            chk_friday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.fri)
+//            chk_saturday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sat)
+//            chk_sunday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sun)
+//        }
+
+//        if (AppUtils.getStatusBoolean(taxi_Service_Request.is_24_hours_open)) {
+//            ed_starttime.visibility = View.GONE
+//            txt_starttime.visibility = View.GONE
+//            ed_closingtime.visibility = View.GONE
+//            txt_closingtime.visibility = View.GONE
+//            chk_24time.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.is_24_hours_open)
+//        } else {
+//            chk_24time.visibility = View.GONE
+//            ed_starttime.setText(taxi_Service_Request.start_time)
+//            ed_closingtime.setText(taxi_Service_Request.close_time)
+//        }
         ed_desc.setText(taxi_Service_Request.description)
+
+        txtSlotsMon.setText(getSlots(taxi_Service_Request.dateTime.get(0).slots))
+        txtSlotsTue.setText(getSlots(taxi_Service_Request.dateTime.get(1).slots))
+        txtSlotsWed.setText(getSlots(taxi_Service_Request.dateTime.get(2).slots))
+        txtSlotsThu.setText(getSlots(taxi_Service_Request.dateTime.get(3).slots))
+        txtSlotsFri.setText(getSlots(taxi_Service_Request.dateTime.get(4).slots))
+        txtSlotsSat.setText(getSlots(taxi_Service_Request.dateTime.get(5).slots))
+        txtSlotsSun.setText(getSlots(taxi_Service_Request.dateTime.get(6).slots))
 
         if (activity is VendorTaxiActivity)
             initViewPager((activity as VendorTaxiActivity).mResults, false)
@@ -168,6 +178,22 @@ class VendorTaxiFinalFragment : Fragment(), View.OnClickListener, ViewPagerItemC
             initViewPager((activity as VendorTourBusActivity).mResults, false)
     }
 
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
 
     private fun initViewPager(mResults: ArrayList<BusinessImage>, fromEdit: Boolean) {
         SCREEN_COUNT = mResults.size

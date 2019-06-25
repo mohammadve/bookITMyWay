@@ -54,16 +54,6 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
         holder.recyclerView.setItemAnimator(new DefaultItemAnimator());
         holder.recyclerView.setAdapter(adapter);
 
-//        if(aviliability.isSeleted()){
-//            holder.recyclerView.setVisibility(View.VISIBLE);
-//            if(isMultiSlots)
-//                holder.btnAddMore.setVisibility(View.VISIBLE);
-//            else
-//                holder.btnAddMore.setVisibility(View.GONE);
-//        }else {
-//            holder.btnAddMore.setVisibility(View.GONE);
-//            holder.recyclerView.setVisibility(View.GONE);
-//        }
         toggleViews(aviliability.isSeleted(),holder);
 
         holder.cbDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,17 +64,6 @@ public class TimeManagerAdapter extends RecyclerView.Adapter<TimeManagerAdapter.
                 holder.cbDay.setChecked(isChecked);
                 aviliability.setSeleted(isChecked);
                 toggleViews(isChecked,holder);
-//                if(isChecked){
-//                    if(isMultiSlots)
-//                        holder.btnAddMore.setVisibility(View.VISIBLE);
-//                    else
-//                        holder.btnAddMore.setVisibility(View.GONE);
-//
-//                    holder.recyclerView.setVisibility(View.VISIBLE);
-//                }else {
-//                    holder.btnAddMore.setVisibility(View.GONE);
-//                    holder.recyclerView.setVisibility(View.GONE);
-//                }
             }
         });
         holder.btnAddMore.setOnClickListener(new View.OnClickListener() {

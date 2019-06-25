@@ -63,7 +63,16 @@ class VendorServiceDetailModel(
         var stadium_address: ArrayList<StoreItemLocationModel> = ArrayList(),
         var arena_address: ArrayList<StoreItemLocationModel> = ArrayList(),
         var other_address: ArrayList<StoreItemLocationModel> = ArrayList(),
-        var storecategory: String? = null
+        var storecategory: String? = null,
+
+        // Added by Dalvendra
+        var monday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var tuesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var wednesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var thursday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var friday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var saturday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var sunday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList()
 
 ) : Serializable {
     override fun toString(): String {

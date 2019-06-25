@@ -99,7 +99,8 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             R.id.txtDays -> {
                 var intent =Intent(activity,TimeManagerActivity::class.java)
                 intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,true)
-//                intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,ArrayList<DayAviliability>)
+                if(taxi_Service_Request.dateTime.size>0)
+                    intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,taxi_Service_Request.dateTime)
                 startActivityForResult(intent,TimeManagerActivity.REQUEST_CODE)
             }
         }
@@ -309,7 +310,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             taxi_Service_Request.avg_seat_per_taxi = ed_seat.text.toString()
             taxi_Service_Request.rate_per_km = ed_rate.text.toString()
 //            taxi_Service_Request.all_day = AppUtils.getStatusString(chk_alldays.isChecked)
-//
 //            taxi_Service_Request.mon = AppUtils.getStatusString(chk_monday.isChecked)
 //            taxi_Service_Request.tue = AppUtils.getStatusString(chk_tuesday.isChecked)
 //            taxi_Service_Request.wed = AppUtils.getStatusString(chk_wednesday.isChecked)
@@ -320,6 +320,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 //            taxi_Service_Request.is_24_hours_open = AppUtils.getStatusString(chk_24time.isChecked)
 //            taxi_Service_Request.start_time = ed_starttime.text.toString()
 //            taxi_Service_Request.close_time = ed_closingtime.text.toString()
+
             taxi_Service_Request.description = ed_desc.text.toString()
 
         } catch (e: Exception) {
@@ -389,6 +390,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 //                return
 //            }
 //        }
+
         if(!isValidTimeSlots()) {
             UiValidator.displayMsg(context, "Please enter a valid time slots")
             return

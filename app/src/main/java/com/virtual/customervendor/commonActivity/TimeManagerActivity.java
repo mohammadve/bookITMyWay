@@ -47,7 +47,6 @@ public class TimeManagerActivity extends BaseActivity {
                 aviliabilities = (ArrayList<DayAviliability>) getIntent().getExtras().getSerializable(KEY_TIME_SLOTS_LIST);
             }else
                 setSlotsBlank(false);
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -111,10 +110,19 @@ public class TimeManagerActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        invalidateData();
         Intent data=new Intent();
         data.putExtra(KEY_TIME_SLOTS_LIST,aviliabilities);
         data.putExtra(KEY_ALL_DAY_SAME,isSameSlots?1:0);
         setResult(RESULT_CODE,data);
         super.onBackPressed();
+    }
+
+    private void invalidateData() {
+        for (DayAviliability aviliability:aviliabilities){
+            if(!aviliability.isSeleted()){
+                aviliability.getSlots().clear();
+            }
+        }
     }
 }

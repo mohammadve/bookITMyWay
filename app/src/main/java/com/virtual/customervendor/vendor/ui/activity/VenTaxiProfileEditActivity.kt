@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -20,10 +22,7 @@ import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.managers.CachingManager
 import com.virtual.customervendor.managers.SharedPreferenceManager
-import com.virtual.customervendor.model.BusinessDetail
-import com.virtual.customervendor.model.BusinessImage
-import com.virtual.customervendor.model.RegionModel
-import com.virtual.customervendor.model.VendorServiceDetailModel
+import com.virtual.customervendor.model.*
 import com.virtual.customervendor.model.request.Ven_Taxi_Service_Request
 import com.virtual.customervendor.model.response.VendorServiceDetailResponse
 import com.virtual.customervendor.networks.ApiClient
@@ -36,6 +35,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_taxi_profile_edit_vendor.*
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPagerItemClicked {
     override fun onPagerItemClicked(position: Int) {
@@ -119,6 +119,50 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
         })
     }
 
+    fun setDaySlots(taxi_Service_Request: Ven_Taxi_Service_Request){
+        var isAllDay: Boolean=AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+        if(taxi_Service_Request.dateTime.size==0){
+//            if(taxi_Service_Request.monday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.mon) ,taxi_Service_Request.monday_time))
+//            if(taxi_Service_Request.tuesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tue) ,taxi_Service_Request.tuesday_time))
+//            if(taxi_Service_Request.wednesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wed) ,taxi_Service_Request.wednesday_time))
+//            if(taxi_Service_Request.thursday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thu) ,taxi_Service_Request.thursday_time))
+//            if(taxi_Service_Request.friday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.fri) ,taxi_Service_Request.friday_time))
+//            if(taxi_Service_Request.saturday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sat) ,taxi_Service_Request.saturday_time))
+//            if(taxi_Service_Request.sunday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sun) ,taxi_Service_Request.sunday_time))
+        }
+
+        txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
+        txtSlotsTue.setText(getSlots(taxi_Service_Request.tuesday_time))
+        txtSlotsWed.setText(getSlots(taxi_Service_Request.wednesday_time))
+        txtSlotsThu.setText(getSlots(taxi_Service_Request.thursday_time))
+        txtSlotsFri.setText(getSlots(taxi_Service_Request.friday_time))
+        txtSlotsSat.setText(getSlots(taxi_Service_Request.saturday_time))
+        txtSlotsSun.setText(getSlots(taxi_Service_Request.sunday_time))
+    }
+
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+        return str
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         SlideAnimationUtill.slideBackAnimation(this)
@@ -199,6 +243,8 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
         if (taxi_Service_Request.business_images != null && taxi_Service_Request.business_images.size > 0) {
             initViewPager(taxi_Service_Request.business_images)
         }
+
+        setDaySlots(taxi_Service_Request)
 
     }
 
@@ -360,6 +406,14 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
         taxiinfo.start_time = detailModel.start_time
         taxiinfo.close_time = detailModel.close_time
         taxiinfo.fri = detailModel.friday
+
+        taxiinfo.monday_time.addAll(detailModel.monday_time)
+        taxiinfo.tuesday_time.addAll(detailModel.tuesday_time)
+        taxiinfo.wednesday_time.addAll(detailModel.wednesday_time)
+        taxiinfo.thursday_time.addAll(detailModel.thursday_time)
+        taxiinfo.friday_time.addAll(detailModel.friday_time)
+        taxiinfo.saturday_time.addAll(detailModel.saturday_time)
+        taxiinfo.sunday_time.addAll(detailModel.sunday_time)
 
         CachingManager.setVendorTaxiInfo(taxiinfo)
         setRestaurantData(taxiinfo)

@@ -427,231 +427,157 @@
             app:layout_constraintTop_toBottomOf="@+id/ed_service" />
 
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/chk_alldays"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            android:button="@drawable/check_box_selector"
-            android:clickable="false"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="@string/all_days"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_days" />
-
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/cons_day"
+        <LinearLayout
+            android:id="@+id/lytDaySlots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/txt_days"
+            android:orientation="vertical"
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            app:layout_constraintTop_toBottomOf="@+id/chk_alldays">
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_monday"
+            android:layout_marginRight="@dimen/dp_20"
+            >
+            <com.virtual.customervendor.customview.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/monday"
+                android:text="@string/monday_m"
                 android:textColor="@color/text1_color_101010"
                 android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/chk_tuesday" />
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_tuesday"
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsMon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/tuesday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
                 app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_monday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_wednesday" />
+                />
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_wednesday"
+            <com.virtual.customervendor.customview.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/wednesday"
+                android:text="@string/tuesday_t"
                 android:textColor="@color/text1_color_101010"
                 android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_tuesday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_thursday" />
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_thursday"
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsTue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/thursday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
                 app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_wednesday"
-                app:layout_constraintRight_toLeftOf="@id/chk_friday" />
+                />
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_friday"
+            <com.virtual.customervendor.customview.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/friday"
+                android:text="@string/wednesday_w"
                 android:textColor="@color/text1_color_101010"
                 android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_thursday"
-                app:layout_constraintRight_toLeftOf="@id/chk_saturday" />
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_saturday"
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsWed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/saturday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
                 app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_friday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_sunday" />
+                />
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_sunday"
+            <com.virtual.customervendor.customview.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:clickable="false"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/saturday"
+                android:text="@string/thursday_t"
                 android:textColor="@color/text1_color_101010"
                 android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
                 app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_saturday"
-                app:layout_constraintRight_toRightOf="parent" />
+                />
 
-        </android.support.constraint.ConstraintLayout>
+            <com.virtual.customervendor.customview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/friday_f"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                />
 
-        <com.virtual.customervendor.customview.CustomTextView
-            android:id="@+id/txt_hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            android:text="@string/bussines_hours"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cons_day" />
+            <com.virtual.customervendor.customview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saturday_s"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsSat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/chk_24time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            android:button="@drawable/check_box_selector"
-            android:clickable="false"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="@string/_24_hrs"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_hours" />
+            <com.virtual.customervendor.customview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sunday_t"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontBold"
+                />
 
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/txtSlotsSun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text2_color_7d7d7d"
+                android:textSize="@dimen/sp_14"
+                android:theme="@style/StyleTextInputLayout"
+                app:customFont="@string/fontRegular"
+                />
 
-        <com.virtual.customervendor.customview.CustomTextView
-            android:id="@+id/txt_starttime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            android:text="@string/start_time"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chk_24time" />
-
-        <com.virtual.customervendor.customview.CustomEditText
-            android:id="@+id/ed_starttime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="@null"
-            android:focusable="false"
-            android:hint="@string/start_time"
-            android:textColor="@color/text2_color_7d7d7d"
-
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_starttime" />
-
-        <com.virtual.customervendor.customview.CustomTextView
-            android:id="@+id/txt_closingtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_30"
-            android:text="@string/closing_time"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_starttime" />
-
-
-        <com.virtual.customervendor.customview.CustomEditText
-            android:id="@+id/ed_closingtime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="@null"
-            android:focusable="false"
-            android:hint="@string/closing_time"
-            android:textColor="@color/text2_color_7d7d7d"
-
-            android:textSize="@dimen/sp_16"
-            app:customFont="@string/fontRegular"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_closingtime" />
+        </LinearLayout>
 
         <com.virtual.customervendor.customview.CustomTextView
             android:id="@+id/txt_desc"
@@ -665,7 +591,7 @@
             android:textSize="@dimen/sp_16"
             app:customFont="@string/fontRegular"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_closingtime" />
+            app:layout_constraintTop_toBottomOf="@+id/lytDaySlots" />
 
 
         <com.virtual.customervendor.customview.CustomEditText
