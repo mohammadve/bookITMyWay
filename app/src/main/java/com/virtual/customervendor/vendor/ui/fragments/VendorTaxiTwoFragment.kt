@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.TimeManagerActivity
 import com.virtual.customervendor.model.DayAviliability
@@ -98,9 +97,17 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             }
             R.id.txtDays -> {
                 var intent =Intent(activity,TimeManagerActivity::class.java)
-                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,true)
-                if(taxi_Service_Request.dateTime.size>0)
-                    intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,taxi_Service_Request.dateTime)
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots,false)
+                if(activity is VendorTaxiActivity){
+                    if(taxi_Service_Request.dateTime.size>0)
+                        intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,taxi_Service_Request.dateTime)
+                }else if(activity is VendorLimoActivity){
+                    if(limo_Service_Request.dateTime.size>0)
+                        intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,limo_Service_Request.dateTime)
+                }else if(activity is VendorTourBusActivity){
+                    if(tourbus_Service_Request.dateTime.size>0)
+                        intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST,tourbus_Service_Request.dateTime)
+                }
                 startActivityForResult(intent,TimeManagerActivity.REQUEST_CODE)
             }
         }
@@ -110,8 +117,17 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==TimeManagerActivity.REQUEST_CODE && resultCode==TimeManagerActivity.RESULT_CODE){
             dateTime=data?.getSerializableExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST) as ArrayList<DayAviliability>
-            taxi_Service_Request.dateTime=dateTime
-            taxi_Service_Request.all_day= data?.getIntExtra(TimeManagerActivity.KEY_ALL_DAY_SAME,0).toString()
+            var isAllDay: String =data?.getIntExtra(TimeManagerActivity.KEY_ALL_DAY_SAME,0).toString()
+            if(activity is VendorTaxiActivity){
+                taxi_Service_Request.dateTime=dateTime
+                taxi_Service_Request.all_day= isAllDay
+            }else if(activity is VendorLimoActivity){
+                limo_Service_Request.dateTime=dateTime
+                limo_Service_Request.all_day= isAllDay
+            }else if(activity is VendorTourBusActivity){
+                tourbus_Service_Request.dateTime=dateTime
+                tourbus_Service_Request.all_day= isAllDay
+            }
         }
 
     }
@@ -391,10 +407,7 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 //            }
 //        }
 
-        if(!isValidTimeSlots()) {
-            UiValidator.displayMsg(context, "Please enter a valid time slots")
-            return
-        }
+
 
         if (ed_desc.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
@@ -407,14 +420,22 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
 
 
         if (activity is VendorTaxiActivity) {
+            if(!isValidTimeSlots(taxi_Service_Request.dateTime)) {
+                UiValidator.displayMsg(context, "Please enter a valid time slots")
+                return
+            }
             putAllDataToFieldMap(taxi_Service_Request)
-
             if ((activity as VendorTaxiActivity).isFromedit()) {
                 (activity as VendorTaxiActivity).hitApiEdit(taxi_Service_Request)
             } else {
                 (activity as VendorTaxiActivity).setDisplayFragment(3, activity!!.resources.getString(R.string.review_your_bussiness), false)
             }
         } else if (activity is VendorLimoActivity) {
+
+            if(!isValidTimeSlots(limo_Service_Request.dateTime)) {
+                UiValidator.displayMsg(context, "Please enter a valid time slots")
+                return
+            }
             putAllDataToFieldMap(limo_Service_Request)
             if ((activity as VendorLimoActivity).isFromedit()) {
                 (activity as VendorLimoActivity).hitApiEdit(limo_Service_Request)
@@ -422,6 +443,11 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
                 (activity as VendorLimoActivity).setDisplayFragment(3, activity!!.resources.getString(R.string.review_your_bussiness), false)
             }
         } else if (activity is VendorTourBusActivity) {
+
+            if(!isValidTimeSlots(tourbus_Service_Request.dateTime)) {
+                UiValidator.displayMsg(context, "Please enter a valid time slots")
+                return
+            }
             putAllDataToFieldMap(tourbus_Service_Request)
             if ((activity as VendorTourBusActivity).isFromedit()) {
                 (activity as VendorTourBusActivity).hitApiEdit(tourbus_Service_Request)
@@ -431,10 +457,10 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
         }
     }
 
-    private fun isValidTimeSlots(): Boolean {
-        for (i in 0..taxi_Service_Request.dateTime.size){
-            if(taxi_Service_Request.dateTime[i].isSeleted && taxi_Service_Request.dateTime[i].slots.size>0)
-                if(taxi_Service_Request.dateTime[i].slots[0].startTime.length>0 && taxi_Service_Request.dateTime[i].slots[0].stopTime.length>0 )
+    private fun isValidTimeSlots(taxi_Service_Request: ArrayList<DayAviliability>): Boolean {
+        for (aviliability in taxi_Service_Request){
+            if(aviliability.isSeleted && aviliability.slots.size>0)
+                if(aviliability.slots[0].startTime.length>0 && aviliability.slots[0].stopTime.length>0 )
                     return true
         }
         return false

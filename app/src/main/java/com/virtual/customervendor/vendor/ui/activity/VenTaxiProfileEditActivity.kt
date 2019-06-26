@@ -10,8 +10,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -137,7 +135,6 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
 //            if(taxi_Service_Request.sunday_time.size>0)
             taxi_Service_Request.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sun) ,taxi_Service_Request.sunday_time))
         }
-
         txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
         txtSlotsTue.setText(getSlots(taxi_Service_Request.tuesday_time))
         txtSlotsWed.setText(getSlots(taxi_Service_Request.wednesday_time))
@@ -160,6 +157,7 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
             str="none"
         else
             str=str.substring(0,str.length-1)
+
         return str
     }
 
@@ -262,7 +260,6 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
                 addBottomDots(position)
 //                setNames(position)
             }
-
             override fun onPageScrollStateChanged(state: Int) {}
         })
     }
@@ -415,8 +412,15 @@ class VenTaxiProfileEditActivity : BaseActivity(), View.OnClickListener, ViewPag
         taxiinfo.saturday_time.addAll(detailModel.saturday_time)
         taxiinfo.sunday_time.addAll(detailModel.sunday_time)
 
-        CachingManager.setVendorTaxiInfo(taxiinfo)
         setRestaurantData(taxiinfo)
+
+        CachingManager.setVendorTaxiInfo(taxiinfo)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        swipeToRefresh.setRefreshing(true)
+        hitApi(businessDetail)
     }
 
 

@@ -160,6 +160,7 @@ class VendorTaxiFinalFragment : Fragment(), View.OnClickListener, ViewPagerItemC
 //            ed_starttime.setText(taxi_Service_Request.start_time)
 //            ed_closingtime.setText(taxi_Service_Request.close_time)
 //        }
+
         ed_desc.setText(taxi_Service_Request.description)
 
         txtSlotsMon.setText(getSlots(taxi_Service_Request.dateTime.get(0).slots))

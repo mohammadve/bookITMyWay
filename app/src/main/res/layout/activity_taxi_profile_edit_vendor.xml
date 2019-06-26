@@ -682,6 +682,7 @@
                     <com.virtual.customervendor.customview.CustomTextView
                         android:id="@+id/ed_day"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:text="@string/name"
                         android:textColor="@color/text2_color_7d7d7d"
