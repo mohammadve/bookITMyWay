@@ -35,8 +35,18 @@ class VendorHealthServiceRequest(
         var fri: String? = "0",
         var sat: String? = "0",
         var visiting_hours_slot: ArrayList<TimeSlotModel> = ArrayList<TimeSlotModel>(),
-        var service_menu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>()
-) : Serializable {
+        var service_menu: ArrayList<ItemPriceModel> = ArrayList<ItemPriceModel>(),
+
+        var monday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var tuesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var wednesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var thursday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var friday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var saturday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var sunday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var dateTime: ArrayList<DayAviliability> = ArrayList()
+
+    ) : Serializable {
     override fun toString(): String {
         return "VendorHealthServiceRequest(business_id=$business_id, business_images=$business_images, action=$action, service_id=$service_id, image_url=$image_url, business_name=$business_name, business_contactno=$business_contactno, country_code=$country_code, dial_code=$dial_code, business_email=$business_email, business_city_id=$business_city_id, business_region_id=$business_region_id, business_specialit=$business_specialit, speciality=$speciality, business_address=$business_address, business_tax=$business_tax, business_category_id=$business_category_id, business_subcategory_id=$business_subcategory_id, fees_per_visit=$fees_per_visit, time_slot=$time_slot, required_person_per_hr=$required_person_per_hr, description=$description, all_day=$all_day, sun=$sun, mon=$mon, tue=$tue, wed=$wed, thu=$thu, fri=$fri, sat=$sat, visiting_hours_slot=$visiting_hours_slot, service_menu=$service_menu)"
     }

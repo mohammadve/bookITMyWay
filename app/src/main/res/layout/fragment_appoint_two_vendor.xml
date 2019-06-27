@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:id="@+id/nest"
+    android:id="@+id/nest"
     android:overScrollMode="never"
     android:scrollbars="none">
 
@@ -28,7 +28,7 @@ android:id="@+id/nest"
             android:theme="@style/StyleTextInputLayout"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-          >
+            >
 
             <com.virtual.customervendor.customview.CustomEditText
                 android:id="@+id/ed_specialty"
@@ -87,7 +87,7 @@ android:id="@+id/nest"
             app:layout_constraintTop_toBottomOf="@+id/til_fees">
 
             <com.virtual.customervendor.customview.CustomEditText
-                    android:id="@+id/ed_patient"
+                android:id="@+id/ed_patient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/avg_person_per_slot"
@@ -182,6 +182,7 @@ android:id="@+id/nest"
             android:layout_marginTop="@dimen/dp_10"
             android:button="@drawable/check_box_selector"
             android:paddingLeft="@dimen/dp_10"
+            android:visibility="gone"
             android:text="@string/all_days"
             android:textColor="@color/text1_color_101010"
             android:textSize="@dimen/sp_16"
@@ -189,150 +190,165 @@ android:id="@+id/nest"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_days" />
 
-
         <com.virtual.customervendor.customview.CustomTextView
+            android:id="@+id/txtDays"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30"
-            android:text="@string/or"
-            android:textColor="@color/text1_color_101010"
-            android:textSize="@dimen/sp_18"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/select_days_of_service"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
             app:customFont="@string/fontRegular"
-            app:layout_constraintBottom_toBottomOf="@+id/chk_alldays"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chk_alldays" />
+            app:layout_constraintTop_toBottomOf="@+id/chk_alldays"
+            android:background="@drawable/btn_bg_click"
+            android:paddingRight="@dimen/dp_35"
+            android:paddingLeft="@dimen/dp_35"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8"
+            />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/cons_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            app:layout_constraintTop_toBottomOf="@+id/chk_alldays">
+        <!--<com.virtual.customervendor.customview.CustomTextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/dp_30"-->
+        <!--android:layout_marginRight="@dimen/dp_30"-->
+        <!--android:text="@string/or"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_18"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/chk_alldays"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/chk_alldays" />-->
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_monday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/monday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/chk_tuesday" />
+        <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/cons_day"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/dp_30"-->
+        <!--android:layout_marginRight="@dimen/dp_30"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/chk_alldays">-->
 
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_tuesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/tuesday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_monday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_wednesday" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_wednesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/wednesday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_tuesday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_thursday" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_thursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/thursday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_wednesday"
-                app:layout_constraintRight_toLeftOf="@id/chk_friday" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/friday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_thursday"
-                app:layout_constraintRight_toLeftOf="@id/chk_saturday" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_saturday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/saturday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_friday"
-                app:layout_constraintRight_toLeftOf="@+id/chk_sunday" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/chk_sunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/check_box_selector"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="@string/saturday"
-                android:textColor="@color/text1_color_101010"
-                android:textSize="@dimen/sp_16"
-                app:customFont="@string/fontRegular"
-                app:layout_constraintLeft_toRightOf="@+id/chk_saturday"
-                app:layout_constraintRight_toRightOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_timing"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cons_day" />
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_monday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/monday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/chk_tuesday" />-->
 
 
-        <com.virtual.customervendor.customview.CustomTextView
-            android:id="@+id/addmore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:drawableLeft="@drawable/ic_add_more"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/dp_5"
-            android:text="@string/add_more"
-            app:customFont="@string/fontBold"
-            android:textColor="@color/themecolor_022E8D"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_timing" />
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_tuesday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/tuesday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_monday"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/chk_wednesday" />-->
+
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_wednesday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/wednesday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_tuesday"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/chk_thursday" />-->
+
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_thursday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/thursday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_wednesday"-->
+        <!--app:layout_constraintRight_toLeftOf="@id/chk_friday" />-->
+
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_friday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/friday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_thursday"-->
+        <!--app:layout_constraintRight_toLeftOf="@id/chk_saturday" />-->
+
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_saturday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/saturday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_friday"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/chk_sunday" />-->
+
+        <!--<android.support.v7.widget.AppCompatCheckBox-->
+        <!--android:id="@+id/chk_sunday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/check_box_selector"-->
+        <!--android:paddingLeft="@dimen/dp_5"-->
+        <!--android:text="@string/saturday"-->
+        <!--android:textColor="@color/text1_color_101010"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--app:customFont="@string/fontRegular"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/chk_saturday"-->
+        <!--app:layout_constraintRight_toRightOf="parent" />-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_timing"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout_editor_absoluteX="30dp"-->
+        <!--tools:layout_editor_absoluteY="314dp" />-->
+
+
+        <!--<com.virtual.customervendor.customview.CustomTextView-->
+        <!--android:id="@+id/addmore"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/dp_30"-->
+        <!--android:drawableLeft="@drawable/ic_add_more"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginTop="@dimen/dp_5"-->
+        <!--android:text="@string/add_more"-->
+        <!--app:customFont="@string/fontBold"-->
+        <!--android:textColor="@color/themecolor_022E8D"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/rv_timing" />-->
 
 
         <android.support.design.widget.TextInputLayout
@@ -346,7 +362,7 @@ android:id="@+id/nest"
             android:theme="@style/StyleTextInputLayout"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addmore">
+            app:layout_constraintTop_toBottomOf="@+id/txtDays">
 
             <com.virtual.customervendor.customview.CustomEditText
                 android:id="@+id/ed_desc"

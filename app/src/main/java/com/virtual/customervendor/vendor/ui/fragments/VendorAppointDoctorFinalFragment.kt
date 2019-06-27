@@ -16,10 +16,7 @@ import com.virtual.customervendor.commonActivity.TermsAndConditionActivity
 import com.virtual.customervendor.commonActivity.TermsAndConditionActivityVendor
 import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
-import com.virtual.customervendor.model.BusinessImage
-import com.virtual.customervendor.model.ItemPriceModel
-import com.virtual.customervendor.model.OfferModel
-import com.virtual.customervendor.model.TimeSlotModel
+import com.virtual.customervendor.model.*
 import com.virtual.customervendor.model.request.VendorHealthServiceRequest
 import com.virtual.customervendor.utills.AppConstants
 import com.virtual.customervendor.utills.AppLog
@@ -133,16 +130,16 @@ class VendorAppointDoctorFinalFragment : Fragment(), View.OnClickListener, ViewP
 
         if (AppUtils.getStatusBoolean(request.all_day)) {
             chk_alldays.isChecked = AppUtils.getStatusBoolean(request.all_day)
-            cons_day.visibility = View.GONE
+//            cons_day.visibility = View.GONE
         } else {
             chk_alldays.visibility = View.GONE
-            chk_monday.isChecked = AppUtils.getStatusBoolean(request.mon)
-            chk_tuesday.isChecked = AppUtils.getStatusBoolean(request.tue)
-            chk_wednesday.isChecked = AppUtils.getStatusBoolean(request.wed)
-            chk_thursday.isChecked = AppUtils.getStatusBoolean(request.thu)
-            chk_friday.isChecked = AppUtils.getStatusBoolean(request.fri)
-            chk_saturday.isChecked = AppUtils.getStatusBoolean(request.sat)
-            chk_sunday.isChecked = AppUtils.getStatusBoolean(request.sun)
+//            chk_monday.isChecked = AppUtils.getStatusBoolean(request.mon)
+//            chk_tuesday.isChecked = AppUtils.getStatusBoolean(request.tue)
+//            chk_wednesday.isChecked = AppUtils.getStatusBoolean(request.wed)
+//            chk_thursday.isChecked = AppUtils.getStatusBoolean(request.thu)
+//            chk_friday.isChecked = AppUtils.getStatusBoolean(request.fri)
+//            chk_saturday.isChecked = AppUtils.getStatusBoolean(request.sat)
+//            chk_sunday.isChecked = AppUtils.getStatusBoolean(request.sun)
         }
 
         var data = StringBuilder()
@@ -152,7 +149,7 @@ class VendorAppointDoctorFinalFragment : Fragment(), View.OnClickListener, ViewP
             }
             data.append(regionModel.fromTime + activity!!.resources.getString(R.string.to) + regionModel.toTime)
         }
-        ed_bussinesshours.setText(data)
+//        ed_bussinesshours.setText(data)
         ed_desc.setText(request.description)
         ed_avgperson.setText(request.required_person_per_hr)
 
@@ -162,9 +159,33 @@ class VendorAppointDoctorFinalFragment : Fragment(), View.OnClickListener, ViewP
             rv_timing.visibility = View.VISIBLE
             createAdapterView(request.service_menu)
         }
+
+        txtSlotsMon.setText(getSlots(request.dateTime.get(0).slots))
+        txtSlotsTue.setText(getSlots(request.dateTime.get(1).slots))
+        txtSlotsWed.setText(getSlots(request.dateTime.get(2).slots))
+        txtSlotsThu.setText(getSlots(request.dateTime.get(3).slots))
+        txtSlotsFri.setText(getSlots(request.dateTime.get(4).slots))
+        txtSlotsSat.setText(getSlots(request.dateTime.get(5).slots))
+        txtSlotsSun.setText(getSlots(request.dateTime.get(6).slots))
+
         initViewPager(mResults, false)
     }
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
 
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
     private fun createAdapterView(timeList: ArrayList<ItemPriceModel>) {
         var serviceAdapter = HealthAddServiceAdapter(activity!!, AppConstants.FROM_REVIEW, timeList)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)

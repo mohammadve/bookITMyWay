@@ -262,9 +262,10 @@ class VendorDoctorActivity : BaseActivity(), View.OnClickListener, CityDialogFra
 
     fun hitApiEdit(doctoreServiceRequest: VendorHealthServiceRequest) {
         if (AppUtils.isInternetConnected(this)) {
-
+//            doctoreServiceRequest.visiting_hours_slot.add(TimeSlotModel("",""))
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
             doctoreServiceRequest.action = AppConstants.ACTION_EDIT
+
             doctoreServiceRequest.business_category_id = AppConstants.CAT_HEALTH_BODYCARE.toString()
             apiInterface?.healthServiceSetUp("Bearer " + SharedPreferenceManager.getAuthToken(), doctoreServiceRequest)
                     ?.subscribeOn(Schedulers.io())
@@ -275,7 +276,6 @@ class VendorDoctorActivity : BaseActivity(), View.OnClickListener, CityDialogFra
                             handleResultsEdit(userResponse)
                             AppLog.e(TAG, userResponse.toString())
                         }
-
                         override fun onError(e: Throwable) {
                             handleError(e)
                         }
@@ -317,8 +317,8 @@ class VendorDoctorActivity : BaseActivity(), View.OnClickListener, CityDialogFra
     private fun handleError(t: Throwable) {
         ProgressDialogLoader.progressDialogDismiss()
         if (t != null) {
-        UiValidator.displayMsgSnack(coordinator, this, t.message)
-        AppLog.e(TAG, t?.message)}
+            UiValidator.displayMsgSnack(coordinator, this, t.message)
+            AppLog.e(TAG, t?.message)}
     }
 
     override fun onSuccess(userImageUploadResponse: BusinessImagesResponse) {
@@ -347,7 +347,7 @@ class VendorDoctorActivity : BaseActivity(), View.OnClickListener, CityDialogFra
         AppLog.e(TAG, d.toString())
     }
 
-    public fun uploadPic(files: ArrayList<File>, bussinessId: String) {
+    fun uploadPic(files: ArrayList<File>, bussinessId: String) {
         ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
         if (files != null && files.size > 0) {
             files.subList(0, venAppointDoctoreServiceRequest.business_images.size).clear()
@@ -361,7 +361,7 @@ class VendorDoctorActivity : BaseActivity(), View.OnClickListener, CityDialogFra
             specialityDialogFragment!!.dismiss()
             val fragment = manager!!.findFragmentById(R.id.flContentnew)
             if (fragment != null && fragment.isVisible) {
-                if (fragment is VendorAppointTwoFragment) fragment.updateSelectedSpeciality(bean)
+//                if (fragment is VendorAppointTwoFragment) fragment.updateSelectedSpeciality(bean)
             }
         }
     }

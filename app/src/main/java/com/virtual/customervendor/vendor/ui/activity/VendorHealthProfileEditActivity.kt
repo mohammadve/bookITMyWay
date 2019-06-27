@@ -123,6 +123,10 @@ class VendorHealthProfileEditActivity : BaseActivity(), View.OnClickListener, Vi
         init()
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        hitApi(businessDetail)
+//    }
     fun init() {
         toolbar = findViewById(R.id.toolbar) as AppBarLayout
         mTitle = toolbar!!.findViewById(R.id.tv_toolbarTitleText) as TextView
@@ -214,9 +218,52 @@ class VendorHealthProfileEditActivity : BaseActivity(), View.OnClickListener, Vi
             iv_servicemenu.visibility = View.VISIBLE
             createAdapterView(healthServiceRequest.service_menu)
         }
+        setDaySlots(healthServiceRequest)
+
+
     }
+    fun setDaySlots(healthServiceRequest: VendorHealthServiceRequest){
+        var isAllDay: Boolean=AppUtils.getStatusBoolean(healthServiceRequest.all_day)
+        if(healthServiceRequest.dateTime.size==0){
+//            if(taxi_Service_Request.monday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.mon) ,healthServiceRequest.monday_time))
+//            if(taxi_Service_Request.tuesday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.tue) ,healthServiceRequest.tuesday_time))
+//            if(taxi_Service_Request.wednesday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.wed) ,healthServiceRequest.wednesday_time))
+//            if(taxi_Service_Request.thursday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.thu) ,healthServiceRequest.thursday_time))
+//            if(taxi_Service_Request.friday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.fri) ,healthServiceRequest.friday_time))
+//            if(taxi_Service_Request.saturday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.sat) ,healthServiceRequest.saturday_time))
+//            if(taxi_Service_Request.sunday_time.size>0)
+            healthServiceRequest.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(healthServiceRequest.sun) ,healthServiceRequest.sunday_time))
+        }
+        txtSlotsMon.setText(getSlots(healthServiceRequest.monday_time))
+        txtSlotsTue.setText(getSlots(healthServiceRequest.tuesday_time))
+        txtSlotsWed.setText(getSlots(healthServiceRequest.wednesday_time))
+        txtSlotsThu.setText(getSlots(healthServiceRequest.thursday_time))
+        txtSlotsFri.setText(getSlots(healthServiceRequest.friday_time))
+        txtSlotsSat.setText(getSlots(healthServiceRequest.saturday_time))
+        txtSlotsSun.setText(getSlots(healthServiceRequest.sunday_time))
+    }
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
 
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
 
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
     private fun createAdapterView(timeList: ArrayList<ItemPriceModel>) {
         var serviceAdapter = BodyCareServiceMenuAdapter(this,  timeList)
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -390,6 +437,15 @@ class VendorHealthProfileEditActivity : BaseActivity(), View.OnClickListener, Vi
 
         healthServiceRequest.speciality = detailModel.speciality
         healthServiceRequest.business_specialit = detailModel.business_specialit
+
+        healthServiceRequest.monday_time.addAll(detailModel.monday_time)
+        healthServiceRequest.tuesday_time.addAll(detailModel.tuesday_time)
+        healthServiceRequest.wednesday_time.addAll(detailModel.wednesday_time)
+        healthServiceRequest.thursday_time.addAll(detailModel.thursday_time)
+        healthServiceRequest.friday_time.addAll(detailModel.friday_time)
+        healthServiceRequest.saturday_time.addAll(detailModel.saturday_time)
+        healthServiceRequest.sunday_time.addAll(detailModel.sunday_time)
+
 
         CachingManager.setVendorDoctorInfo(healthServiceRequest)
         setRestaurantData(healthServiceRequest)
