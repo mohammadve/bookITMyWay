@@ -23,6 +23,7 @@ class VendorParkingRequest(
         var parking_charges: String? = "",
         var parking_capacity: String? = "",
         var description: String? = "",
+        var address: String? = "",
         var all_day: String? = "0",
         var sun: String? = "0",
         var mon: String? = "0",
@@ -33,10 +34,21 @@ class VendorParkingRequest(
         var sat: String? = "0",
         var is_24_hours_open: String? = null,
         var start_time: String? = null,
-        var close_time: String? = null
+        var close_time: String? = null,
+
+        var monday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var tuesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var wednesday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var thursday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var friday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var saturday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var sunday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var dateTime: ArrayList<DayAviliability> = ArrayList()
+
+
 
 ) : Serializable {
     override fun toString(): String {
-        return "VendorParkingRequest(business_images=$business_images, business_id=$business_id, action=$action, image_url=$image_url, service_id=$service_id, business_name=$business_name, business_contactno=$business_contactno, country_code=$country_code, dial_code=$dial_code, business_email=$business_email, business_city_id=$business_city_id, business_region_id=$business_region_id, business_address=$business_address, business_tax=$business_tax, business_category_id=$business_category_id, business_subcategory_id=$business_subcategory_id, parking_charges=$parking_charges, parking_capacity=$parking_capacity, description=$description, all_day=$all_day, sun=$sun, mon=$mon, tue=$tue, wed=$wed, thu=$thu, fri=$fri, sat=$sat, is_24_hours_open=$is_24_hours_open, start_time=$start_time, close_time=$close_time)"
+        return "VendorParkingRequest(business_images=$business_images, business_id=$business_id, action=$action, image_url=$image_url, service_id=$service_id, business_name=$business_name, business_contactno=$business_contactno, country_code=$country_code, dial_code=$dial_code, business_email=$business_email, business_city_id=$business_city_id, business_region_id=$business_region_id, business_address=$business_address, business_tax=$business_tax, business_category_id=$business_category_id, business_subcategory_id=$business_subcategory_id, parking_charges=$parking_charges, parking_capacity=$parking_capacity, description=$description, all_day=$all_day, sun=$sun, mon=$mon, tue=$tue, wed=$wed, thu=$thu, fri=$fri, sat=$sat, is_24_hours_open=$is_24_hours_open, start_time=$start_time, close_time=$close_time, dateTime=$dateTime)"
     }
 }

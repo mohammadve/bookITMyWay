@@ -14,10 +14,9 @@ import com.virtual.customervendor.commonActivity.TermsAndConditionActivityVendor
 import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.DayAviliability
 import com.virtual.customervendor.model.request.VendorParkingRequest
-import com.virtual.customervendor.utills.AppConstants
 import com.virtual.customervendor.utills.AppLog
-import com.virtual.customervendor.utills.AppUtils
 import com.virtual.customervendor.utills.UiValidator
 import com.virtual.customervendor.vendor.ui.activity.VendorParkingValetActivity
 import kotlinx.android.synthetic.main.fragment_parking_review_vendor.*
@@ -96,36 +95,60 @@ class VendorParkingReviewFragment : Fragment(), View.OnClickListener, ViewPagerI
             ed_tax.visibility = View.GONE
         }
 
-        if (AppUtils.getStatusBoolean(mfieldMap.all_day)) {
-            chk_alldays.isChecked = true
-            cons_day.visibility = View.GONE
-        } else {
-            chk_alldays.visibility = View.GONE
-            chk_monday.isChecked = AppUtils.getStatusBoolean(mfieldMap.mon)
-            chk_tuesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.tue)
-            chk_wednesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.wed)
-            chk_thursday.isChecked = AppUtils.getStatusBoolean(mfieldMap.thu)
-            chk_friday.isChecked = AppUtils.getStatusBoolean(mfieldMap.fri)
-            chk_saturday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sat)
-            chk_sunday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sun)
-        }
+//        if (AppUtils.getStatusBoolean(mfieldMap.all_day)) {
+//            chk_alldays.isChecked = true
+//            cons_day.visibility = View.GONE
+//        } else {
+//            chk_alldays.visibility = View.GONE
+//            chk_monday.isChecked = AppUtils.getStatusBoolean(mfieldMap.mon)
+//            chk_tuesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.tue)
+//            chk_wednesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.wed)
+//            chk_thursday.isChecked = AppUtils.getStatusBoolean(mfieldMap.thu)
+//            chk_friday.isChecked = AppUtils.getStatusBoolean(mfieldMap.fri)
+//            chk_saturday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sat)
+//            chk_sunday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sun)
+//        }
 
-        if (AppUtils.getStatusBoolean(mfieldMap.is_24_hours_open)) {
-            ed_starttime.visibility = View.GONE
-            ed_closingtime.visibility = View.GONE
-            txt_starttime.visibility = View.GONE
-            txt_closingtime.visibility = View.GONE
-            chk_24time.isChecked = true
-        } else {
-            chk_24time.visibility = View.GONE
-            ed_starttime.setText(mfieldMap.start_time)
-            ed_closingtime.setText(mfieldMap.close_time)
-        }
+//        if (AppUtils.getStatusBoolean(mfieldMap.is_24_hours_open)) {
+//            ed_starttime.visibility = View.GONE
+//            ed_closingtime.visibility = View.GONE
+//            txt_starttime.visibility = View.GONE
+//            txt_closingtime.visibility = View.GONE
+//            chk_24time.isChecked = true
+//        } else {
+//            chk_24time.visibility = View.GONE
+//            ed_starttime.setText(mfieldMap.start_time)
+//            ed_closingtime.setText(mfieldMap.close_time)
+//        }
+
         ed_desc.setText(mfieldMap.description)
+
+        txtSlotsMon.setText(getSlots(mfieldMap.dateTime.get(0).slots))
+        txtSlotsTue.setText(getSlots(mfieldMap.dateTime.get(1).slots))
+        txtSlotsWed.setText(getSlots(mfieldMap.dateTime.get(2).slots))
+        txtSlotsThu.setText(getSlots(mfieldMap.dateTime.get(3).slots))
+        txtSlotsFri.setText(getSlots(mfieldMap.dateTime.get(4).slots))
+        txtSlotsSat.setText(getSlots(mfieldMap.dateTime.get(5).slots))
+        txtSlotsSun.setText(getSlots(mfieldMap.dateTime.get(6).slots))
 
         initViewPager((activity as VendorParkingValetActivity).mResults, false)
     }
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
 
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var mView = inflater.inflate(R.layout.fragment_parking_review_vendor, container, false)
         return mView

@@ -76,5 +76,15 @@ public class DayAviliability implements Serializable {
         public void setStopTime(String stopTime) {
             this.end_time = stopTime;
         }
+
+        @Override
+        public String toString() {
+            return "{ end_time "+ end_time+" start_time" +start_time+"}";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "{ day ="+day+", dayValue="+dayValue+", timeSlot ="+timeSlot.toString()+"},";
     }
 }

@@ -22,6 +22,7 @@ import com.virtual.customervendor.managers.CachingManager
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.BusinessDetail
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.DayAviliability
 import com.virtual.customervendor.model.VendorServiceDetailModel
 import com.virtual.customervendor.model.request.VendorParkingRequest
 import com.virtual.customervendor.model.response.VendorServiceDetailResponse
@@ -184,8 +185,55 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
             initViewPager(parkingRequest.business_images)
         }
 
+        setDaySlots(parkingRequest)
+
     }
 
+
+
+    fun setDaySlots(parkingRequest: VendorParkingRequest){
+        var isAllDay: Boolean=AppUtils.getStatusBoolean(parkingRequest.all_day)
+        if(parkingRequest.dateTime.size==0){
+//            if(parkingRequest.monday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.mon) ,parkingRequest.monday_time))
+//            if(parkingRequest.tuesday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.tue) ,parkingRequest.tuesday_time))
+//            if(parkingRequest.wednesday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.wed) ,parkingRequest.wednesday_time))
+//            if(parkingRequest.thursday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.thu) ,parkingRequest.thursday_time))
+//            if(parkingRequest.friday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.fri) ,parkingRequest.friday_time))
+//            if(parkingRequest.saturday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.sat) ,parkingRequest.saturday_time))
+//            if(parkingRequest.sunday_time.size>0)
+            parkingRequest.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.sun) ,parkingRequest.sunday_time))
+        }
+        txtSlotsMon.setText(getSlots(parkingRequest.monday_time))
+        txtSlotsTue.setText(getSlots(parkingRequest.tuesday_time))
+        txtSlotsWed.setText(getSlots(parkingRequest.wednesday_time))
+        txtSlotsThu.setText(getSlots(parkingRequest.thursday_time))
+        txtSlotsFri.setText(getSlots(parkingRequest.friday_time))
+        txtSlotsSat.setText(getSlots(parkingRequest.saturday_time))
+        txtSlotsSun.setText(getSlots(parkingRequest.sunday_time))
+    }
+
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
     private fun initViewPager(categories: ArrayList<BusinessImage>) {
         SCREEN_COUNT = categories.size
         homeSliderAdapter = HomeSliderAdapter(this@VendorParkingProfileEditActivity, categories, this, false)
