@@ -103,7 +103,7 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
         iv_service.setOnClickListener(this)
         swipeToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             if (AppUtils.isInternetConnected(this))
-            hitApi(businessDetail)
+                hitApi(businessDetail)
             else
                 swipeToRefresh.setRefreshing(false)
 
@@ -313,7 +313,7 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
                         override fun onError(e: Throwable) {
                             ProgressDialogLoader.progressDialogDismiss()
                             if (e != null)
-                            AppLog.e(TAG, e?.message)
+                                AppLog.e(TAG, e?.message)
                             swipeToRefresh.setRefreshing(false)
                         }
 
@@ -390,7 +390,13 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
         parkingRequest.fri = detailModel.friday
 
         CachingManager.setVendorParkingInfo(parkingRequest)
-
+        parkingRequest.monday_time=detailModel.monday_time
+        parkingRequest.tuesday_time=detailModel.tuesday_time
+        parkingRequest.wednesday_time=detailModel.wednesday_time
+        parkingRequest.thursday_time=detailModel.thursday_time
+        parkingRequest.friday_time=detailModel.friday_time
+        parkingRequest.saturday_time=detailModel.saturday_time
+        parkingRequest.sunday_time=detailModel.sunday_time
         setParkingData(parkingRequest)
     }
 
