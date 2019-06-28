@@ -92,7 +92,7 @@ class RestaurantBookingInfromationFragment : Fragment(), View.OnClickListener, D
     fun updateSelectedTime(bean: CustomerTimeModel) {
         if (bean != null) {
             timedata = bean
-            if (ed_licence.text.isEmpty()) {
+            if (ed_licence.text!!.isEmpty()) {
                 ed_fromtime.setText(bean.slot)
 //                UiValidator.displayMsgSnack(nest, activity, resources.getString(R.string.choose_no_of_persons))
             } else if (!(ed_licence.text.toString().toInt() > bean?.remain?.toInt()!!)) {

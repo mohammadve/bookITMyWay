@@ -52,7 +52,7 @@ class OrderadapterCustomer(val pagingListener: PagingListeners, val mContext: Co
                 itemView.ordernumber.text = offModel.order_id
                 itemView.businessname.text = offModel.business_name
 
-//                itemView.datetime.text = offModel.serviceinformation.book_date
+ //              itemView.datetime.text = offModel.serviceinformation.book_date
 
                 handleDate(offModel)
 

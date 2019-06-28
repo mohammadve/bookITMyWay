@@ -127,7 +127,7 @@ class VendorPackageDetailActivity : BaseActivity(), View.OnClickListener, Region
                 }
             }
         }
-        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment).commit()
+        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment!!).commit()
     }
 
     fun setDisplayFragment(number: Int, title: String, removeStack: Boolean) {

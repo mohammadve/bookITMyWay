@@ -15,6 +15,7 @@ import com.virtual.customer_vendor.utill.UploadBussinessImage
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.BaseActivity
 import com.virtual.customervendor.customer.ui.dialogFragment.CityDialogFragment
+import com.virtual.customervendor.customer.ui.dialogFragment.CityDialogFragmentMulti
 import com.virtual.customervendor.customer.ui.dialogFragment.RegionDialogFragmentSingle
 import com.virtual.customervendor.customer.ui.dialogFragment.StoreListFragment
 import com.virtual.customervendor.managers.CachingManager
@@ -26,7 +27,10 @@ import com.virtual.customervendor.model.response.TaxiServiceResponse
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.*
-import com.virtual.customervendor.vendor.ui.fragments.*
+import com.virtual.customervendor.vendor.ui.fragments.SuccesBookingFragment
+import com.virtual.customervendor.vendor.ui.fragments.VendorStoreOneFragment
+import com.virtual.customervendor.vendor.ui.fragments.VendorStoreReviewFragment
+import com.virtual.customervendor.vendor.ui.fragments.VendorStoreTwoFragment
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -34,7 +38,20 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_store_vendor.*
 import java.io.File
 
-class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFragment.citySelectionInterface, RegionDialogFragmentSingle.SingleRegionSelectionInterface, UploadBussinessImage.IBussinessImage1, StoreListFragment.categorySelectionInterface {
+class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFragment.citySelectionInterface,
+        RegionDialogFragmentSingle.SingleRegionSelectionInterface,
+        CityDialogFragmentMulti.MultiRegionSelectionInterface, UploadBussinessImage.IBussinessImage1, StoreListFragment.categorySelectionInterface {
+    override fun done(bean: ArrayList<CityModel>, fromWhere: String?) {
+        AppLog.e(TAG, bean.toString())
+        if (regionDialogFragmentMulti != null) {
+            regionDialogFragmentMulti!!.dismiss()
+            val fragment = manager!!.findFragmentById(R.id.flContentnew)
+            if (fragment != null && fragment.isVisible) {
+                if (fragment is VendorStoreTwoFragment) fragment.updateSelectedServiceArea(bean)
+            }
+        }
+    }
+
     override fun catSelectionInterface(bean: StoreCategoryModel, fromWhere: String?) {
         if (storeListFragment != null) {
             storeListFragment!!.dismiss()
@@ -66,6 +83,7 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
     var imageFiles: ArrayList<File>? = null
     //    var deleteFiles: ArrayList<String>? = null
     var mResults = ArrayList<BusinessImage>()
+    var regionDialogFragmentMulti: CityDialogFragmentMulti? = null
 
     override fun regionSelectionInterface(bean: RegionModel, fromWhere: String?) {
         AppLog.e(TAG, bean.toString())
@@ -154,7 +172,7 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
                 }
             }
         }
-        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment).commit()
+        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment!!).commit()
     }
 
     fun setDisplayFragment(number: Int, title: String, removeStack: Boolean) {
@@ -181,6 +199,7 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
             6 -> showCitySelectionDialog(region_id)
             7 -> showRegionSelectionDialogSingle(title)
             8 -> showStoreCategoryList(title)
+            9 -> showNationalitySelectionDialogMMutli(region_id)
         }
 
     }
@@ -242,6 +261,12 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
         when {
             fragment is VendorStoreOneFragment -> fragment.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun showNationalitySelectionDialogMMutli(from: String) {
+        regionDialogFragmentMulti = CityDialogFragmentMulti.newInstance(from)
+        manager = supportFragmentManager
+        regionDialogFragmentMulti!!.show(manager, "My Dialog")
     }
 
     fun isFromedit(): Boolean {

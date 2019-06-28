@@ -390,19 +390,36 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
 
     private fun getOfferPrice() {
         var orderprice: String? = ""
-        var tempPrice = 0
         if (activity is BookAppointmentDoctorActivity) {
             orderprice = (businessDetailModel.fees_per_visit)
 
-        } else {
-            (activity as BookAppointmentNailActivity).serviceSelectedItems
+        } else if (activity is BookAppointmentNailActivity) {
+            var tempPrice=0f
+
             for (temp in (activity as BookAppointmentNailActivity).serviceSelectedItems) {
 
-                var tempPrice = tempPrice + temp.itemPrice.toFloat()
+                 tempPrice = tempPrice + temp.itemPrice.toFloat()
 
             }
             orderprice = tempPrice.toString()
 
+        } else if (activity is BookAppointmentHairActivity) {
+            var tempPrice=0f
+            for (temp in (activity as BookAppointmentHairActivity).serviceSelectedItems) {
+
+                 tempPrice = tempPrice + temp.itemPrice.toFloat()
+
+            }
+            orderprice = tempPrice.toString()
+        } else if (activity is BookAppointmentMassageActivity) {
+            var tempPrice=0f
+
+            for (temp in (activity as BookAppointmentMassageActivity).serviceSelectedItems) {
+
+                 tempPrice = tempPrice + temp.itemPrice.toFloat()
+
+            }
+            orderprice = tempPrice.toString()
         }
 
 
@@ -454,8 +471,8 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
     }
 
     fun updateSelectedServiceList(bean: ArrayList<ItemPriceModel>) {
-        if(servicemenu.size>0){
-          //  UiValidator.displayMsgSnack(cons, activity, "Please sel")
+        if (servicemenu.size > 0) {
+            //  UiValidator.displayMsgSnack(cons, activity, "Please sel")
             ed_time.setText("")
         }
 
@@ -486,6 +503,23 @@ class AppointmentInformationFragment : Fragment(), View.OnClickListener {
                 UiValidator.disableValidationError(servicees)
             }
         }
+
+        var totalCost = 0f
+        for (item in servicemenu) {
+            totalCost = totalCost + item.itemPrice.toFloat()
+
+        }
+
+
+        if (activity is BookAppointmentHairActivity) {
+            (activity as BookAppointmentHairActivity).getbusinessDetailModel().fees_per_visit = totalCost.toString()
+        } else if (activity is BookAppointmentMassageActivity) {
+            (activity as BookAppointmentHairActivity).getbusinessDetailModel().fees_per_visit = totalCost.toString()
+        } else if (activity is BookAppointmentNailActivity) {
+            (activity as BookAppointmentHairActivity).getbusinessDetailModel().fees_per_visit = totalCost.toString()
+        }
+
+
     }
 
 }

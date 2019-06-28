@@ -66,6 +66,8 @@ class VendorStoreOneFragment : Fragment(), View.OnClickListener, ViewPagerItemCl
                 ed_address.requestFocus()
                 if (context is VendorStoreActivity) {
                     if (vendorstoreRequest.business_region_id.regionid != null && !vendorstoreRequest.business_region_id.regionid.equals("")) {
+
+                      AppLog.e("@@@",""+vendorstoreRequest.business_region_id.regionid);
                         (context as VendorStoreActivity).setDisplayDialog(6, AppConstants.FROM_V_TAXI_CITY, "" + vendorstoreRequest.business_region_id.regionid)
                     } else {
                         UiValidator.displayMsgSnack(nest, activity, getString(R.string.select_region))

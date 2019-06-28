@@ -499,6 +499,8 @@
     <string name="no_list_found">No List Found</string>
     <string name="quantity">Quantity</string>
     <string name="select_service">Select Service</string>
+    <string name="create_varients_of_item">Create variants of this item</string>
+    <string name="select_size">Select size</string>
 
 
 </resources>

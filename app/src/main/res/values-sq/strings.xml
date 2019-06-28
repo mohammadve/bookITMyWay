@@ -252,7 +252,7 @@
     <string name="dessert_menu">Ëmbëlsirë Menu</string>
     <string name="item_name">Emri i artikullit</string>
     <string name="price">Çmimi ($)</string>
-    <string name="vendor_success_msg">Aplikacioni juaj është dorëzuar me sukses \ nPër Admin dhe është nën shqyrtim, së shpejti \ nAdmin do t'ju kontaktojë me anë të informatave të dhëna, \ nPasi aplikimi juaj miratohet, Ne \ 'll \ nNjoftim</string>
+    <string name="vendor_success_msg">Aplikacioni juaj është dorëzuar me sukses \nPër Admin dhe është nën shqyrtim, së shpejti \nAdmin do t\'ju kontaktojë me anë të informatave të dhëna, \nPasi aplikimi juaj miratohet, Ne \'ll \ nNjoftim</string>
     <string name="go_to_home">Shkoni në shtëpi</string>
     <string name="application_status">Statusi i Aplikimit</string>
     <string name="profile_switch_msg">Ju mund të kaloni në mes të përdoruesit tuaj</string>
@@ -392,7 +392,7 @@
     <string name="special_instructions">Udhëzime të veçanta</string>
     <string name="number_of_tourist">Numri i turistëve</string>
     <string name="coupon_code">Kodi kupon</string>
-    <string name="nocoupon_code">Asnjë kod kupon për t'u aplikuar</string>
+    <string name="nocoupon_code">Asnjë kod kupon për t\'u aplikuar</string>
     <string name="viewoffer">Shiko ofertën</string>
     <string name="no_offer">Asnjë ofertë e disponueshme</string>
     <string name="apply">aplikoni</string>

@@ -187,6 +187,7 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
 
 
         } else if (activity is BookAppointmentNailActivity) {
+
             info = (activity as BookAppointmentNailActivity).getbusinessDetailModel()
             request = (activity as BookAppointmentNailActivity).getFieldMap()
             sunCategoryId = AppConstants.SUBCAT_HEALTH_NAIL
@@ -196,17 +197,15 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             radio.visibility = View.GONE
             radioGroup_payment_option_appointment.visibility = View.GONE
 
+            selectedServiceMenu = (activity as BookAppointmentNailActivity).serviceSelectedItems
 
-            selected_service_adapter = SelectedServiceAdapter(activity!!, (activity as BookAppointmentNailActivity).serviceSelectedItems) { serviceModel ->
+            selected_service_adapter = SelectedServiceAdapter(activity!!, selectedServiceMenu) { serviceModel ->
                 // serviceModelList = serviceModel
             }
             val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
             rv_selected_service?.layoutManager = manager
             rv_selected_service?.adapter = selected_service_adapter
-
-            selectedServiceMenu = (activity as BookAppointmentNailActivity).serviceSelectedItems
-
 
         }
         setData()
@@ -238,6 +237,9 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
             taxAmt = AppUtill.calculateTaxAmt(info.businessData.business_tax!!, info.fees_per_visit!!)
         }
 
+
+
+
         ed_tax.setText(AppUtils.getRateWithSymbol(taxAmt))
         ed_toatlprice.setText(AppUtils.getRateWithSymbol(totalAmt))
 
@@ -248,16 +250,16 @@ class AppointmentFinalFragment : Fragment(), View.OnClickListener {
     fun hitApi() {
 
         if (activity is BookAppointmentHairActivity || activity is BookAppointmentMassageActivity || activity is BookAppointmentNailActivity) {
-            var serviceStrings =""
-            var serviceTimingStrings =""
+            var serviceStrings = ""
+            var serviceTimingStrings = ""
             for (item in selectedServiceMenu) {
-                serviceStrings= serviceStrings+","+ item.itemName
-                serviceTimingStrings=serviceTimingStrings+","+ item.serviceTime
+                serviceStrings = serviceStrings + "," + item.itemName
+                serviceTimingStrings = serviceTimingStrings + "," + item.serviceTime
 
             }
 
-            serviceStrings=   serviceStrings.substring(1,serviceStrings.length)
-            serviceTimingStrings=   serviceTimingStrings.substring(1,serviceTimingStrings.length)
+            serviceStrings = serviceStrings.substring(1, serviceStrings.length)
+            serviceTimingStrings = serviceTimingStrings.substring(1, serviceTimingStrings.length)
 
             var serviceJson = Gson().toJson(serviceStrings)
             var serviceTimeJson = Gson().toJson(serviceTimingStrings)

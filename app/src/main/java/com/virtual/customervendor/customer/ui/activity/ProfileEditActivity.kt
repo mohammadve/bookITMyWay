@@ -69,7 +69,7 @@ class ProfileEditActivity : BaseActivity(), View.OnClickListener, CaptureImageUt
         profile_img.setOnClickListener(this)
 
         ed_name.setText(SharedPreferenceManager.getCustomerName())
-        ed_name.setSelection(ed_name.text.length)
+        ed_name.setSelection(ed_name.text!!.length)
         ed_email.setText(SharedPreferenceManager.getCustomerEmail())
         ed_mobno.setText(SharedPreferenceManager.getCustomerMobileNo())
 

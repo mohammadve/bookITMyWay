@@ -332,7 +332,7 @@ class DashBoardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
         }
         // Insert the fragment by replacing any existing fragment
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1).replace(R.id.flContent, fragment).commit()
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1).replace(R.id.flContent, fragment!!).commit()
     }
 
     /**

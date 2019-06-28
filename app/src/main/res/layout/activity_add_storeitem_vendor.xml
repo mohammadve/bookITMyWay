@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/place_holder_banner"
                 app:layout_constraintDimensionRatio="2:1" />
 

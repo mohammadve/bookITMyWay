@@ -39,7 +39,7 @@ class OrderDetailModel(
 
         var business_name: String? = null,
 
-        var serviceinformation: OrderDetailServiceInfo = OrderDetailServiceInfo(),
+        var serviceinformation : OrderDetailServiceInfo = OrderDetailServiceInfo(),
         var storeItem: ArrayList<StoreCartModel> = ArrayList()
 ) : Serializable {
     override fun toString(): String {

@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
+import com.virtual.customervendor.model.CityModel
+import com.virtual.customervendor.model.RegionModel
 import com.virtual.customervendor.model.StoreCategoryModel
 import com.virtual.customervendor.model.StoreItemLocationModel
 import com.virtual.customervendor.model.request.VendorStoreServiceRequest
@@ -18,9 +20,18 @@ import com.virtual.customervendor.utills.AppConstants
 import com.virtual.customervendor.utills.AppLog
 import com.virtual.customervendor.utills.AppUtils
 import com.virtual.customervendor.utills.UiValidator
+import com.virtual.customervendor.vendor.ui.activity.VendorLimoActivity
 import com.virtual.customervendor.vendor.ui.activity.VendorStoreActivity
+import com.virtual.customervendor.vendor.ui.activity.VendorTaxiActivity
+import com.virtual.customervendor.vendor.ui.activity.VendorTourBusActivity
+import com.virtual.customervendor.vendor.ui.adapter.StoreClothTypeAdapter
 import com.virtual.customervendor.vendor.ui.adapter.StoreDeliverLocationAdapter
 import kotlinx.android.synthetic.main.fragment_store_two_vendor.*
+import kotlinx.android.synthetic.main.fragment_store_two_vendor.btn_next
+import kotlinx.android.synthetic.main.fragment_store_two_vendor.ed_desc
+import kotlinx.android.synthetic.main.fragment_store_two_vendor.nest
+import kotlinx.android.synthetic.main.fragment_store_two_vendor.til_desc
+import kotlinx.android.synthetic.main.fragment_taxi_two_vendor.*
 
 class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
@@ -60,14 +71,18 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
     var vendorStoreRequest = VendorStoreServiceRequest()
 
     var stadiumList: ArrayList<StoreItemLocationModel> = ArrayList()
+    var storeClothTypeList: ArrayList<StoreItemLocationModel> = ArrayList()
     var arenaList: ArrayList<StoreItemLocationModel> = ArrayList()
     var otherList: ArrayList<StoreItemLocationModel> = ArrayList()
 
     var storeAddStadiumAdapter: StoreDeliverLocationAdapter? = null
+    var storecClothTypeAdapter: StoreClothTypeAdapter? = null
+
+
     var storeAddArenaAdapter: StoreDeliverLocationAdapter? = null
     var storeAddOtherAdapter: StoreDeliverLocationAdapter? = null
     var manager: RecyclerView.LayoutManager? = null
-
+    var dataId = StringBuilder()
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back -> {
@@ -88,6 +103,7 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
             }
 
             R.id.addstadium -> performAddStadium()
+            R.id.addClothType -> performAddClothsType()
             R.id.addarena -> performAddArena()
             R.id.addother -> performAddOther()
 
@@ -95,6 +111,22 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
                 if (context is VendorStoreActivity) {
                     (context as VendorStoreActivity).setDisplayDialog(8, AppConstants.FROM_V_TAXI_CITY, "")
                 }
+            }
+            R.id.edtxt_service_area -> {
+
+                edtxt_service_area.requestFocus()
+                if (context is VendorStoreActivity) {
+                    if (vendorStoreRequest.business_region_id.regionid != null && !vendorStoreRequest.business_region_id.regionid.equals("")) {
+
+                        AppLog.e("@@@",""+vendorStoreRequest.business_region_id.regionid);
+
+                        (context as VendorStoreActivity).setDisplayDialog(9, AppConstants.FROM_V_TAXI_CITY, "" + vendorStoreRequest.business_region_id.regionid)
+                    } else {
+                        UiValidator.displayMsgSnack(nest, activity, getString(R.string.select_region))
+                    }
+                }
+
+
             }
 
         }
@@ -126,6 +158,7 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
     fun initView(view: View) {
         btn_next.setOnClickListener(this)
         ed_store.setOnClickListener(this)
+        edtxt_service_area.setOnClickListener(this)
         ed_starttime.setOnClickListener(this)
         ed_closingtime.setOnClickListener(this)
         chk_alldays.setOnCheckedChangeListener(this)
@@ -138,11 +171,13 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         chk_sunday.setOnCheckedChangeListener(this)
         chk_24time.setOnCheckedChangeListener(this)
 
+        createAdapterClothsType()
         createAdapterStadium()
         createAdapterArena()
         createAdapterOther()
 
         addstadium.setOnClickListener(this)
+        addClothType.setOnClickListener(this)
         addarena.setOnClickListener(this)
         addother.setOnClickListener(this)
         manageFromEdit()
@@ -321,6 +356,26 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         AppLog.e(TAG, otherList.toString() + "----" + storelistnew.toString() + "---" + vendorStoreRequest?.other_address.toString())
     }
 
+    fun updateSelectedServiceArea(bean: ArrayList<CityModel>) {
+        val data = StringBuilder()
+
+        val filledList: ArrayList<CityModel> = ArrayList()
+
+        for (temp in bean) {
+            if (temp.isSelected) {
+                filledList.add(temp)
+                if (data.length > 0) {
+                    data.append(", ")
+                    dataId.append(", ")
+                }
+                data.append(temp.cityname)
+                dataId.append(temp.cityid)
+            }
+        }
+
+
+        edtxt_service_area.setText(data.toString())
+    }
     fun updateSelectedServiceArea(bean: StoreCategoryModel) {
         if (bean != null) {
             vendorStoreRequest.store_category_id = bean.id
@@ -344,6 +399,14 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         rv_stadium.adapter = (storeAddStadiumAdapter)
     }
 
+
+    private fun createAdapterClothsType() {
+        storecClothTypeAdapter = StoreClothTypeAdapter(activity!!, AppConstants.FROM_ADDDATA, storeClothTypeList)
+        manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        rv_cloths_type.layoutManager = manager
+        rv_cloths_type.adapter = (storecClothTypeAdapter)
+    }
+
     private fun createAdapterArena() {
         storeAddArenaAdapter = StoreDeliverLocationAdapter(activity!!, AppConstants.FROM_ADDDATA, arenaList)
         manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -356,6 +419,13 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rv_other.layoutManager = manager
         rv_other.adapter = (storeAddOtherAdapter)
+    }
+
+    fun performAddClothsType() {
+        storeClothTypeList.add(StoreItemLocationModel())
+        storecClothTypeAdapter?.notifyItemInserted(storeClothTypeList.size - 1)
+        rv_cloths_type.invalidate()
+        AppLog.e(TAG + "RECYCLERVIEW CHILD COUNT ", storeClothTypeList.toString())
     }
 
     fun performAddStadium() {

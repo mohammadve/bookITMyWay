@@ -18,9 +18,9 @@
 
     <string name="i_have_arrived">je suis arrivé</string>
     <string name="i_am_here">Je suis là</string>
-    <string name="i_am_waiting">J'attends</string>
+    <string name="i_am_waiting">J\'attends</string>
 
-    <string name="emptyerror">S'il vous plaît remplir le champ</string>
+    <string name="emptyerror">S\'il vous plaît remplir le champ</string>
     <string name="no_internet_connection">Pas de connexion Internet</string>
     <string name="Customer">CLIENT</string>
     <string name="Customer_name">Nom du client</string>
@@ -28,19 +28,19 @@
     <string name="forgot_password">Mot de passe oublié?</string>
     <string name="forgot_password1">Mot de passe oublié</string>
     <string name="resetpasswrd">réinitialiser le mot de passe</string>
-    <string name="login">S'identifier</string>
+    <string name="login">S\'identifier</string>
     <string name="notification">Notification</string>
     <string name="notification_sound">Son de notification</string>
-    <string name="Sign_Up">S'inscrire</string>
+    <string name="Sign_Up">S\'inscrire</string>
     <string name="service_you_provide">Quel service fournissez-vous?</string>
     <string name="choose_preferred_lang">Choisissez une langue préférée</string>
     <string name="verification">Vérification</string>
     <string name="profile_setup">Configuration du profil</string>
     <string name="send">Envoyer</string>
-    <string name="new_user_sign_up">Besoin d'un compte?<u><font color="#022E8D">SignUp</font></u></string>
+    <string name="new_user_sign_up">Besoin d\'un compte?<u><font color="#022E8D">SignUp</font></u></string>
     <string name="alreay_have_an_account_login">Vous avez déjà un compte?<u><font color="#022E8D">Login</font></u></string>
     <string name="next">Suivant</string>
-    <string name="i_agree_to_the_terms_conditions">Je suis d'accord avec le<font fgcolor="#022E8D">terms &amp; conditions</font></string>
+    <string name="i_agree_to_the_terms_conditions">Je suis d\'accord avec le<font fgcolor="#022E8D">terms &amp; conditions</font></string>
     <string name="mobile_number">Numéro de portable</string>
     <string name="password">Mot de passe</string>
     <string name="email">Email</string>
@@ -61,17 +61,17 @@
     <string name="settings">Réglages</string>
     <string name="about">Sur</string>
     <string name="help">Aidez-moi</string>
-    <string name="help_center">Centre d'aide</string>
+    <string name="help_center">Centre d\'aide</string>
     <string name="navigation_header">Navigation header</string>
     <string name="restaurant_book">Restaurant Book</string>
     <string name="doctor_appointment">Rendez-vous médical</string>
-    <string name="purchase_items">Articles d'achat</string>
+    <string name="purchase_items">Articles d\'achat</string>
     <string name="disease_reason">Maladie / raison</string>
     <string name="select_doctor_clinic">Sélectionnez un médecin / clinique</string>
     <string name="time">Temps</string>
     <string name="date">Date</string>
     <string name="selectdate">Sélectionner une date</string>
-    <string name="selecttime">Sélectionnez l'heure</string>
+    <string name="selecttime">Sélectionnez l\'heure</string>
     <string name="submit">Soumettre</string>
     <string name="no_of_seat">N ° de siège</string>
     <string name="select_restaurant">Select Restaurant</string>
@@ -110,23 +110,23 @@
     <string name="zip_code">Code postal</string>
     <string name="postal_code">Postal Code</string>
     <string name="departure_date">Date de départ</string>
-    <string name="arrival_date">Date d'arrivée</string>
+    <string name="arrival_date">Date d\'arrivée</string>
     <string name="pay_at_station">Payer à la gare</string>
     <string name="from">De</string>
-    <string name="from_location">De l'emplacement</string>
-    <string name="to_location">À l'emplacement</string>
+    <string name="from_location">De l\'emplacement</string>
+    <string name="to_location">À l\'emplacement</string>
     <string name="to">\ u0020To \ u0020</string>
     <string name="too">À</string>
     <string name="special_ins">instructions spéciales</string>
     <string name="pay_after_drop">Payer après la chute</string>
     <string name="terms_conditions">termes</string>
-    <string name="purchase_history">Historique d'achat</string>
+    <string name="purchase_history">Historique d\'achat</string>
     <string name="bookings">Les réservations</string>
     <string name="pay">Payer</string>
     <string name="taxi">Taxi</string>
     <string name="limos">Limos</string>
     <string name="tour_bus">Tour Bus</string>
-    <string name="business_profile">Profil de l'entreprise</string>
+    <string name="business_profile">Profil de l\'entreprise</string>
     <string name="sight_seeing">Voir la vue</string>
     <string name="other">Autre</string>
     <string name="store_items">Articles de magasin</string>
@@ -139,7 +139,7 @@
     <string name="massage_or_physio">Massage ou Physio</string>
     <string name="doctor_clinic">Docteur / clinique</string>
     <string name="doctor">Médecin</string>
-    <string name="please_wait">S'il vous plaît, attendez...</string>
+    <string name="please_wait">S\'il vous plaît, attendez...</string>
     <string name="status_success">0</string>
     <string name="status_failure">1</string>
     
@@ -158,31 +158,31 @@
     <string name="choose_service_area">Choisissez votre zone de service</string>
     <string name="check_tern">Accepter terme</string>
     <string name="choose_service_menu">Choisissez votre menu de service</string>
-    <string name="business_name">Nom de l'entreprise</string>
-    <string name="business_contact_number">Numéro de contact d'affaires</string>
+    <string name="business_name">Nom de l\'entreprise</string>
+    <string name="business_contact_number">Numéro de contact d\'affaires</string>
     <string name="business_email">Courriel professionnel</string>
     <string name="transportaion_vehicle">Transport / véhicule</string>
     <string name="restaurant_dinning">Restaurant/Dinning</string>
     <string name="choose_sub_category">Choisissez une sous catégorie</string>
     <string name="setup_your_bussiness">Configurez votre entreprise</string>
-    <string name="bussiness_information">Informations d'affaires</string>
+    <string name="bussiness_information">Informations d\'affaires</string>
     <string name="service_information">Service Information</string>
 
     <string name="editbussiness_information">Modifier les informations commerciales</string>
     <string name="editservice_information">Edit Service Information</string>
 
-    <string name="event_information">Informations sur l'événement</string>
+    <string name="event_information">Informations sur l\'événement</string>
     <string name="review_your_bussiness">Révisez votre entreprise</string>
     <string name="numbers">Nombres</string>
     <string name="how_many_taxi_you_have">Combien de taxi vous avez</string>
-    <string name="avg_no_of_seat_per_taxi_for_user">Moy. nombre de places par taxi pour l'utilisateur</string>
+    <string name="avg_no_of_seat_per_taxi_for_user">Moy. nombre de places par taxi pour l\'utilisateur</string>
     <string name="rate_per_km">Rate Per Km</string>
     <string name="rate">Taux</string>
     <string name="rate_us">Évaluez nous</string>
     <string name="select_region">Choisissez une région</string>
     <string name="region">Région</string>
     <string name="select_days_of_service">Sélectionnez les jours de service</string>
-    <string name="bussines_hours">Heures d'affaires</string>
+    <string name="bussines_hours">Heures d\'affaires</string>
     <string name="choose_valid_time_slot">Choisissez une plage horaire valide</string>
     <string name="bussines_visithours">Heures de visite</string>
     <string name="closing_time">Heure de fermeture</string>
@@ -211,16 +211,16 @@
     <string name="sign_up_invalid_password">Veuillez utiliser 6 caractères ou plus, y compris les majuscules</string>
     <string name="rgs_sign_up_invalid_username">Veuillez utiliser 6 caractères ou plus.</string>
     <string name="rgs_sign_up_invalid_mobileno">Veuillez utiliser 6 chiffres ou plus.</string>
-    <string name="rgs_terms_validations">S'il vous plaît accepter les termes</string>
-    <string name="rgs_sign_up_title">S'inscrire</string>
+    <string name="rgs_terms_validations">S\'il vous plaît accepter les termes</string>
+    <string name="rgs_sign_up_title">S\'inscrire</string>
     <string name="rgs_password_not_match">Le mot de passe ne correspond pas</string>
-    <string name="rgs_username_hint">Choisissez un nom d'utilisateur</string>
+    <string name="rgs_username_hint">Choisissez un nom d\'utilisateur</string>
     <string name="order_id_required">Identifiant de commande requis.</string>
     <string name="order_complete">Commande terminée</string>
-    <string name="user_not_login">Vous n'êtes pas connecté. Veuillez vous connecter et réessayer.</string>
+    <string name="user_not_login">Vous n\'êtes pas connecté. Veuillez vous connecter et réessayer.</string>
     <string name="sign_in_empty_password_text">Veuillez entrer un mot de passe</string>
-    <string name="rgs_sign_in_empty_username_text">Merci d'entrer un nom d'utilisateur</string>
-    <string name="rgs_sign_in_empty_mobile_text">S'il vous plaît entrer un numéro de téléphone</string>
+    <string name="rgs_sign_in_empty_username_text">Merci d\'entrer un nom d\'utilisateur</string>
+    <string name="rgs_sign_in_empty_mobile_text">S\'il vous plaît entrer un numéro de téléphone</string>
     <string name="field_required">Champ obligatoire</string>
     <string name="service_area">Service Area</string>
     <string name="service_region">Service Region</string>
@@ -228,7 +228,7 @@
     <string name="service_day">Service Day</string>
     <string name="service_time">Service time</string>
     <string name="area">Surface</string>
-    <string name="ok">D'accord</string>
+    <string name="ok">D\'accord</string>
     <string name="description">Description</string>
     <string name="start_location">Start Location</string>
     <string name="end_location">End Location</string>
@@ -238,7 +238,7 @@
     <string name="home_text">Configurer votre entreprise sur mon application est facile</string>
     <string name="home_text_steps">Étape 1 - Remplissez l’application commerciale \ Étape 2 - Soumettez-la à l’administrateur \ Étape 3 - Bingo!</string>
     <string name="home_text_lets">Faites-nous savoir votre domaine de service principal</string>
-    <string name="transport_text_header">Quel type d'entreprise de transport vous \ noffrez?</string>
+    <string name="transport_text_header">Quel type d\'entreprise de transport vous \ noffrez?</string>
     <string name="health_text_header">Quel type de service de santé vous \ noffrez?</string>
     <string name="parking_capacity_in_number">Capacité de stationnement en nombre</string>
     <string name="parking_charges">Parking Charges</string>
@@ -250,13 +250,13 @@
     <string name="drink_menu">Menu de boissons</string>
     <string name="food_menu">Le menu</string>
     <string name="dessert_menu">Dessert Menu</string>
-    <string name="item_name">Nom de l'article</string>
+    <string name="item_name">Nom de l\'article</string>
     <string name="price">Prix ($)</string>
-    <string name="vendor_success_msg">Votre candidature a été soumise avec succès \ nÀ l’administrateur et est en cours de révision. L \ 'administrateur vous contactera prochainement via \ n, \ nUne fois votre candidature approuvée, nous \ n \' notifierons vous</string>
+    <string name="vendor_success_msg">Votre candidature a été soumise avec succès \nÀ l administrateur et est en cours de révision. L administrateur vous contactera prochainement via \n, \nUne fois votre candidature approuvée, nous \n  notifierons vous</string>
     <string name="go_to_home">Aller à la maison</string>
     <string name="application_status">Application Status</string>
     <string name="profile_switch_msg">Vous pouvez basculer entre votre utilisateur</string>
-    <string name="got_it">Je l'ai</string>
+    <string name="got_it">Je l\'ai</string>
     <string name="switch_to_customer">Passer au client</string>
     <string name="switch_to_vendor">Basculer vers le vendeur</string>
     <string name="ticket_events">Ticket / Événements</string>
@@ -289,12 +289,12 @@
     <string name="service_menu">Service Menu</string>
     <string name="appointment_number">Numéro de rendez-vous</string>
     <string name="user">Utilisateur</string>
-    <string name="user_full_name">Nom complet de l'utilisateur</string>
+    <string name="user_full_name">Nom complet de l\'utilisateur</string>
     <string name="visiting_charges">Frais de visite</string>
     <string name="check_in">Enregistrement</string>
     <string name="check_out">Check-out</string>
     <string name="payment_received">Paiement reçu</string>
-    <string name="event_name">Nom de l'événement</string>
+    <string name="event_name">Nom de l\'événement</string>
     <string name="total_numbers_of_tickets">Nombre total de billets</string>
     <string name="ticket_price">Le prix du ticket</string>
     <string name="booked_ticket">Billet réservé</string>
@@ -328,7 +328,7 @@
     <string name="total_no_of_vehicle_for_this_package">Nombre total de véhicules pour ce forfait:</string>
     <string name="follow">Suivre</string>
     <string name="book_a_table">Book a Table</string>
-    <string name="expected_number_of_guests">Nombre attendu d'invités</string>
+    <string name="expected_number_of_guests">Nombre attendu d\'invités</string>
 
     <string name="invalid_time">Temps invalide</string>
     <string name="journey">Périple</string>
@@ -365,7 +365,7 @@
     <string name="service_list">Liste de service</string>
     <string name="total">Total</string>
     <string name="cart">Chariot</string>
-    <string name="select_paymentOption">Sélectionnez l'option de paiement</string>
+    <string name="select_paymentOption">Sélectionnez l\'option de paiement</string>
     <string name="pay_later">Payer plus tard</string>
     <string name="booked_for">Réservé pour</string>
 
@@ -378,7 +378,7 @@
 
 
     <string name="please_select_correct_dates">Veuillez sélectionner les dates correctes</string>
-    <string name="no_follower_is_selected">Aucun suiveur n'est sélectionné.</string>
+    <string name="no_follower_is_selected">Aucun suiveur n\'est sélectionné.</string>
 
 
     <string name="choose_date_first">Choisissez Date en premier</string>
@@ -390,14 +390,14 @@
     <string name="number_of_tourist">Nombre de touriste</string>
     <string name="coupon_code">Coupon Code</string>
     <string name="nocoupon_code">Aucun code de coupon à appliquer</string>
-    <string name="viewoffer">Voir l'offre</string>
+    <string name="viewoffer">Voir l\'offre</string>
     <string name="no_offer">Aucune offre disponible</string>
     <string name="apply">Appliquer</string>
     <string name="order_price">Prix de la commande</string>
-    <string name="offer_price">Prix de l'offre</string>
+    <string name="offer_price">Prix de l\'offre</string>
     <string name="prepaid">Payé</string>
     <string name="postpaid">en attendant</string>
-    <string name="please_select_payment_option">Veuillez sélectionner l'option de paiement</string>
+    <string name="please_select_payment_option">Veuillez sélectionner l\'option de paiement</string>
     <string name="discount_percent">Remise(%)</string>
     <string name="payment">Paiement</string>
     <string name="discribe_issue">Décrivez le problème</string>
@@ -418,12 +418,12 @@
     <string name="server_fetch_problem">Problème de serveur, essayez après quelque temps</string>
     <string name="eventvenue">Event Venue</string>
     <string name="cart_empty">Panier vide</string>
-    <string name="change_app_language">Changer la langue de l'application</string>
+    <string name="change_app_language">Changer la langue de l\'application</string>
     <string name="order_history">Historique des commandes</string>
     <string name="search">Chercher</string>
     <string name="lets_start">Commençons</string>
     <string name="tap_to_retry">Cliquer pour réessayer</string>
-    <string name="something_went_wrong">Quelque chose s'est mal passé, essayez après quelque temps.</string>
+    <string name="something_went_wrong">Quelque chose s\'est mal passé, essayez après quelque temps.</string>
     <string name="unfollow">Se désabonner</string>
     <string name="venue">Venue</string>
     <string name="no_result_found">Aucun résultat trouvé</string>
@@ -475,7 +475,7 @@
     <string name="tax">Montant de la taxe(%)</string>
     <string name="taxamt">Montant de la taxe</string>
     <string name="plus"> </string>
-    <string name="choose_country_first">Choisissez le pays d'abord</string>
+    <string name="choose_country_first">Choisissez le pays d\'abord</string>
     <string name="get">Obtenir</string>
     <string name="off">De</string>
     <string name="section">Section</string>
@@ -488,7 +488,7 @@
     <string name="choose_valid_location">Choisissez un emplacement valide</string>
     <string name="retail_store">Magasin de détail</string>
     <string name="clinic">Clinique</string>
-    <string name="location_valition">Emplacement de la différence d'utilisateur</string>
+    <string name="location_valition">Emplacement de la différence d\'utilisateur</string>
     <string name="no_list_found">Aucune liste trouvée</string>
     <string name="quantity">Quantité</string>
     <string name="already_used">Déjà utilisé</string>

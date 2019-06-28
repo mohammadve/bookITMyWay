@@ -153,7 +153,7 @@ class VendorRestaurantActivity : BaseActivity(), View.OnClickListener, CityDialo
                 }
             }
         }
-        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment).commitAllowingStateLoss()
+        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).replace(frameLayout!!.id, fragment!!).commitAllowingStateLoss()
     }
 
     fun setDisplayFragment(number: Int, title: String, removeStack: Boolean) {

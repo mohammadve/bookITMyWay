@@ -125,7 +125,7 @@ class BookRideTaxiActivity : BaseActivity(), View.OnClickListener, RegionDialogF
                 }
             }
         }
-        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).add(frameLayout!!.id, fragment).commit()
+        mTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left1, R.anim.slide_from_left, R.anim.slide_to_right).add(frameLayout!!.id, fragment!!).commit()
     }
 
     fun handleBackPress() {
