@@ -501,6 +501,10 @@
     <string name="select_service">Select Service</string>
     <string name="create_varients_of_item">Create variants of this item</string>
     <string name="select_size">Select size</string>
+    <string name="hint_enter_size_number">Enter size number</string>
+    <string name="add">Add</string>
+    <string name="create_colors_of_item">Select colors for SMALL</string>
+    <string name="hint_serch_select_color">Search and select colors</string>
 
 
 </resources>

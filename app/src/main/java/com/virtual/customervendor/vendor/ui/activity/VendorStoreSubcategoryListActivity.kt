@@ -43,7 +43,13 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
                 onBackPressed()
             }
             R.id.iv_add -> {
-                var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
+/*                var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
+                var bundle = Bundle()
+                bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+                intent.putExtras(bundle)
+                startActivityForResult(intent, 112)
+                SlideAnimationUtill.slideNextAnimation(this)*/
+                var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
                 var bundle = Bundle()
                 bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
                 intent.putExtras(bundle)

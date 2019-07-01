@@ -41,10 +41,19 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
                 onBackPressed()
             }
             R.id.iv_add -> {
+                /*
+
+
                 var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
                 intent.putExtra(AppKeys.SERVICE_ID, businessDetail.service_id)
                 startActivityForResult(intent, 112)
+                SlideAnimationUtill.slideNextAnimation(this)*/
+
+                var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
+                intent.putExtra(AppKeys.SERVICE_ID, businessDetail.service_id)
+                startActivityForResult(intent, 112)
                 SlideAnimationUtill.slideNextAnimation(this)
+
             }
             R.id.iv_edit -> {
                 var intent: Intent = Intent(this, VendorListEditStoreItemsActivity::class.java)
