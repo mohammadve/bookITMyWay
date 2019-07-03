@@ -17,7 +17,8 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vendor.ui.activity.VendorAddStoreItemsClothsActivity"></activity>
+        <activity android:name=".customer.ui.activity.OrdersActivity"></activity>
+        <activity android:name=".vendor.ui.activity.VendorAddStoreItemsClothsActivity" />
         <activity android:name=".commonActivity.TimeManagerActivity" />
 
         <meta-data
@@ -48,9 +49,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.ui.activity.RestaurantActivity"
-            android:screenOrientation="portrait" /> <!-- <activity -->
+            android:screenOrientation="portrait" />
+
+        <!-- <activity -->
         <!-- android:name=".customer.ui.activity.DoctorAppointmentActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
+
         <activity
             android:name=".customer.ui.activity.PurchaseItemsActivity"
             android:screenOrientation="portrait"
@@ -63,9 +67,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.ui.activity.SelectVendorActivity"
-            android:screenOrientation="portrait" /> <!-- <activity -->
+            android:screenOrientation="portrait" />
+
+        <!-- <activity -->
         <!-- android:name=".customer.ui.activity.AppointmentsActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
+
         <activity
             android:name=".customer.ui.activity.TableBookingActivity"
             android:screenOrientation="portrait"

@@ -354,8 +354,11 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
             AppLog.e(TAG, detailResponse.message)
         }
     }
+
     private fun handleParking(detailModel: VendorServiceDetailModel) {
+
         var parkingRequest = VendorParkingRequest()
+
         if (detailModel.businessData != null) {
             parkingRequest.business_id = detailModel.businessData.business_id
             parkingRequest.business_name = detailModel.businessData.business_name
@@ -372,6 +375,7 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
             parkingRequest.image_url = detailModel.businessData.business_image
             parkingRequest.business_images = detailModel.businessData.business_images
         }
+
         parkingRequest.service_id = detailModel.service_id
         parkingRequest.parking_charges = detailModel.parking_charges
         parkingRequest.parking_capacity = detailModel.parking_capacity
@@ -401,3 +405,5 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
     }
 
 }
+
+//4207399164123068 11/23

@@ -334,7 +334,7 @@ class VendorParkingValetActivity : BaseActivity(), View.OnClickListener, CityDia
         }
     }
 
-    public fun uploadPic(files: ArrayList<File>, bussinessId: String) {
+    fun uploadPic(files: ArrayList<File>, bussinessId: String) {
         ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
         if (files != null && files.size > 0) {
             files.subList(0, vendorParkingRequest.business_images.size).clear()

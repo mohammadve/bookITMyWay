@@ -95,32 +95,6 @@ class VendorParkingReviewFragment : Fragment(), View.OnClickListener, ViewPagerI
             ed_tax.visibility = View.GONE
         }
 
-//        if (AppUtils.getStatusBoolean(mfieldMap.all_day)) {
-//            chk_alldays.isChecked = true
-//            cons_day.visibility = View.GONE
-//        } else {
-//            chk_alldays.visibility = View.GONE
-//            chk_monday.isChecked = AppUtils.getStatusBoolean(mfieldMap.mon)
-//            chk_tuesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.tue)
-//            chk_wednesday.isChecked = AppUtils.getStatusBoolean(mfieldMap.wed)
-//            chk_thursday.isChecked = AppUtils.getStatusBoolean(mfieldMap.thu)
-//            chk_friday.isChecked = AppUtils.getStatusBoolean(mfieldMap.fri)
-//            chk_saturday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sat)
-//            chk_sunday.isChecked = AppUtils.getStatusBoolean(mfieldMap.sun)
-//        }
-
-//        if (AppUtils.getStatusBoolean(mfieldMap.is_24_hours_open)) {
-//            ed_starttime.visibility = View.GONE
-//            ed_closingtime.visibility = View.GONE
-//            txt_starttime.visibility = View.GONE
-//            txt_closingtime.visibility = View.GONE
-//            chk_24time.isChecked = true
-//        } else {
-//            chk_24time.visibility = View.GONE
-//            ed_starttime.setText(mfieldMap.start_time)
-//            ed_closingtime.setText(mfieldMap.close_time)
-//        }
-
         ed_desc.setText(mfieldMap.description)
 
         txtSlotsMon.setText(getSlots(mfieldMap.dateTime.get(0).slots))

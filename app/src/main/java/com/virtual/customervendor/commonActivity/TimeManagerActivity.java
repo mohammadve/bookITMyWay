@@ -83,6 +83,7 @@ public class TimeManagerActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 
     private void setSlotsBlank(boolean isSameSlots) {
@@ -120,7 +121,12 @@ public class TimeManagerActivity extends BaseActivity {
 
     private void invalidateData() {
         for (DayAviliability aviliability:aviliabilities){
-            if(!aviliability.isSeleted()){
+            if(aviliability.isSeleted()) {
+                if(aviliability.getSlots().size()==1 && aviliability.getSlots().get(0).getStartTime().length()<4) {
+                    aviliability.getSlots().clear();
+                    aviliability.setSeleted(false);
+                }
+            }else{
                 aviliability.getSlots().clear();
             }
         }
