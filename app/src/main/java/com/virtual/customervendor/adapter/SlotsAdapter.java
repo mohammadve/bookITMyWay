@@ -103,7 +103,12 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.ViewHolder>{
     }
 
     private void removeSlot(DayAviliability.TimeSlot slot){
-        slots.remove(slot);
+        if(slots.size()>1)
+            slots.remove(slot);
+        else {
+            slot.setStartTime("");
+            slot.setStopTime("");
+        }
         if(isSameSlots)
             slotsObserver.notifyAllDays();
         notifyDataSetChanged();

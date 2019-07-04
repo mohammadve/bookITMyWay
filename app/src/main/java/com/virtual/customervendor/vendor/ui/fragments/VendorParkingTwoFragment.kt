@@ -17,41 +17,7 @@ import com.virtual.customervendor.vendor.ui.activity.*
 import kotlinx.android.synthetic.main.fragment_parking_two_vendor.*
 
 class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
-
-//    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-//        when (buttonView!!.id) {
-//            R.id.chk_alldays -> {
-//                handleAlldays(isChecked)
-//            }
-//            R.id.chk_monday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_tuesday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_wednesday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_thursday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_friday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_saturday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_sunday -> {
-//                handleDays(isChecked)
-//            }
-//            R.id.chk_24time -> {
-//                handleTime24(isChecked)
-//            }
-//        }
-//
-//    }
-
-    var datetime: String? = null
+        var datetime: String? = null
     var parkingRequest = VendorParkingRequest()
     var TAG: String = VendorParkingTwoFragment::class.java.simpleName
 
@@ -61,20 +27,6 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
             R.id.iv_back -> {
                 activity?.onBackPressed()
             }
-
-//            R.id.ed_starttime -> {
-//                if (chk_24time.isChecked()) chk_24time.isChecked = false
-//
-//                AppUtils.getTimeNew(ed_starttime, activity as AppCompatActivity?)
-//
-////                AppUtill.getTime(ed_starttime,activity!!)
-//            }
-//            R.id.ed_closingtime -> {
-//                if (chk_24time.isChecked()) chk_24time.isChecked = false
-////                AppUtill.getTime(ed_closingtime, activity!!)
-//                AppUtils.getTimeNew(ed_closingtime, activity as AppCompatActivity?)
-//
-//            }
 
             R.id.txtDays -> {
                 var intent = Intent(activity, TimeManagerActivity::class.java)
@@ -108,6 +60,7 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         parkingRequest = (context as VendorParkingValetActivity).getValetRequestPojo()
 
         til_rate.hint=""+til_rate.hint+"("+AppUtils.getCurrencySymbol()+")"
@@ -115,6 +68,7 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
         getfilledData()
 
         initView(view)
+
     }
 
 
@@ -130,66 +84,20 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
     }
 
     fun initView(view: View) {
-        btn_next.setOnClickListener(this)
-        txtDays.setOnClickListener(this)
 
-//        ed_starttime.setOnClickListener(this)
-//        ed_closingtime.setOnClickListener(this)
-//        chk_alldays.setOnCheckedChangeListener(this)
-//        chk_monday.setOnCheckedChangeListener(this)
-//        chk_tuesday.setOnCheckedChangeListener(this)
-//        chk_wednesday.setOnCheckedChangeListener(this)
-//        chk_thursday.setOnCheckedChangeListener(this)
-//        chk_friday.setOnCheckedChangeListener(this)
-//        chk_saturday.setOnCheckedChangeListener(this)
-//        chk_sunday.setOnCheckedChangeListener(this)
-//        chk_24time.setOnCheckedChangeListener(this)
+        btn_next.setOnClickListener(this)
+
+        txtDays.setOnClickListener(this)
 
         manageFromEdit()
     }
 
-//    fun handleAlldays(isChecked: Boolean) {
-//        if (isChecked) {
-//            if (chk_monday.isChecked()) chk_monday.isChecked = false
-//            if (chk_tuesday.isChecked()) chk_tuesday.isChecked = false
-//            if (chk_wednesday.isChecked()) chk_wednesday.isChecked = false
-//            if (chk_thursday.isChecked()) chk_thursday.isChecked = false
-//            if (chk_friday.isChecked()) chk_friday.isChecked = false
-//            if (chk_saturday.isChecked()) chk_saturday.isChecked = false
-//            if (chk_sunday.isChecked()) chk_sunday.isChecked = false
-//        }
-//    }
-
-//    fun handleDays(isChecked: Boolean) {
-//        if (isChecked) {
-//            if (chk_alldays.isChecked()) chk_alldays.isChecked = false
-//        }
-//    }
-//
-//    fun handleTime24(isChecked: Boolean) {
-//        if (isChecked) {
-//            ed_starttime.setText("")
-//            ed_closingtime.setText("")
-//        }
-//    }
 
     private fun putAllDataToFieldMap(parkingRequest: VendorParkingRequest) {
 
         try {
             parkingRequest.parking_capacity = ed_par_cap.text.toString()
             parkingRequest.parking_charges = ed_rate.text.toString()
-
-//            parkingRequest.all_day = (AppUtils.getStatusString(chk_alldays.isChecked))
-//            parkingRequest.mon = (AppUtils.getStatusString(chk_monday.isChecked))
-//            parkingRequest.tue = (AppUtils.getStatusString(chk_tuesday.isChecked))
-//            parkingRequest.wed = (AppUtils.getStatusString(chk_wednesday.isChecked))
-//            parkingRequest.thu = (AppUtils.getStatusString(chk_thursday.isChecked))
-//            parkingRequest.fri = (AppUtils.getStatusString(chk_friday.isChecked))
-//            parkingRequest.sat = (AppUtils.getStatusString(chk_saturday.isChecked))
-//            parkingRequest.sun = (AppUtils.getStatusString(chk_sunday.isChecked))
-//            parkingRequest.is_24_hours_open = AppUtils.getStatusString(chk_24time.isChecked)
-//            parkingRequest.start_time = ed_starttime.text.toString()
-//            parkingRequest.close_time = ed_closingtime.text.toString()
 
             parkingRequest.description = ed_desc.text.toString()
 
@@ -202,24 +110,6 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
         try {
             ed_par_cap.setText(parkingRequest.parking_capacity)
             ed_rate.setText(parkingRequest.parking_charges)
-//            if (AppUtils.getStatusBoolean(parkingRequest.all_day)) {
-//                chk_alldays.isChecked = true
-//            } else {
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(parkingRequest.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(parkingRequest.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(parkingRequest.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(parkingRequest.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(parkingRequest.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(parkingRequest.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(parkingRequest.sun)
-//            }
-//
-//            if (AppUtils.getStatusBoolean(parkingRequest.is_24_hours_open)) {
-//                chk_24time.isChecked = true
-//            } else {
-//                ed_starttime.setText(parkingRequest.start_time)
-//                ed_closingtime.setText(parkingRequest.close_time)
-//            }
             ed_desc.setText(parkingRequest.description)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -252,21 +142,6 @@ class VendorParkingTwoFragment : Fragment(), View.OnClickListener {
         if (til_rate.isErrorEnabled()) {
             UiValidator.disableValidationError(til_rate)
         }
-//        if (!(chk_alldays.isChecked || chk_monday.isChecked || chk_tuesday.isChecked || chk_wednesday.isChecked || chk_thursday.isChecked || chk_friday.isChecked || chk_saturday.isChecked || chk_sunday.isChecked)) {
-//            UiValidator.displayMsgSnack(nest,activity, getString(R.string.select_days_of_service))
-//            return
-//        }
-//        if (!(chk_24time.isChecked || (!ed_starttime.text.toString().isEmpty() && !ed_closingtime.text.toString().isEmpty()))) {
-//            UiValidator.displayMsgSnack(nest,activity, getString(R.string.bussines_hours))
-//            return
-//        }
-//        if (!chk_24time.isChecked) {
-//            if (!AppUtill.compareTime(ed_starttime.text.toString(), ed_closingtime.text.toString())) {
-//                UiValidator.displayMsgSnack(nest,activity, getString(R.string.choose_valid_time_slot))
-//                return
-//            }
-//        }
-
         if (ed_desc.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
             return

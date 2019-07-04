@@ -64,7 +64,7 @@ class CustomerOrderFragment : Fragment(), View.OnClickListener, PagingListeners 
     private fun createAdapterView() {
         orderadapterCustomer = OrderadapterCustomer(this, activity!!, list) { orderDeatail ->
 
-            var intent: Intent = Intent(activity!!, CustomerOrderDetailActivity::class.java)
+            var intent = Intent(activity!!, CustomerOrderDetailActivity::class.java)
             var bundle = Bundle()
             bundle.putSerializable(AppConstants.OREDER_DATA, orderDeatail)
             intent.putExtras(bundle)
@@ -137,12 +137,9 @@ class CustomerOrderFragment : Fragment(), View.OnClickListener, PagingListeners 
     }
 
     override fun onFinishListener() {
-
         getCustomerOrderList(list.size)
     }
 
-    override fun onFinishListener(type: Int) {
-
-    }
+    override fun onFinishListener(type: Int) {}
 
 }

@@ -454,7 +454,6 @@ class DashBoardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
                         intent.putExtras(bundle)
                         startActivity(intent)
                         finish()
-
                     }
                 }
             }
