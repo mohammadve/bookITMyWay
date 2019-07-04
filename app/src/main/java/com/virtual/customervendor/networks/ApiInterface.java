@@ -21,6 +21,8 @@ import com.virtual.customervendor.model.response.CancelOrderResponse;
 import com.virtual.customervendor.model.response.CategoryAllResponse;
 import com.virtual.customervendor.model.response.CategoryResponse;
 import com.virtual.customervendor.model.response.CityResponse;
+import com.virtual.customervendor.model.response.ClothColorResponse;
+import com.virtual.customervendor.model.response.ClothSizeResponse;
 import com.virtual.customervendor.model.response.CommonResponse;
 import com.virtual.customervendor.model.response.CountryResponse;
 import com.virtual.customervendor.model.response.CountrycodeResponse;
@@ -45,6 +47,7 @@ import com.virtual.customervendor.model.response.RestaurantMenuListingResponse;
 import com.virtual.customervendor.model.response.SearchResponse;
 import com.virtual.customervendor.model.response.SpecialityResponse;
 import com.virtual.customervendor.model.response.StoreCategoryResponse;
+import com.virtual.customervendor.model.response.StoreClothColorModel;
 import com.virtual.customervendor.model.response.StoreListingResponse;
 import com.virtual.customervendor.model.response.TaxiServiceResponse;
 import com.virtual.customervendor.model.response.UserProfilePicResponse;
@@ -178,6 +181,14 @@ public interface ApiInterface {
     @POST(AppConstants.GET_CITIES)
     @Headers({"Content-Type: application/json"})
     Observable<CityResponse> getCities(@Query(AppKeys.RESION_CODE) String resion_code);
+
+    @GET(AppConstants.GET_COLOR_LIST)
+    @Headers({"Content-Type: application/json"})
+    Observable<ClothColorResponse> getClothColor();
+
+    @POST(AppConstants.GET_SIZE_LIST)
+    @Headers({"Content-Type: application/json"})
+    Observable<ClothSizeResponse> getClothSize(@Query(AppKeys.TYPE) String type);
 
     @GET(AppConstants.GET_ALL_CATEGORIES)
     @Headers({"Content-Type: application/json"})

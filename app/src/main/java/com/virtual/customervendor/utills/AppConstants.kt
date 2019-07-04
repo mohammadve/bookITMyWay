@@ -56,6 +56,9 @@ class AppConstants {
         const val GET_PRODUCT_CATEGORIES = "get_product_categories"
         const val GET_BUSINESS_LIST = "get-business-list"
         const val GET_CITIES = "getCities"
+        const val GET_COLOR_LIST = "colours-list"
+        const val GET_SIZE_LIST = "get-clothes-number"
+
         const val GET_COUNTRIES = "get-countries-list"
         const val SEARCH_BUSINESS = "search-business"
         const val CUSTOMER_INFORM_VENDOR = "customer-inform-vendor"

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true">
+
+    <View
+        android:id="@+id/view_colors"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_0.50"
+        android:layout_marginTop="@dimen/dp_15"
+        android:background="@color/text2_color_7d7d7d"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/tv_color_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="Red"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_colors" />
+
+    <ImageView
+        android:id="@+id/remove_colors"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_10"
+        android:tint="@android:color/holo_red_light"
+        app:layout_constraintLeft_toRightOf="@+id/tv_color_name"
+        app:layout_constraintTop_toBottomOf="@+id/view_colors"
+        app:srcCompat="@drawable/ic_cross" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_color_name">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_corners_gray_strocks"
+
+            >
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_spinner_doqn"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_8"
+                android:text="1"
+                android:textColor="@color/text1_color_101010"
+                android:textSize="@dimen/sp_16"
+                app:customFont="@string/fontRegular" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/quantity_Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/quanlity_arrays"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/round_corners_gray_strocks"
+            android:gravity="center"
+            android:hint="@string/per_unit"
+            android:inputType="number"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toRightOf="@+id/tv_quantity"
+            app:layout_constraintTop_toBottomOf="@+id/tv_color_name" />
+
+        <com.virtual.customervendor.customview.CustomEditText
+            android:id="@+id/tv_price2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="@drawable/round_corners_gray_strocks"
+            android:gravity="center"
+            android:hint="@string/per_unit"
+            android:inputType="number"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8"
+            android:textColor="@color/text1_color_101010"
+            android:textSize="@dimen/sp_16"
+            app:customFont="@string/fontRegular"
+            app:layout_constraintLeft_toRightOf="@+id/tv_price"
+            app:layout_constraintTop_toBottomOf="@+id/tv_color_name" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

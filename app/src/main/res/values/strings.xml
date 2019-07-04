@@ -503,8 +503,28 @@
     <string name="select_size">Select size</string>
     <string name="hint_enter_size_number">Enter size number</string>
     <string name="add">Add</string>
-    <string name="create_colors_of_item">Select colors for SMALL</string>
+    <string name="create_colors_of_item">Select colors for</string>
     <string name="hint_serch_select_color">Search and select colors</string>
-
+    <string name="per_unit">/Unit price</string>
+    <string name="add_to_release">Add to release soon</string>
+    <string name="select_date">Select date</string>
+    <string-array name="quanlity_arrays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+    </string-array>
 
 </resources>

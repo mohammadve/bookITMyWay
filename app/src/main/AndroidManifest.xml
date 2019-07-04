@@ -17,7 +17,8 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vendor.ui.activity.VendorAddStoreItemsClothsActivity"></activity>
+        <activity android:name=".vendor.ui.activity.VendorAddStoreItemsOtherActivity"></activity>
+        <activity android:name=".vendor.ui.activity.VendorAddStoreItemsClothsActivity" />
         <activity android:name=".commonActivity.TimeManagerActivity" />
 
         <meta-data

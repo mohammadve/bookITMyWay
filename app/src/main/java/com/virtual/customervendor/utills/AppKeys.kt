@@ -156,6 +156,7 @@ class AppKeys {
         const val KEY_STORE_ID="store_category_id"
         const val CN_CODE="cn_code"
         const val RESION_CODE="region_id"
+        const val TYPE="type"
 
     }
 }
