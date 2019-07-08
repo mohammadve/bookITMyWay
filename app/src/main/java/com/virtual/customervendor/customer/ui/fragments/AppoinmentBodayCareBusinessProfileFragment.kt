@@ -242,7 +242,8 @@ class AppoinmentBodayCareBusinessProfileFragment : Fragment(), View.OnClickListe
             }
         }
         ed_day.setText(time)
-        ed_sertime.setText(detailModel.visiting_hours_slot.get(0).fromTime + " - " + detailModel.visiting_hours_slot.get(0).toTime)
+        if(detailModel.visiting_hours_slot.size>0)
+            ed_sertime.setText(detailModel.visiting_hours_slot.get(0).fromTime + " - " + detailModel.visiting_hours_slot.get(0).toTime)
         ed_person.setText(detailModel.required_person_per_hr)
         ed_slottime.setText(detailModel.time_slot)
 
