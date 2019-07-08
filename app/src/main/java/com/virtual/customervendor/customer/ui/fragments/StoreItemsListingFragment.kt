@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.virtual.customervendor.R
 import com.virtual.customervendor.customer.ui.activity.PurchaseItemsActivity
+import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.CustomerBookingListModel
 import com.virtual.customervendor.model.ProductCategoryModel
 import com.virtual.customervendor.model.response.ProductCategoryResponse
@@ -51,37 +52,12 @@ class StoreItemsListingFragment : Fragment() {
         (activity as PurchaseItemsActivity).setCartValueVisible(false)
     }
 
-//    fun getStoreItems(service_id: String) {
-//        if (AppUtils.isInternetConnected(activity)) {
-//            ProgressDialogLoader.progressDialogCreation(activity, getString(R.string.please_wait))
-//            apiService?.getStoreItemListing("Bearer " + SharedPreferenceManager.getAuthToken(), service_id.toInt(),0)
-//                    ?.subscribeOn(Schedulers.io())
-//                    ?.observeOn(AndroidSchedulers.mainThread())
-//                    ?.subscribe(object : Observer<StoreListingResponse> {
-//                        override fun onSubscribe(d: Disposable) {
-//                        }
-//
-//                        override fun onNext(detailResponse: StoreListingResponse) {
-//                            AppLog.e(TAG, detailResponse.toString())
-//                            handleResults(detailResponse)
-//                        }
-//
-//                        override fun onError(e: Throwable) {
-//                            handleError(e)
-//                        }
-//
-//                        override fun onComplete() {}
-//                    })
-//        } else {
-//            UiValidator.displayMsgSnack(cons, activity, getString(R.string.no_internet_connection))
-//        }
-//
-//    }
+
 
     fun getStoreItems() {
         if (AppUtils.isInternetConnected(activity)) {
             ProgressDialogLoader.progressDialogCreation(activity, getString(R.string.please_wait))
-            apiService?.getProductCategory()
+            apiService?.getProductCategory("Bearer " + SharedPreferenceManager.getAuthToken(),customerBookingListModel.service_id?.toInt()!!)
                     ?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe(object : Observer<ProductCategoryResponse> {
