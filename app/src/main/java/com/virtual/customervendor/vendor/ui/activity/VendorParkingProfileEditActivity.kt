@@ -194,19 +194,12 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
     fun setDaySlots(parkingRequest: VendorParkingRequest){
         var isAllDay: Boolean=AppUtils.getStatusBoolean(parkingRequest.all_day)
         if(parkingRequest.dateTime.size==0){
-//            if(parkingRequest.monday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.mon) ,parkingRequest.monday_time))
-//            if(parkingRequest.tuesday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.tue) ,parkingRequest.tuesday_time))
-//            if(parkingRequest.wednesday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.wed) ,parkingRequest.wednesday_time))
-//            if(parkingRequest.thursday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.thu) ,parkingRequest.thursday_time))
-//            if(parkingRequest.friday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.fri) ,parkingRequest.friday_time))
-//            if(parkingRequest.saturday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.sat) ,parkingRequest.saturday_time))
-//            if(parkingRequest.sunday_time.size>0)
             parkingRequest.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(parkingRequest.sun) ,parkingRequest.sunday_time))
         }
         txtSlotsMon.setText(getSlots(parkingRequest.monday_time))
@@ -277,8 +270,6 @@ class VendorParkingProfileEditActivity : BaseActivity(), View.OnClickListener, V
                 handler.post(Runnable {
                     if (pagePosition == SCREEN_COUNT) {
                         pagePosition = 0
-//                        if (mTimerTask != null)
-//                            mTimerTask!!.cancel()
                     } else {
                         pagePosition = pagePosition + 1
                     }

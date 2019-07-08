@@ -32,7 +32,6 @@
         android:background="@drawable/findloaction_edittext_bg"
         android:orientation="horizontal"
         >
-
         <com.virtual.customervendor.customview.CustomEditText
             android:id="@+id/et_searchText"
             android:layout_width="match_parent"

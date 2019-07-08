@@ -215,29 +215,6 @@ class DashBoardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        AppLog.e("lifecycle","onResume")
-//        var i = 4/0;
-//
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        AppLog.e("lifecycle","onPause")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        AppLog.e("lifecycle","onStop")
-//
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        AppLog.e("lifecycle","onDestroy")
-//    }
-
     private fun initView() {
         AppUtils.hideSoftKeyboard(this)
         apiInterface = ApiClient.client.create(ApiInterface::class.java)

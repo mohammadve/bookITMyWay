@@ -120,13 +120,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
             if (activity is VendorDoctorActivity) {
                 ed_fees.setText(venAppointDoctoreServiceRequest.fees_per_visit)
                 chk_alldays.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(venAppointDoctoreServiceRequest.sun)
                 ed_desc.setText(venAppointDoctoreServiceRequest.description)
                 ed_patient.setText(venAppointDoctoreServiceRequest.required_person_per_hr)
                 if (venAppointDoctoreServiceRequest.visiting_hours_slot.size > 0) {
@@ -134,9 +127,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
                     timeList = venAppointDoctoreServiceRequest.visiting_hours_slot
                     appointDoctorTimingAdapter = AppointDoctorTimingAdapter(activity!!, timeList)
                     val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//                    rv_timing.layoutManager = manager
-//                    rv_timing.adapter = (appointDoctorTimingAdapter)
-//                    rv_timing.isNestedScrollingEnabled = false
                 } else {
                     createAdapterView()
                 }
@@ -157,22 +147,12 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
                 til_speci.visibility = View.GONE
                 ed_fees.setText(hairServiceRequest.fees_per_visit)
                 chk_alldays.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(hairServiceRequest.sun)
                 ed_desc.setText(hairServiceRequest.description)
                 ed_patient.setText(hairServiceRequest.required_person_per_hr)
                 if (hairServiceRequest.visiting_hours_slot.size > 0) {
                     timeList = hairServiceRequest.visiting_hours_slot
                     appointDoctorTimingAdapter = AppointDoctorTimingAdapter(activity!!, timeList)
                     val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//                    rv_timing.layoutManager = manager
-//                    rv_timing.adapter = (appointDoctorTimingAdapter)
-//                    rv_timing.isNestedScrollingEnabled = false
                 } else {
                     createAdapterView()
                 }
@@ -193,22 +173,12 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
                 til_speci.visibility = View.GONE
                 ed_fees.setText(nailsServiceRequest.fees_per_visit)
                 chk_alldays.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(nailsServiceRequest.sun)
                 ed_desc.setText(nailsServiceRequest.description)
                 ed_patient.setText(nailsServiceRequest.required_person_per_hr)
                 if (nailsServiceRequest.visiting_hours_slot.size > 0) {
                     timeList = nailsServiceRequest.visiting_hours_slot
                     appointDoctorTimingAdapter = AppointDoctorTimingAdapter(activity!!, timeList)
                     val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//                    rv_timing.layoutManager = manager
-//                    rv_timing.adapter = (appointDoctorTimingAdapter)
-//                    rv_timing.isNestedScrollingEnabled = false
                 } else {
                     createAdapterView()
                 }
@@ -229,22 +199,12 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
                 til_speci.visibility = View.GONE
                 ed_fees.setText(massageServiceRequest.fees_per_visit)
                 chk_alldays.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(massageServiceRequest.sun)
                 ed_desc.setText(massageServiceRequest.description)
                 ed_patient.setText(massageServiceRequest.required_person_per_hr)
                 if (massageServiceRequest.visiting_hours_slot.size > 0) {
                     timeList = massageServiceRequest.visiting_hours_slot
                     appointDoctorTimingAdapter = AppointDoctorTimingAdapter(activity!!, timeList)
                     val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//                    rv_timing.layoutManager = manager
-//                    rv_timing.adapter = (appointDoctorTimingAdapter)
-//                    rv_timing.isNestedScrollingEnabled = false
                 } else {
                     createAdapterView()
                 }
@@ -313,27 +273,12 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
         btn_next.setOnClickListener(this)
         txtDays.setOnClickListener(this)
         chk_alldays.setOnCheckedChangeListener(this)
-//        chk_monday.setOnCheckedChangeListener(this)
-//        chk_tuesday.setOnCheckedChangeListener(this)
-//        chk_wednesday.setOnCheckedChangeListener(this)
-//        chk_thursday.setOnCheckedChangeListener(this)
-//        chk_friday.setOnCheckedChangeListener(this)
-//        chk_saturday.setOnCheckedChangeListener(this)
-//        chk_sunday.setOnCheckedChangeListener(this)
-//        addmore.setOnClickListener(this)
         ed_specialty.setOnClickListener(this)
     }
 
 
     fun handleAlldays(isChecked: Boolean) {
         if (isChecked) {
-//            if (chk_monday.isChecked()) chk_monday.isChecked = false
-//            if (chk_tuesday.isChecked()) chk_tuesday.isChecked = false
-//            if (chk_wednesday.isChecked()) chk_wednesday.isChecked = false
-//            if (chk_thursday.isChecked()) chk_thursday.isChecked = false
-//            if (chk_friday.isChecked()) chk_friday.isChecked = false
-//            if (chk_saturday.isChecked()) chk_saturday.isChecked = false
-//            if (chk_sunday.isChecked()) chk_sunday.isChecked = false
         }
     }
 
@@ -349,13 +294,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
         try {
             doctoreServiceRequest.fees_per_visit = ed_fees.text.toString()
             doctoreServiceRequest.all_day = AppUtils.getStatusString(chk_alldays.isChecked)
-//            doctoreServiceRequest.mon = AppUtils.getStatusString(chk_monday.isChecked)
-//            doctoreServiceRequest.tue = AppUtils.getStatusString(chk_tuesday.isChecked)
-//            doctoreServiceRequest.wed = AppUtils.getStatusString(chk_wednesday.isChecked)
-//            doctoreServiceRequest.thu = AppUtils.getStatusString(chk_thursday.isChecked)
-//            doctoreServiceRequest.fri = AppUtils.getStatusString(chk_friday.isChecked)
-//            doctoreServiceRequest.sat = AppUtils.getStatusString(chk_saturday.isChecked)
-//            doctoreServiceRequest.sun = AppUtils.getStatusString(chk_sunday.isChecked)
             doctoreServiceRequest.description = ed_desc.text.toString()
             doctoreServiceRequest.required_person_per_hr = ed_patient.text.toString()
 
@@ -410,11 +348,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
         if (til_patient.isErrorEnabled()) {
             UiValidator.disableValidationError(til_patient)
         }
-
-//        if (!(chk_alldays.isChecked || chk_monday.isChecked || chk_tuesday.isChecked || chk_wednesday.isChecked || chk_thursday.isChecked || chk_friday.isChecked || chk_saturday.isChecked || chk_sunday.isChecked)) {
-//            UiValidator.displayMsgSnack(nest, activity, getString(R.string.select_days_of_service))
-//            return
-//        }
 
         if (ed_desc.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
@@ -485,9 +418,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
         timeList.add(TimeSlotModel())
         appointDoctorTimingAdapter = AppointDoctorTimingAdapter(activity!!, timeList)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//        rv_timing.layoutManager = manager
-//        rv_timing.adapter = (appointDoctorTimingAdapter)
-//        rv_timing.isNestedScrollingEnabled = false
     }
 
     fun isValidTimeSlots(taxi_Service_Request: ArrayList<DayAviliability>): Boolean {
@@ -500,22 +430,6 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
     }
 
     fun getListSightSeen(): Boolean {
-
-//        AppLog.e(TAG, rv_timing.childCount.toString())
-//        var timeSlotModel: TimeSlotModel
-//        timeList.clear()
-//        for (i in 0 until rv_timing.childCount) {
-//            var data: ConstraintLayout = rv_timing.getChildAt(i) as ConstraintLayout
-//            if (!data.findViewById<CustomEditText>(R.id.ed_fromtime).text.toString().isEmpty()) {
-//                timeSlotModel = TimeSlotModel()
-//                timeSlotModel.fromTime = data.findViewById<CustomEditText>(R.id.ed_fromtime).text.toString()
-//                timeSlotModel.toTime = data.findViewById<CustomEditText>(R.id.ed_totime).text.toString()
-//                if (!AppUtill.compareTime(timeSlotModel.fromTime.toString(), timeSlotModel.toTime.toString()))
-//                    return false
-//
-//                timeList.add(timeSlotModel)
-//            }
-//        }
 
         for (i in 0 until timeList.size - 1) {
             if (!AppUtill.compareTime(timeList.get(i).toTime!!, timeList.get(i + 1).fromTime!!))

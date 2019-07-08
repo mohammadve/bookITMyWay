@@ -250,7 +250,8 @@ class VendorRestaurantTwoFragment : Fragment(), View.OnClickListener, CompoundBu
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
             return
         }
-        if(!isValidTimeSlots()) {
+
+        if(!isValidTimeSlots(vendorRestaurantServiceModel.dateTime)) {
             UiValidator.displayMsg(context, "Please enter a valid time slots")
             return
         }
@@ -271,6 +272,15 @@ class VendorRestaurantTwoFragment : Fragment(), View.OnClickListener, CompoundBu
     }
 
 
+    private fun isValidTimeSlots(taxi_Service_Request: ArrayList<DayAviliability>): Boolean {
+        for (aviliability in taxi_Service_Request){
+            if(aviliability.isSeleted && aviliability.slots.size>0)
+                if(aviliability.slots[0].startTime.length>0 && aviliability.slots[0].stopTime.length>0 )
+                    return true
+        }
+        return false
+    }
+
     fun manageFromEdit() {
         if (activity is VendorRestaurantActivity) {
             if ((activity as VendorRestaurantActivity).isFromedit()) {
@@ -287,15 +297,6 @@ class VendorRestaurantTwoFragment : Fragment(), View.OnClickListener, CompoundBu
             vendorRestaurantServiceModel.all_day= data?.getIntExtra(TimeManagerActivity.KEY_ALL_DAY_SAME,0).toString()
         }
 
-    }
-
-    private fun isValidTimeSlots(): Boolean {
-        for (i in 0..vendorRestaurantServiceModel.dateTime.size){
-            if(vendorRestaurantServiceModel.dateTime[i].isSeleted && vendorRestaurantServiceModel.dateTime[i].slots.size>0)
-                if(vendorRestaurantServiceModel.dateTime[i].slots[0].startTime.length>0 && vendorRestaurantServiceModel.dateTime[i].slots[0].stopTime.length>0 )
-                    return true
-        }
-        return false
     }
 
 }

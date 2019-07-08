@@ -72,16 +72,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             R.id.iv_back -> {
                 activity?.onBackPressed()
             }
-//            R.id.ed_starttime -> {
-//                if (chk_24time.isChecked()) chk_24time.isChecked = false
-//                AppUtils.getTimeNew(ed_starttime, activity as AppCompatActivity?)
-//
-//            }
-//            R.id.ed_closingtime -> {
-//                if (chk_24time.isChecked()) chk_24time.isChecked = false
-//                AppUtils.getTimeNew(ed_closingtime, activity as AppCompatActivity?)
-//
-//            }
 
             R.id.ed_service -> {
                 if (context is VendorTaxiActivity) {
@@ -154,17 +144,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
                     data.append(regionModel.regionname)
                 }
                 ed_service.setText(data.toString())
-//                chk_alldays.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.sun)
-//                chk_24time.isChecked = AppUtils.getStatusBoolean(taxi_Service_Request.is_24_hours_open)
-//                ed_starttime.setText(taxi_Service_Request.start_time)
-//                ed_closingtime.setText(taxi_Service_Request.close_time)
                 ed_desc.setText(taxi_Service_Request.description)
             } else if (activity is VendorLimoActivity) {
 
@@ -180,18 +159,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
                 }
                 ed_service.setText(data.toString())
 
-//                chk_alldays.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.sun)
-//                chk_24time.isChecked = AppUtils.getStatusBoolean(limo_Service_Request.is_24_hours_open)
-//                ed_starttime.setText(limo_Service_Request.start_time)
-//                ed_closingtime.setText(limo_Service_Request.close_time)
-//                ed_desc.setText(limo_Service_Request.description)
 
             } else if (activity is VendorTourBusActivity) {
                 ed_taxicount.setText(tourbus_Service_Request.total_taxi)
@@ -207,17 +174,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
                 }
                 ed_service.setText(data.toString())
 
-//                chk_alldays.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.all_day)
-//                chk_monday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.mon)
-//                chk_tuesday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.tue)
-//                chk_wednesday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.wed)
-//                chk_thursday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.thu)
-//                chk_friday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.fri)
-//                chk_saturday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.sat)
-//                chk_sunday.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.sun)
-//                chk_24time.isChecked = AppUtils.getStatusBoolean(tourbus_Service_Request.is_24_hours_open)
-//                ed_starttime.setText(tourbus_Service_Request.start_time)
-//                ed_closingtime.setText(tourbus_Service_Request.close_time)
 
                 ed_desc.setText(tourbus_Service_Request.description)
             }
@@ -255,43 +211,16 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
     fun initView() {
         btn_next.setOnClickListener(this)
         txtDays.setOnClickListener(this)
-//        ed_starttime.setOnClickListener(this)
-//        ed_closingtime.setOnClickListener(this)
         ed_service.setOnClickListener(this)
-//        chk_alldays.setOnCheckedChangeListener(this)
-//        chk_monday.setOnCheckedChangeListener(this)
-//        chk_tuesday.setOnCheckedChangeListener(this)
-//        chk_wednesday.setOnCheckedChangeListener(this)
-//        chk_thursday.setOnCheckedChangeListener(this)
-//        chk_friday.setOnCheckedChangeListener(this)
-//        chk_saturday.setOnCheckedChangeListener(this)
-//        chk_sunday.setOnCheckedChangeListener(this)
-//        chk_24time.setOnCheckedChangeListener(this)
     }
 
     fun handleAlldays(isChecked: Boolean) {
-//        if (isChecked) {
-//            if (chk_monday.isChecked()) chk_monday.isChecked = false
-//            if (chk_tuesday.isChecked()) chk_tuesday.isChecked = false
-//            if (chk_wednesday.isChecked()) chk_wednesday.isChecked = false
-//            if (chk_thursday.isChecked()) chk_thursday.isChecked = false
-//            if (chk_friday.isChecked()) chk_friday.isChecked = false
-//            if (chk_saturday.isChecked()) chk_saturday.isChecked = false
-//            if (chk_sunday.isChecked()) chk_sunday.isChecked = false
-//        }
     }
 
     fun handleDays(isChecked: Boolean) {
-//        if (isChecked) {
-//            if (chk_alldays.isChecked()) chk_alldays.isChecked = false
-//        }
     }
 
     fun handleTime24(isChecked: Boolean) {
-//        if (isChecked) {
-//            ed_starttime.setText("")
-//            ed_closingtime.setText("")
-//        }
     }
 
     fun updateSelectedServiceArea(bean: ArrayList<RegionModel>) {
@@ -325,17 +254,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
             taxi_Service_Request.total_taxi = ed_taxicount.text.toString()
             taxi_Service_Request.avg_seat_per_taxi = ed_seat.text.toString()
             taxi_Service_Request.rate_per_km = ed_rate.text.toString()
-//            taxi_Service_Request.all_day = AppUtils.getStatusString(chk_alldays.isChecked)
-//            taxi_Service_Request.mon = AppUtils.getStatusString(chk_monday.isChecked)
-//            taxi_Service_Request.tue = AppUtils.getStatusString(chk_tuesday.isChecked)
-//            taxi_Service_Request.wed = AppUtils.getStatusString(chk_wednesday.isChecked)
-//            taxi_Service_Request.thu = AppUtils.getStatusString(chk_thursday.isChecked)
-//            taxi_Service_Request.fri = AppUtils.getStatusString(chk_friday.isChecked)
-//            taxi_Service_Request.sat = AppUtils.getStatusString(chk_saturday.isChecked)
-//            taxi_Service_Request.sun = AppUtils.getStatusString(chk_sunday.isChecked)
-//            taxi_Service_Request.is_24_hours_open = AppUtils.getStatusString(chk_24time.isChecked)
-//            taxi_Service_Request.start_time = ed_starttime.text.toString()
-//            taxi_Service_Request.close_time = ed_closingtime.text.toString()
 
             taxi_Service_Request.description = ed_desc.text.toString()
 
@@ -392,21 +310,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
         if (til_servicearea.isErrorEnabled()) {
             UiValidator.disableValidationError(til_servicearea)
         }
-//        if (!(chk_alldays.isChecked || chk_monday.isChecked || chk_tuesday.isChecked || chk_wednesday.isChecked || chk_thursday.isChecked || chk_friday.isChecked || chk_saturday.isChecked || chk_sunday.isChecked)) {
-//            UiValidator.displayMsgSnack(nest, activity, getString(R.string.select_days_of_service))
-//            return
-//        }
-//        if (!(chk_24time.isChecked || (!ed_starttime.text.toString().isEmpty() && !ed_closingtime.text.toString().isEmpty()))) {
-//            UiValidator.displayMsgSnack(nest, activity, getString(R.string.bussines_hours))
-//            return
-//        }
-//        if (!chk_24time.isChecked) {
-//            if (!AppUtill.compareTime(ed_starttime.text.toString(), ed_closingtime.text.toString())) {
-//                UiValidator.displayMsgSnack(nest, activity, getString(R.string.choose_valid_time_slot))
-//                return
-//            }
-//        }
-
 
 
         if (ed_desc.getText().toString().isEmpty()) {
@@ -416,8 +319,6 @@ class VendorTaxiTwoFragment : Fragment(), View.OnClickListener, CompoundButton.O
         if (til_desc.isErrorEnabled()) {
             UiValidator.disableValidationError(til_desc)
         }
-
-
 
         if (activity is VendorTaxiActivity) {
             if(!isValidTimeSlots(taxi_Service_Request.dateTime)) {
