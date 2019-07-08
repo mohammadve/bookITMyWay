@@ -34,6 +34,7 @@ class AppKeys {
         const val SERVICES_TIME = "subservice_book_time"
         const val PRODUCT_CATEGORY = "product_category"
         const val BUSINESS_ID = "business_id"
+        const val STORE_CATEGORY_ID = "store_category_id"
         const val OFFER_BUSINESS_ID = "busines_id"
         const val VENDOR_BUSSINESSNAME = "vendor_bussinessname"
         const val ITEM_ID = "item_id"

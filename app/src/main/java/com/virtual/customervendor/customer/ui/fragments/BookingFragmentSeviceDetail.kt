@@ -225,6 +225,8 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
         }
         ed_desc.setText(detailModel.description)
 
+        setDaySlots(detailModel)
+
         if (detailModel.businessData.followBusiness.equals("1")) {
             btn_follow_unfollow.tag = resources.getString(R.string.unfollow)
             btn_follow_unfollow.text = resources.getString(R.string.unfollow)
@@ -348,6 +350,51 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
         if (detailModel.businessData.business_images != null && detailModel.businessData.business_images.size > 0) {
             initViewPager(detailModel.businessData.business_images)
         }
+    }
+
+
+    fun setDaySlots(taxi_Service_Request: VendorServiceDetailModel){
+        var isAllDay: Boolean=AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+        if(taxi_Service_Request.dateTime.size==0){
+//            if(taxi_Service_Request.monday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.monday) ,taxi_Service_Request.monday_time))
+//            if(taxi_Service_Request.tuesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tuesday) ,taxi_Service_Request.tuesday_time))
+//            if(taxi_Service_Request.wednesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wednesday) ,taxi_Service_Request.wednesday_time))
+//            if(taxi_Service_Request.thursday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thursday) ,taxi_Service_Request.thursday_time))
+//            if(taxi_Service_Request.friday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.friday) ,taxi_Service_Request.friday_time))
+//            if(taxi_Service_Request.saturday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.saturday) ,taxi_Service_Request.saturday_time))
+//            if(taxi_Service_Request.sunday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sunday) ,taxi_Service_Request.sunday_time))
+        }
+
+        txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
+        txtSlotsTue.setText(getSlots(taxi_Service_Request.tuesday_time))
+        txtSlotsWed.setText(getSlots(taxi_Service_Request.wednesday_time))
+        txtSlotsThu.setText(getSlots(taxi_Service_Request.thursday_time))
+        txtSlotsFri.setText(getSlots(taxi_Service_Request.friday_time))
+        txtSlotsSat.setText(getSlots(taxi_Service_Request.saturday_time))
+        txtSlotsSun.setText(getSlots(taxi_Service_Request.sunday_time))
+    }
+
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+        return str
     }
 
     private fun initViewPager(categories: ArrayList<BusinessImage>) {

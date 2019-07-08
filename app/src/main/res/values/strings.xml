@@ -126,6 +126,7 @@
     <string name="business_profile">Business Profile</string>
     <string name="sight_seeing">Sight Seeing</string>
     <string name="other">Other</string>
+    <string name="store_subcat">Store SubCategory</string>
     <string name="store_items">Store Items</string>
     <string name="excursion">Excursion</string>
     <string name="tickes_fpr_events">Tickets &amp; Events</string>
@@ -179,7 +180,7 @@
     <string name="select_region">Select Region</string>
 
     <string name="region">Region</string>
-    <string name="select_days_of_service">Select Days of Service</string>
+    <string name="select_days_of_service">Selected Days of Service</string>
     <string name="bussines_hours">Busines Hours</string>
     <string name="choose_valid_time_slot">Choose Valid Time Slot</string>
     <string name="bussines_visithours">Visiting Hours</string>
@@ -222,6 +223,12 @@
     <string name="field_required">Field Required</string>
     <string name="service_area">Service Area</string>
     <string name="service_region">Service Region</string>
+
+    <string name="service_subcat">Service SubCategory</string>
+
+    <string name="service_custom_subcat">Service Custom SubCategory</string>
+
+
 
     <string name="service_day">Service Day</string>
     <string name="service_time">Service time</string>
@@ -312,6 +319,7 @@
 
     <string name="store_seller">Store/Seller</string>
     <string name="store_category">Store Category</string>
+    <string name="store_subcategory">Store SubCategory</string>
     <string name="edit_event">Edit Event</string>
     <string name="edit_package">Edit Package</string>
     <string name="view">View</string>

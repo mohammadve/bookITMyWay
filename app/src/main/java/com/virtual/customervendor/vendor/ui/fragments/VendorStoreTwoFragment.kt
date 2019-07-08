@@ -1,77 +1,111 @@
 package com.virtual.customervendor.vendor.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
-import com.virtual.customervendor.model.CityModel
-import com.virtual.customervendor.model.RegionModel
-import com.virtual.customervendor.model.StoreCategoryModel
-import com.virtual.customervendor.model.StoreItemLocationModel
+import com.virtual.customervendor.commonActivity.TimeManagerActivity
+import com.virtual.customervendor.model.*
 import com.virtual.customervendor.model.request.VendorStoreServiceRequest
 import com.virtual.customervendor.utills.AppConstants
 import com.virtual.customervendor.utills.AppLog
 import com.virtual.customervendor.utills.AppUtils
 import com.virtual.customervendor.utills.UiValidator
-import com.virtual.customervendor.vendor.ui.activity.VendorLimoActivity
 import com.virtual.customervendor.vendor.ui.activity.VendorStoreActivity
-import com.virtual.customervendor.vendor.ui.activity.VendorTaxiActivity
-import com.virtual.customervendor.vendor.ui.activity.VendorTourBusActivity
 import com.virtual.customervendor.vendor.ui.adapter.StoreClothTypeAdapter
 import com.virtual.customervendor.vendor.ui.adapter.StoreDeliverLocationAdapter
 import kotlinx.android.synthetic.main.fragment_store_two_vendor.*
-import kotlinx.android.synthetic.main.fragment_store_two_vendor.btn_next
-import kotlinx.android.synthetic.main.fragment_store_two_vendor.ed_desc
-import kotlinx.android.synthetic.main.fragment_store_two_vendor.nest
-import kotlinx.android.synthetic.main.fragment_store_two_vendor.til_desc
-import kotlinx.android.synthetic.main.fragment_taxi_two_vendor.*
 
-class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        when (buttonView!!.id) {
-            R.id.chk_alldays -> {
-                handleAlldays(isChecked)
-            }
-            R.id.chk_monday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_tuesday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_wednesday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_thursday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_friday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_saturday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_sunday -> {
-                handleDays(isChecked)
-            }
-            R.id.chk_24time -> {
-                handleTime24(isChecked)
-            }
+class VendorStoreTwoFragment : Fragment(), View.OnClickListener, TextWatcher {
+    override fun afterTextChanged(p0: Editable?) {
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+
+            til_storeSubcategory.visibility = View.GONE
+            addClothType.visibility = View.GONE
+            til_Service_area.visibility = View.GONE
+
+            txtDays.visibility = View.VISIBLE
+
+            txt_stadium.visibility = View.VISIBLE
+            rv_stadium.visibility = View.VISIBLE
+            addstadium.visibility = View.VISIBLE
+
+            txt_arena.visibility = View.VISIBLE
+            rv_arena.visibility = View.VISIBLE
+            addarena.visibility = View.VISIBLE
+
+            txt_others.visibility = View.VISIBLE
+            rv_other.visibility = View.VISIBLE
+            addother.visibility = View.VISIBLE
+
+
+        } else if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_CLOTHING) {
+
+            til_storeSubcategory.visibility = View.VISIBLE
+            addClothType.visibility = View.VISIBLE
+            rv_cloths_type.visibility = View.VISIBLE
+            til_Service_area.visibility = View.VISIBLE
+
+            txtDays.visibility = View.GONE
+
+            txt_stadium.visibility = View.GONE
+            rv_stadium.visibility = View.GONE
+            addstadium.visibility = View.GONE
+
+            txt_arena.visibility = View.GONE
+            rv_arena.visibility = View.GONE
+            addarena.visibility = View.GONE
+
+            txt_others.visibility = View.GONE
+            rv_other.visibility = View.GONE
+            addother.visibility = View.GONE
+
+
+        } else if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_CUSTOM) {
+
+            til_storeSubcategory.visibility = View.GONE
+            addClothType.visibility = View.VISIBLE
+            rv_cloths_type.visibility = View.VISIBLE
+            til_Service_area.visibility = View.VISIBLE
+
+            txtDays.visibility = View.GONE
+
+            txt_stadium.visibility = View.GONE
+            rv_stadium.visibility = View.GONE
+            addstadium.visibility = View.GONE
+
+            txt_arena.visibility = View.GONE
+            rv_arena.visibility = View.GONE
+            addarena.visibility = View.GONE
+
+            txt_others.visibility = View.GONE
+            rv_other.visibility = View.GONE
+            addother.visibility = View.GONE
         }
     }
+
 
     var datetime: String? = null
     var TAG: String = VendorStoreTwoFragment::class.java.simpleName
     var vendorStoreRequest = VendorStoreServiceRequest()
 
     var stadiumList: ArrayList<StoreItemLocationModel> = ArrayList()
-    var storeClothTypeList: ArrayList<StoreItemLocationModel> = ArrayList()
+    var storeClothTypeList: ArrayList<CustomSubCategoryModel> = ArrayList()
     var arenaList: ArrayList<StoreItemLocationModel> = ArrayList()
     var otherList: ArrayList<StoreItemLocationModel> = ArrayList()
 
@@ -83,26 +117,34 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
     var storeAddOtherAdapter: StoreDeliverLocationAdapter? = null
     var manager: RecyclerView.LayoutManager? = null
     var dataId = StringBuilder()
+
+
+    var dateTime: ArrayList<DayAviliability> = java.util.ArrayList()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var mView = inflater.inflate(R.layout.fragment_store_two_vendor, container, false)
+        return mView
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back -> {
                 activity?.onBackPressed()
             }
-            R.id.ed_starttime -> {
-                if (chk_24time.isChecked()) chk_24time.isChecked = false
+            R.id.txtDays -> {
+                var intent = Intent(activity, TimeManagerActivity::class.java)
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots, false)
+                if (vendorStoreRequest.dateTime.size > 0)
+                    intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST, vendorStoreRequest.dateTime)
+                startActivityForResult(intent, TimeManagerActivity.REQUEST_CODE)
 
-                AppUtils.getTimeNew(ed_starttime, activity as AppCompatActivity?)
-
-            }
-            R.id.ed_closingtime -> {
-                if (chk_24time.isChecked()) chk_24time.isChecked = false
-                AppUtils.getTimeNew(ed_closingtime, activity as AppCompatActivity?)
             }
             R.id.btn_next -> {
                 validateField()
             }
 
             R.id.addstadium -> performAddStadium()
+
             R.id.addClothType -> performAddClothsType()
             R.id.addarena -> performAddArena()
             R.id.addother -> performAddOther()
@@ -112,13 +154,19 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
                     (context as VendorStoreActivity).setDisplayDialog(8, AppConstants.FROM_V_TAXI_CITY, "")
                 }
             }
+
+            R.id.ed_storesub -> {
+                if (context is VendorStoreActivity) {
+                    (context as VendorStoreActivity).setDisplayDialog(10, AppConstants.FROM_V_TAXI_CITY, "")
+                }
+            }
             R.id.edtxt_service_area -> {
 
                 edtxt_service_area.requestFocus()
                 if (context is VendorStoreActivity) {
                     if (vendorStoreRequest.business_region_id.regionid != null && !vendorStoreRequest.business_region_id.regionid.equals("")) {
 
-                        AppLog.e("@@@",""+vendorStoreRequest.business_region_id.regionid);
+                        AppLog.e("@@@", "" + vendorStoreRequest.business_region_id.regionid);
 
                         (context as VendorStoreActivity).setDisplayDialog(9, AppConstants.FROM_V_TAXI_CITY, "" + vendorStoreRequest.business_region_id.regionid)
                     } else {
@@ -143,10 +191,6 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var mView = inflater.inflate(R.layout.fragment_store_two_vendor, container, false)
-        return mView
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -158,18 +202,11 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
     fun initView(view: View) {
         btn_next.setOnClickListener(this)
         ed_store.setOnClickListener(this)
+        ed_storesub.setOnClickListener(this)
         edtxt_service_area.setOnClickListener(this)
-        ed_starttime.setOnClickListener(this)
-        ed_closingtime.setOnClickListener(this)
-        chk_alldays.setOnCheckedChangeListener(this)
-        chk_monday.setOnCheckedChangeListener(this)
-        chk_tuesday.setOnCheckedChangeListener(this)
-        chk_wednesday.setOnCheckedChangeListener(this)
-        chk_thursday.setOnCheckedChangeListener(this)
-        chk_friday.setOnCheckedChangeListener(this)
-        chk_saturday.setOnCheckedChangeListener(this)
-        chk_sunday.setOnCheckedChangeListener(this)
-        chk_24time.setOnCheckedChangeListener(this)
+        txtDays.setOnClickListener(this)
+
+        ed_store.addTextChangedListener(this)
 
         createAdapterClothsType()
         createAdapterStadium()
@@ -181,73 +218,23 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         addarena.setOnClickListener(this)
         addother.setOnClickListener(this)
         manageFromEdit()
-    }
 
-    fun handleAlldays(isChecked: Boolean) {
-        if (isChecked) {
-            if (chk_monday.isChecked()) chk_monday.isChecked = false
-            if (chk_tuesday.isChecked()) chk_tuesday.isChecked = false
-            if (chk_wednesday.isChecked()) chk_wednesday.isChecked = false
-            if (chk_thursday.isChecked()) chk_thursday.isChecked = false
-            if (chk_friday.isChecked()) chk_friday.isChecked = false
-            if (chk_saturday.isChecked()) chk_saturday.isChecked = false
-            if (chk_sunday.isChecked()) chk_sunday.isChecked = false
-        }
-    }
 
-    fun handleDays(isChecked: Boolean) {
-        if (isChecked) {
-            if (chk_alldays.isChecked()) chk_alldays.isChecked = false
-        }
-    }
-
-    fun handleTime24(isChecked: Boolean) {
-        if (isChecked) {
-            ed_starttime.setText("")
-            ed_closingtime.setText("")
-        }
     }
 
     private fun putAllDataToFieldMap() {
-        vendorStoreRequest.all_day = AppUtils.getStatusString(chk_alldays.isChecked)
-        vendorStoreRequest.mon = AppUtils.getStatusString(chk_monday.isChecked)
-        vendorStoreRequest.tue = AppUtils.getStatusString(chk_tuesday.isChecked)
-        vendorStoreRequest.wed = AppUtils.getStatusString(chk_wednesday.isChecked)
-        vendorStoreRequest.thu = AppUtils.getStatusString(chk_thursday.isChecked)
-        vendorStoreRequest.fri = AppUtils.getStatusString(chk_friday.isChecked)
-        vendorStoreRequest.sat = AppUtils.getStatusString(chk_saturday.isChecked)
-        vendorStoreRequest.sun = AppUtils.getStatusString(chk_sunday.isChecked)
-        vendorStoreRequest.is_24_hours_open = AppUtils.getStatusString(chk_24time.isChecked)
-        vendorStoreRequest.start_time = ed_starttime.text.toString()
-        vendorStoreRequest.close_time = ed_closingtime.text.toString()
         vendorStoreRequest.description = ed_desc.text.toString()
         vendorStoreRequest.stadium_address = stadiumList
         vendorStoreRequest.arena_address = arenaList
         vendorStoreRequest.other_address = otherList
+//        vendorStoreRequest.store_customSubCategory = storeClothTypeList
     }
 
     private fun getfilledData() {
         try {
             if (vendorStoreRequest != null) {
                 ed_store.setText(vendorStoreRequest.storecategory)
-                if (AppUtils.getStatusBoolean(vendorStoreRequest.all_day)) {
-                    chk_alldays.isChecked = true
-                } else {
-                    chk_monday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.mon)
-                    chk_tuesday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.tue)
-                    chk_wednesday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.wed)
-                    chk_thursday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.thu)
-                    chk_friday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.fri)
-                    chk_saturday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.sat)
-                    chk_sunday.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.sun)
-                }
 
-                if (AppUtils.getStatusBoolean(vendorStoreRequest.is_24_hours_open)) {
-                    chk_24time.isChecked = AppUtils.getStatusBoolean(vendorStoreRequest.is_24_hours_open)
-                } else {
-                    ed_starttime.setText(vendorStoreRequest.start_time)
-                    ed_closingtime.setText(vendorStoreRequest.close_time)
-                }
                 ed_desc.setText(vendorStoreRequest.description)
 
                 if (vendorStoreRequest.stadium_address.size > 0)
@@ -283,20 +270,13 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
             UiValidator.disableValidationError(til_storecategory)
         }
 
-        if (!(chk_alldays.isChecked || chk_monday.isChecked || chk_tuesday.isChecked || chk_wednesday.isChecked || chk_thursday.isChecked || chk_friday.isChecked || chk_saturday.isChecked || chk_sunday.isChecked)) {
-            UiValidator.displayMsgSnack(nest, activity, getString(R.string.select_days_of_service))
-            return
-        }
-        if (!(chk_24time.isChecked || (!ed_starttime.text.toString().isEmpty() && !ed_closingtime.text.toString().isEmpty()))) {
-            UiValidator.displayMsgSnack(nest, activity, getString(R.string.bussines_hours))
-            return
-        }
-        if (!chk_24time.isChecked) {
-            if (!AppUtill.compareTime(ed_starttime.text.toString(), ed_closingtime.text.toString())) {
-                UiValidator.displayMsgSnack(nest, activity, getString(R.string.choose_valid_time_slot))
+        if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+            if (!isValidTimeSlots()) {
+                UiValidator.displayMsg(context, "Please enter a valid time slots")
                 return
             }
         }
+
         if (ed_desc.getText().toString().isEmpty()) {
             UiValidator.setValidationError(til_desc, getString(R.string.field_required))
             return
@@ -304,10 +284,15 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         if (til_desc.isErrorEnabled()) {
             UiValidator.disableValidationError(til_desc)
         }
+        if ((vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_CLOTHING) || (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_CUSTOM)) {
+            getListCustomField()
+        }
 
-        getListStadium()
-        getListArena()
-        getListOther()
+        if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+            getListStadium()
+            getListArena()
+            getListOther()
+        }
 
         UiValidator.hideSoftKeyboard(context as AppCompatActivity)
         if (activity is VendorStoreActivity) {
@@ -319,6 +304,20 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
             }
         }
     }
+
+
+    fun getListCustomField() {
+        var customFiled = ArrayList<String>()
+        for (i in 0 until storeClothTypeList.size) {
+            if (!storeClothTypeList.get(i).name.equals("")) {
+                customFiled.add(storeClothTypeList.get(i).name!!)
+            }
+        }
+        vendorStoreRequest?.store_customSubCategory?.clear()
+        vendorStoreRequest?.store_customSubCategory?.addAll(customFiled)
+        AppLog.e(TAG, storeClothTypeList.toString() + "----" + customFiled.toString() + "---" + vendorStoreRequest?.store_customSubCategory.toString())
+    }
+
 
     fun getListStadium() {
         var storelistnew = ArrayList<StoreItemLocationModel>()
@@ -373,14 +372,105 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
             }
         }
 
-
+        vendorStoreRequest.service_region_ids = filledList
         edtxt_service_area.setText(data.toString())
     }
+
+
+    fun updateClothing(bean: ArrayList<ClothingCategoryModel>) {
+        val data = StringBuilder()
+
+        val filledList: ArrayList<ClothingCategoryModel> = ArrayList()
+        var subcatId: ArrayList<Int> = ArrayList()
+
+        for (temp in bean) {
+            if (temp.isSelected!!) {
+                filledList.add(temp)
+                if (data.length > 0) {
+                    data.append(", ")
+
+                }
+                data.append(temp.name)
+                subcatId.add(temp.id!!.toInt())
+            }
+        }
+        vendorStoreRequest.store_subcategory_ids = subcatId
+        vendorStoreRequest.store_subcategory = filledList
+
+        ed_storesub.setText(data.toString())
+    }
+
     fun updateSelectedServiceArea(bean: StoreCategoryModel) {
         if (bean != null) {
             vendorStoreRequest.store_category_id = bean.id
             vendorStoreRequest.storecategory = bean.category_name
             ed_store.setText(bean.category_name)
+
+
+            if (bean.id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+
+                til_storeSubcategory.visibility = View.GONE
+                addClothType.visibility = View.GONE
+                til_Service_area.visibility = View.GONE
+
+                txtDays.visibility = View.VISIBLE
+
+                txt_stadium.visibility = View.VISIBLE
+                rv_stadium.visibility = View.VISIBLE
+                addstadium.visibility = View.VISIBLE
+
+                txt_arena.visibility = View.VISIBLE
+                rv_arena.visibility = View.VISIBLE
+                addarena.visibility = View.VISIBLE
+
+                txt_others.visibility = View.VISIBLE
+                rv_other.visibility = View.VISIBLE
+                addother.visibility = View.VISIBLE
+
+
+            } else if (bean.id == AppConstants.STORE_CAT_CLOTHING) {
+
+                til_storeSubcategory.visibility = View.VISIBLE
+                addClothType.visibility = View.VISIBLE
+                rv_cloths_type.visibility = View.VISIBLE
+                til_Service_area.visibility = View.VISIBLE
+
+                txtDays.visibility = View.GONE
+
+                txt_stadium.visibility = View.GONE
+                rv_stadium.visibility = View.GONE
+                addstadium.visibility = View.GONE
+
+                txt_arena.visibility = View.GONE
+                rv_arena.visibility = View.GONE
+                addarena.visibility = View.GONE
+
+                txt_others.visibility = View.GONE
+                rv_other.visibility = View.GONE
+                addother.visibility = View.GONE
+
+
+            } else if (bean.id == AppConstants.STORE_CAT_CUSTOM) {
+
+                til_storeSubcategory.visibility = View.GONE
+                addClothType.visibility = View.VISIBLE
+                rv_cloths_type.visibility = View.VISIBLE
+                til_Service_area.visibility = View.VISIBLE
+
+                txtDays.visibility = View.GONE
+
+                txt_stadium.visibility = View.GONE
+                rv_stadium.visibility = View.GONE
+                addstadium.visibility = View.GONE
+
+                txt_arena.visibility = View.GONE
+                rv_arena.visibility = View.GONE
+                addarena.visibility = View.GONE
+
+                txt_others.visibility = View.GONE
+                rv_other.visibility = View.GONE
+                addother.visibility = View.GONE
+            }
         }
     }
 
@@ -422,7 +512,7 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
     }
 
     fun performAddClothsType() {
-        storeClothTypeList.add(StoreItemLocationModel())
+        storeClothTypeList.add(CustomSubCategoryModel())
         storecClothTypeAdapter?.notifyItemInserted(storeClothTypeList.size - 1)
         rv_cloths_type.invalidate()
         AppLog.e(TAG + "RECYCLERVIEW CHILD COUNT ", storeClothTypeList.toString())
@@ -447,5 +537,24 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, CompoundButton.
         storeAddOtherAdapter?.notifyItemInserted(otherList.size - 1)
         rv_arena.invalidate()
         AppLog.e(TAG + "RECYCLERVIEW CHILD COUNT ", otherList.toString())
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == TimeManagerActivity.REQUEST_CODE && resultCode == TimeManagerActivity.RESULT_CODE) {
+            dateTime = data?.getSerializableExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST) as ArrayList<DayAviliability>
+            vendorStoreRequest.dateTime = dateTime
+            vendorStoreRequest.all_day = data?.getIntExtra(TimeManagerActivity.KEY_ALL_DAY_SAME, 0).toString()
+        }
+
+    }
+
+    private fun isValidTimeSlots(): Boolean {
+        for (i in 0..vendorStoreRequest.dateTime.size) {
+            if (vendorStoreRequest.dateTime[i].isSeleted && vendorStoreRequest.dateTime[i].slots.size > 0)
+                if (vendorStoreRequest.dateTime[i].slots[0].startTime.length > 0 && vendorStoreRequest.dateTime[i].slots[0].stopTime.length > 0)
+                    return true
+        }
+        return false
     }
 }

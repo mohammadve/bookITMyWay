@@ -170,80 +170,80 @@ class VendorStoreOneFragment : Fragment(), View.OnClickListener, ViewPagerItemCl
 
     fun validateField() {
 
-        if (ed_bname.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_in_empty_username_text))
-            return
-        }
-        if (!UiValidator.isValidUserName(ed_bname.getText().toString())) {
-            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_up_invalid_username))
-            return
-        }
-        if (til_bname.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bname)
-        }
-
-        if (ed_bcontact.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bcontact, getString(R.string.rgs_sign_in_empty_mobile_text))
-            return
-        }
-        if (!UiValidator.isValidPhoneNumber(ed_bcontact.getText().toString())) {
-            UiValidator.setValidationError(til_bcontact, getString(R.string.rgs_sign_up_invalid_mobileno))
-            return
-        }
-        if (til_bcontact.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bcontact)
-        }
-
-        if (ed_email.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bemail, getString(R.string.rgs_sign_up_empty_email))
-            return
-        }
-        if (!UiValidator.isValidEmail(ed_email.getText().toString())) {
-            UiValidator.setValidationError(til_bemail, getString(R.string.rgs_sign_up_invalid_email))
-            return
-        }
-        if (til_bemail.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bemail)
-        }
-
-
-        if (ed_bname.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_in_empty_username_text))
-            return
-        }
-        if (!UiValidator.isValidUserName(ed_bname.getText().toString())) {
-            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_up_invalid_username))
-            return
-        }
-        if (til_bname.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bname)
-        }
-        if (ed_region.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bregion, getString(R.string.field_required))
-            return
-        }
-
-        if (til_bregion.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bregion)
-        }
-        if (ed_city.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_bcity, getString(R.string.field_required))
-            return
-        }
-
-        if (til_bcity.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_bcity)
-        }
-
-
-        if (ed_address.getText().toString().isEmpty()) {
-            UiValidator.setValidationError(til_badd, getString(R.string.field_required))
-            return
-        }
-
-        if (til_badd.isErrorEnabled()) {
-            UiValidator.disableValidationError(til_badd)
-        }
+//        if (ed_bname.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_in_empty_username_text))
+//            return
+//        }
+//        if (!UiValidator.isValidUserName(ed_bname.getText().toString())) {
+//            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_up_invalid_username))
+//            return
+//        }
+//        if (til_bname.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bname)
+//        }
+//
+//        if (ed_bcontact.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bcontact, getString(R.string.rgs_sign_in_empty_mobile_text))
+//            return
+//        }
+//        if (!UiValidator.isValidPhoneNumber(ed_bcontact.getText().toString())) {
+//            UiValidator.setValidationError(til_bcontact, getString(R.string.rgs_sign_up_invalid_mobileno))
+//            return
+//        }
+//        if (til_bcontact.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bcontact)
+//        }
+//
+//        if (ed_email.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bemail, getString(R.string.rgs_sign_up_empty_email))
+//            return
+//        }
+//        if (!UiValidator.isValidEmail(ed_email.getText().toString())) {
+//            UiValidator.setValidationError(til_bemail, getString(R.string.rgs_sign_up_invalid_email))
+//            return
+//        }
+//        if (til_bemail.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bemail)
+//        }
+//
+//
+//        if (ed_bname.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_in_empty_username_text))
+//            return
+//        }
+//        if (!UiValidator.isValidUserName(ed_bname.getText().toString())) {
+//            UiValidator.setValidationError(til_bname, getString(R.string.rgs_sign_up_invalid_username))
+//            return
+//        }
+//        if (til_bname.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bname)
+//        }
+//        if (ed_region.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bregion, getString(R.string.field_required))
+//            return
+//        }
+//
+//        if (til_bregion.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bregion)
+//        }
+//        if (ed_city.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_bcity, getString(R.string.field_required))
+//            return
+//        }
+//
+//        if (til_bcity.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_bcity)
+//        }
+//
+//
+//        if (ed_address.getText().toString().isEmpty()) {
+//            UiValidator.setValidationError(til_badd, getString(R.string.field_required))
+//            return
+//        }
+//
+//        if (til_badd.isErrorEnabled()) {
+//            UiValidator.disableValidationError(til_badd)
+//        }
 
         UiValidator.hideSoftKeyboard(context as AppCompatActivity)
         if (activity is VendorStoreActivity) {

@@ -21,6 +21,7 @@ class VendorServiceDetailModel(
         var start_time: String? = null,
         var close_time: String? = null,
         var description: String? = null,
+        var store_subcategory_list: ArrayList<ClothingCategoryModel> = ArrayList(),
 
         var businessData: BusinessDetail = BusinessDetail(),
 
@@ -72,10 +73,11 @@ class VendorServiceDetailModel(
         var thursday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
         var friday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
         var saturday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
-        var sunday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList()
+        var sunday_time: ArrayList<DayAviliability.TimeSlot> = ArrayList(),
+        var dateTime: ArrayList<DayAviliability> = ArrayList()
 
 ) : Serializable {
     override fun toString(): String {
-        return "VendorServiceDetailModel(service_id=$service_id, total_taxi=$total_taxi, avg_seat_per_taxi=$avg_seat_per_taxi, rate_per_km=$rate_per_km, region_ids=$region_ids, all_day=$all_day, monday=$monday, tuesday=$tuesday, wednesday=$wednesday, thursday=$thursday, friday=$friday, saturday=$saturday, sunday=$sunday, is_24_hours_open=$is_24_hours_open, start_time=$start_time, close_time=$close_time, description=$description, businessData=$businessData, time_slot=$time_slot, cost_per_guest=$cost_per_guest, total_table=$total_table, seat_per_table=$seat_per_table, food_menu=$food_menu, drink_menu=$drink_menu, dessert_menu=$dessert_menu, fees_per_visit=$fees_per_visit, visiting_hours_slot=$visiting_hours_slot, service_menu=$service_menu, required_person_per_hr=$required_person_per_hr, business_specialit=$business_specialit, speciality=$speciality, parking_charges=$parking_charges, parking_capacity=$parking_capacity, package_name=$package_name, total_tour_vehicle=$total_tour_vehicle, avg_seat_per_vehicle=$avg_seat_per_vehicle, cost=$cost, start_location=$start_location, end_location=$end_location, end_time=$end_time, sight_seens=$sight_seens, store_category_id=$store_category_id, stadium_address=$stadium_address, arena_address=$arena_address, other_address=$other_address, storecategory=$storecategory)"
+        return "VendorServiceDetailModel(service_id=$service_id, total_taxi=$total_taxi, avg_seat_per_taxi=$avg_seat_per_taxi, rate_per_km=$rate_per_km, region_ids=$region_ids, all_day=$all_day, monday=$monday, tuesday=$tuesday, wednesday=$wednesday, thursday=$thursday, friday=$friday, saturday=$saturday, sunday=$sunday, is_24_hours_open=$is_24_hours_open, start_time=$start_time, close_time=$close_time, description=$description, store_subcategory_list=$store_subcategory_list, businessData=$businessData, time_slot=$time_slot, cost_per_guest=$cost_per_guest, total_table=$total_table, seat_per_table=$seat_per_table, food_menu=$food_menu, drink_menu=$drink_menu, dessert_menu=$dessert_menu, appetizers_menu=$appetizers_menu, fees_per_visit=$fees_per_visit, visiting_hours_slot=$visiting_hours_slot, service_menu=$service_menu, required_person_per_hr=$required_person_per_hr, business_specialit=$business_specialit, speciality=$speciality, parking_charges=$parking_charges, parking_capacity=$parking_capacity, package_name=$package_name, total_tour_vehicle=$total_tour_vehicle, avg_seat_per_vehicle=$avg_seat_per_vehicle, cost=$cost, start_location=$start_location, end_location=$end_location, end_time=$end_time, sight_seens=$sight_seens, store_category_id=$store_category_id, stadium_address=$stadium_address, arena_address=$arena_address, other_address=$other_address, storecategory=$storecategory, monday_time=$monday_time, tuesday_time=$tuesday_time, wednesday_time=$wednesday_time, thursday_time=$thursday_time, friday_time=$friday_time, saturday_time=$saturday_time, sunday_time=$sunday_time, dateTime=$dateTime)"
     }
 }

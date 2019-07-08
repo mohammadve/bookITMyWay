@@ -86,7 +86,7 @@ class VendorAppointTwoFragment : Fragment(), View.OnClickListener, CompoundButto
             }
             R.id.txtDays -> {
                 var intent = Intent(activity, TimeManagerActivity::class.java)
-                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots, false)
+                intent.putExtra(TimeManagerActivity.KEY_Multi_Slots, true)
                 if (activity is VendorDoctorActivity) {
                     if (venAppointDoctoreServiceRequest.dateTime.size > 0)
                         intent.putExtra(TimeManagerActivity.KEY_TIME_SLOTS_LIST, venAppointDoctoreServiceRequest.dateTime)

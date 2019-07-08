@@ -14,6 +14,7 @@ import com.virtual.customervendor.commonActivity.TermsAndConditionActivityVendor
 import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.DayAviliability
 import com.virtual.customervendor.model.request.VendorRestaurantServiceModel
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
@@ -60,6 +61,11 @@ class VendorRestaurantReviewFragment : Fragment(), View.OnClickListener, ViewPag
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var mView = inflater.inflate(R.layout.fragment_restaurant_review_vendor, container, false)
+        return mView
+    }
+
     companion object {
         fun newInstance(from: String): VendorRestaurantReviewFragment {
             val args = Bundle()
@@ -99,37 +105,63 @@ class VendorRestaurantReviewFragment : Fragment(), View.OnClickListener, ViewPag
             ed_tax.setText(vendorRestaurantServiceModel.business_tax)
         }
 
-        if (AppUtils.getStatusBoolean(vendorRestaurantServiceModel.all_day)) {
-            chk_alldays.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.all_day)
-            cons_day.visibility = View.GONE
-        } else {
-            chk_alldays.visibility = View.GONE
-            chk_monday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.mon)
-            chk_tuesday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.tue)
-            chk_wednesday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.wed)
-            chk_thursday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.thu)
-            chk_friday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.fri)
-            chk_saturday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.sat)
-            chk_sunday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.sun)
-        }
-
-        if (AppUtils.getStatusBoolean(vendorRestaurantServiceModel.is_24_hours_open)) {
-            ed_starttime.visibility = View.GONE
-            ed_closingtime.visibility = View.GONE
-            txt_starttime.visibility = View.GONE
-            txt_closingtime.visibility = View.GONE
-            chk_24time.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.is_24_hours_open)
-        } else {
-            chk_24time.visibility = View.GONE
-            ed_starttime.setText(vendorRestaurantServiceModel.start_time)
-            ed_closingtime.setText(vendorRestaurantServiceModel.close_time)
-        }
+//        if (AppUtils.getStatusBoolean(vendorRestaurantServiceModel.all_day)) {
+//            chk_alldays.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.all_day)
+//            cons_day.visibility = View.GONE
+//        } else {
+//            chk_alldays.visibility = View.GONE
+//            chk_monday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.mon)
+//            chk_tuesday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.tue)
+//            chk_wednesday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.wed)
+//            chk_thursday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.thu)
+//            chk_friday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.fri)
+//            chk_saturday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.sat)
+//            chk_sunday.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.sun)
+//        }
+//
+//        if (AppUtils.getStatusBoolean(vendorRestaurantServiceModel.is_24_hours_open)) {
+//            ed_starttime.visibility = View.GONE
+//            ed_closingtime.visibility = View.GONE
+//            txt_starttime.visibility = View.GONE
+//            txt_closingtime.visibility = View.GONE
+//            chk_24time.isChecked = AppUtils.getStatusBoolean(vendorRestaurantServiceModel.is_24_hours_open)
+//        } else {
+//            chk_24time.visibility = View.GONE
+//            ed_starttime.setText(vendorRestaurantServiceModel.start_time)
+//            ed_closingtime.setText(vendorRestaurantServiceModel.close_time)
+//        }
 
         ed_desc.setText(vendorRestaurantServiceModel.description)
+
+        txtSlotsMon.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(0).slots))
+        txtSlotsTue.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(1).slots))
+        txtSlotsWed.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(2).slots))
+        txtSlotsThu.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(3).slots))
+        txtSlotsFri.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(4).slots))
+        txtSlotsSat.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(5).slots))
+        txtSlotsSun.setText(getSlots(vendorRestaurantServiceModel.dateTime.get(6).slots))
 
         initViewPager((activity as VendorRestaurantActivity).mResults, false)
 
     }
+
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
+
 
     private fun initViewPager(mResults: ArrayList<BusinessImage>, fromEdit: Boolean) {
         SCREEN_COUNT = mResults.size
@@ -138,10 +170,7 @@ class VendorRestaurantReviewFragment : Fragment(), View.OnClickListener, ViewPag
         AppUtill.handlePager(activity!!, mResults.size, layoutDots, viewPager)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var mView = inflater.inflate(R.layout.fragment_restaurant_review_vendor, container, false)
-        return mView
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

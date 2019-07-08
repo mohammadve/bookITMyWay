@@ -2,7 +2,7 @@ package com.virtual.customervendor.utills
 
 class AppConstants {
     companion object {
-        //        val API_KEY = "AIzaSyDisTDVD5jBscXH2ik7ArdjGxFUcy49iR4"//Sumit Test
+
         val API_KEY = "AIzaSyDCf4z9jqOn5HJfDK14Esb2yTbcqT_wGDo"
         val FROM_FORGOT = "from forgot"
         val OFFER_DATA = "offer data"
@@ -75,8 +75,9 @@ class AppConstants {
         const val VENDOR_EVENT_LISTING = "business-events-list"
         const val VENDOR_UPDATE_BUSINESS_DETAIL = "update-business-detail"
         const val VENDOR_ADD_UPDATE_EVENT = "add-vendor-event"
-        const val VENDOR_STORE_SERVICE_REQUEST = "vendor-store-service-request"
+
         const val VENDOR_STORE_CATEGORY = "get_store_categories"
+        const val VENDOR_STORE_CLOTH_CAT = "cloth-category-list"
         const val VENDOR_DELETE_EVENT = "delete-event-request"
         const val VENDOR_DELETE_SIGHTSEEN = "delete-sightseen-service"
         const val VENDOR_STORE_ITEM_LISTING = "store-item-list"
@@ -92,6 +93,7 @@ class AppConstants {
         const val VENDOR_ADD_UPDATE_SIGHTSEEN = "add-sightseen-service"
 
         const val UPDATE_USER_IMAGE_URL = "upload_avatar"
+        const val VENDOR_STORE_SERVICE_REQUEST = "vendor-store-service-request"
 
         const val EDIT_USER_IMAGE_URL = "upload_avatar_profile"
         const val UPDATE_BUSSINESS_IMAGE_URL = "upload_business_image"
@@ -191,6 +193,8 @@ class AppConstants {
         const val NOTIFICATION_DATA = "notification_data"
 
         const val STORE_CAT_SEAT_SERVICE = "1"
+        const val STORE_CAT_CLOTHING = "2"
+        const val STORE_CAT_CUSTOM = "3"
 
         const val STATUS_I_AM_ARRIVED = "1"
         const val STATUS_I_AM_HERE = "2"

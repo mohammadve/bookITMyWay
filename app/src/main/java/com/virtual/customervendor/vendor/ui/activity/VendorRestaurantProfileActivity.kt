@@ -21,6 +21,7 @@ import com.virtual.customervendor.managers.CachingManager
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.BusinessDetail
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.DayAviliability
 import com.virtual.customervendor.model.VendorServiceDetailModel
 import com.virtual.customervendor.model.request.VendorRestaurantServiceModel
 import com.virtual.customervendor.model.response.VendorServiceDetailResponse
@@ -132,43 +133,88 @@ class VendorRestaurantProfileActivity : BaseActivity(), View.OnClickListener, Vi
 
         ed_slot.setText(restaurantServiceModel.time_slot)
 
-        var time = StringBuilder()
-        if (AppUtils.getStatusBoolean(restaurantServiceModel.all_day)) {
-            time.append(resources.getString(R.string.all_days))
-        } else {
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.mon)) {
-                time.append(resources.getString(R.string.monday_m))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.tue)) {
-                time.append(", " + resources.getString(R.string.tuesday_t))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.wed)) {
-                time.append(", " + resources.getString(R.string.wednesday_w))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.thu)) {
-                time.append(", " + resources.getString(R.string.thursday_t))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.fri)) {
-                time.append(", " + resources.getString(R.string.friday_f))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.sat)) {
-                time.append(", " + resources.getString(R.string.saturday_s))
-            }
-            if (AppUtils.getStatusBoolean(restaurantServiceModel.sun)) {
-                time.append(", " + resources.getString(R.string.sunday_t))
-            }
-        }
+//        var time = StringBuilder()
+//        if (AppUtils.getStatusBoolean(restaurantServiceModel.all_day)) {
+//            time.append(resources.getString(R.string.all_days))
+//        } else {
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.mon)) {
+//                time.append(resources.getString(R.string.monday_m))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.tue)) {
+//                time.append(", " + resources.getString(R.string.tuesday_t))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.wed)) {
+//                time.append(", " + resources.getString(R.string.wednesday_w))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.thu)) {
+//                time.append(", " + resources.getString(R.string.thursday_t))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.fri)) {
+//                time.append(", " + resources.getString(R.string.friday_f))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.sat)) {
+//                time.append(", " + resources.getString(R.string.saturday_s))
+//            }
+//            if (AppUtils.getStatusBoolean(restaurantServiceModel.sun)) {
+//                time.append(", " + resources.getString(R.string.sunday_t))
+//            }
+//        }
 
-        ed_day.setText(time)
-        if (AppUtils.getStatusBoolean(restaurantServiceModel.is_24_hours_open)) {
-            ed_sertime.setText(resources.getString(R.string._24_hrs))
-        } else {
-            ed_sertime.setText(restaurantServiceModel.start_time + " - " + restaurantServiceModel.close_time)
-        }
+//        ed_day.setText(time)
+//        if (AppUtils.getStatusBoolean(restaurantServiceModel.is_24_hours_open)) {
+//            ed_sertime.setText(resources.getString(R.string._24_hrs))
+//        } else {
+//            ed_sertime.setText(restaurantServiceModel.start_time + " - " + restaurantServiceModel.close_time)
+//        }
         ed_desc.setText(restaurantServiceModel.description)
+
+
+        setDaySlots(restaurantServiceModel)
     }
 
+    fun setDaySlots(taxi_Service_Request: VendorRestaurantServiceModel){
+        var isAllDay: Boolean=AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+        if(taxi_Service_Request.dateTime.size==0){
+//            if(taxi_Service_Request.monday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.mon) ,taxi_Service_Request.monday_time))
+//            if(taxi_Service_Request.tuesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tue) ,taxi_Service_Request.tuesday_time))
+//            if(taxi_Service_Request.wednesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wed) ,taxi_Service_Request.wednesday_time))
+//            if(taxi_Service_Request.thursday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thu) ,taxi_Service_Request.thursday_time))
+//            if(taxi_Service_Request.friday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.fri) ,taxi_Service_Request.friday_time))
+//            if(taxi_Service_Request.saturday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sat) ,taxi_Service_Request.saturday_time))
+//            if(taxi_Service_Request.sunday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sun) ,taxi_Service_Request.sunday_time))
+        }
+        txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
+        txtSlotsTue.setText(getSlots(taxi_Service_Request.tuesday_time))
+        txtSlotsWed.setText(getSlots(taxi_Service_Request.wednesday_time))
+        txtSlotsThu.setText(getSlots(taxi_Service_Request.thursday_time))
+        txtSlotsFri.setText(getSlots(taxi_Service_Request.friday_time))
+        txtSlotsSat.setText(getSlots(taxi_Service_Request.saturday_time))
+        txtSlotsSun.setText(getSlots(taxi_Service_Request.sunday_time))
+    }
 
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
+                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+        }
+        var str:String=builder.toString()
+
+        if(str.equals(""))
+            str="none"
+        else
+            str=str.substring(0,str.length-1)
+
+        return str
+    }
     private fun initViewPager(categories: ArrayList<BusinessImage>) {
         SCREEN_COUNT = categories.size
         homeSliderAdapter = HomeSliderAdapter(this@VendorRestaurantProfileActivity, categories, this, false)
@@ -315,15 +361,24 @@ class VendorRestaurantProfileActivity : BaseActivity(), View.OnClickListener, Vi
         restaurantInfo.thu = detailModel.thursday
         restaurantInfo.fri = detailModel.friday
         restaurantInfo.sat = detailModel.saturday
-        restaurantInfo.is_24_hours_open = detailModel.is_24_hours_open
+//        restaurantInfo.is_24_hours_open = detailModel.is_24_hours_open
         restaurantInfo.cost_per_guest = detailModel.cost_per_guest
         restaurantInfo.time_slot = detailModel.time_slot
-        restaurantInfo.start_time = detailModel.start_time
-        restaurantInfo.close_time = detailModel.close_time
+//        restaurantInfo.start_time = detailModel.start_time
+//        restaurantInfo.close_time = detailModel.close_time
         restaurantInfo.food_menu = detailModel.food_menu
         restaurantInfo.drink_menu = detailModel.drink_menu
         restaurantInfo.dessert_menu = detailModel.dessert_menu
         restaurantInfo.description = detailModel.description
+
+
+        restaurantInfo.monday_time.addAll(detailModel.monday_time)
+        restaurantInfo.tuesday_time.addAll(detailModel.tuesday_time)
+        restaurantInfo.wednesday_time.addAll(detailModel.wednesday_time)
+        restaurantInfo.thursday_time.addAll(detailModel.thursday_time)
+        restaurantInfo.friday_time.addAll(detailModel.friday_time)
+        restaurantInfo.saturday_time.addAll(detailModel.saturday_time)
+        restaurantInfo.sunday_time.addAll(detailModel.sunday_time)
 
         if (detailModel.businessData != null) {
             restaurantInfo.business_id = detailModel.businessData.business_id

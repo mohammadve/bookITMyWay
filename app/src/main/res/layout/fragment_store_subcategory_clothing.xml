@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5">
+
+
+
+
+    <com.virtual.customervendor.customview.CustomTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subcategory Name"
+        android:padding="@dimen/dp_5"
+        android:textColor="@color/text1_color_101010"
+        android:textSize="@dimen/sp_16"
+        app:customFont="@string/fontRegular"
+       />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

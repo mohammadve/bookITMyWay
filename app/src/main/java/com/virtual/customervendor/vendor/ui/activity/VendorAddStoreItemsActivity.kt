@@ -41,6 +41,7 @@ class VendorAddStoreItemsActivity : BaseActivity(), View.OnClickListener, ViewPa
     var toolbar: AppBarLayout? = null
     var mTitle: TextView? = null
     var apiInterface: ApiInterface? = null
+
     val REQUEST_CODE = 123
     var mResults = ArrayList<String>()
     var imageFiles = ArrayList<File>()

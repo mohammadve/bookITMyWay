@@ -21,15 +21,13 @@ import com.virtual.customervendor.customer.ui.ViewPagerItemClicked
 import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.managers.CachingManager
 import com.virtual.customervendor.managers.SharedPreferenceManager
-import com.virtual.customervendor.model.BusinessDetail
-import com.virtual.customervendor.model.BusinessImage
-import com.virtual.customervendor.model.StoreItemLocationModel
-import com.virtual.customervendor.model.VendorServiceDetailModel
+import com.virtual.customervendor.model.*
 import com.virtual.customervendor.model.request.VendorStoreServiceRequest
 import com.virtual.customervendor.model.response.VendorServiceDetailResponse
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.*
+import com.virtual.customervendor.vendor.ui.adapter.StoreClothSubCategoryAdapter
 import com.virtual.customervendor.vendor.ui.adapter.StoreDeliverLocationReviewAdapter
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -56,10 +54,12 @@ class VendorStoreProfileEditActivity : BaseActivity(), View.OnClickListener, Vie
     var stadiumList: ArrayList<StoreItemLocationModel> = ArrayList()
     var arenaList: ArrayList<StoreItemLocationModel> = ArrayList()
     var otherList: ArrayList<StoreItemLocationModel> = ArrayList()
+    var subcatList: ArrayList<ClothingCategoryModel> = ArrayList()
 
     var storeAddStadiumAdapter: StoreDeliverLocationReviewAdapter? = null
     var storeAddArenaAdapter: StoreDeliverLocationReviewAdapter? = null
     var storeAddOtherAdapter: StoreDeliverLocationReviewAdapter? = null
+    var storeSubCatAdapter: StoreClothSubCategoryAdapter? = null
 
     var manager: RecyclerView.LayoutManager? = null
 
@@ -138,73 +138,134 @@ class VendorStoreProfileEditActivity : BaseActivity(), View.OnClickListener, Vie
 
     fun setRestaurantData(healthServiceRequest: VendorStoreServiceRequest) {
         ed_bname.setText(healthServiceRequest.business_name)
-        ed_bcontact.setText(resources.getString(R.string.plus)+healthServiceRequest.dial_code + " " + healthServiceRequest.business_contactno)
+        ed_bcontact.setText(resources.getString(R.string.plus) + healthServiceRequest.dial_code + " " + healthServiceRequest.business_contactno)
         ed_email.setText(healthServiceRequest.business_email)
-
         ed_tax.setText(healthServiceRequest.business_tax)
-
-        var time = StringBuilder()
-        if (AppUtils.getStatusBoolean(healthServiceRequest.all_day)) {
-            time.append(resources.getString(R.string.all_days))
-        } else {
-            if (AppUtils.getStatusBoolean(healthServiceRequest.mon)) time.append(resources.getString(R.string.monday_m))
-
-            if (AppUtils.getStatusBoolean(healthServiceRequest.tue)) {
-                time.append(", " + resources.getString(R.string.tuesday_t))
-            }
-            if (AppUtils.getStatusBoolean(healthServiceRequest.wed)) {
-                time.append(", " + resources.getString(R.string.wednesday_w))
-            }
-            if (AppUtils.getStatusBoolean(healthServiceRequest.thu)) {
-                time.append(", " + resources.getString(R.string.thursday_t))
-            }
-            if (AppUtils.getStatusBoolean(healthServiceRequest.fri)) {
-                time.append(", " + resources.getString(R.string.friday_f))
-            }
-            if (AppUtils.getStatusBoolean(healthServiceRequest.sat)) {
-                time.append(", " + resources.getString(R.string.saturday_s))
-            }
-            if (AppUtils.getStatusBoolean(healthServiceRequest.sun)) {
-                time.append(", " + resources.getString(R.string.sunday_t))
-            }
-        }
-        ed_day.setText(time)
-        if (AppUtils.getStatusBoolean(healthServiceRequest.is_24_hours_open)) {
-            ed_sertime.setText(resources.getString(R.string._24_hrs))
-        } else {
-            ed_sertime.setText(healthServiceRequest.start_time + " - " + healthServiceRequest.close_time)
-        }
-
         ed_region.setText(healthServiceRequest.business_region_id.regionname)
         ed_city.setText(healthServiceRequest.business_city_id.cityname)
         ed_address.setText(healthServiceRequest.business_address)
         ed_desc.setText(healthServiceRequest.description)
 
+        if (healthServiceRequest.store_category_id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+            serday.visibility = View.VISIBLE
+            lytDaySlots.visibility = View.VISIBLE
 
-        if (healthServiceRequest.stadium_address != null && healthServiceRequest.stadium_address.size > 0) {
-            stadiumList = healthServiceRequest.stadium_address
-            txt_stadium.visibility = View.VISIBLE
-            rv_stadium.visibility = View.VISIBLE
-            createAdapterStadium()
-        }
+            setDaySlots(healthServiceRequest)
+            if (healthServiceRequest.stadium_address != null && healthServiceRequest.stadium_address.size > 0) {
+                stadiumList = healthServiceRequest.stadium_address
+                txt_stadium.visibility = View.VISIBLE
+                rv_stadium.visibility = View.VISIBLE
+                createAdapterStadium()
+            }
 
-        if (healthServiceRequest.arena_address != null && healthServiceRequest.arena_address.size > 0) {
-            arenaList = healthServiceRequest.arena_address
-            txt_arena.visibility = View.VISIBLE
-            rv_arena.visibility = View.VISIBLE
-            createAdapterArena()
-        }
+            if (healthServiceRequest.arena_address != null && healthServiceRequest.arena_address.size > 0) {
+                arenaList = healthServiceRequest.arena_address
+                txt_arena.visibility = View.VISIBLE
+                rv_arena.visibility = View.VISIBLE
+                createAdapterArena()
+            }
 
-        if (healthServiceRequest.other_address != null && healthServiceRequest.other_address.size > 0) {
-            otherList = healthServiceRequest.other_address
-            txt_other.visibility = View.VISIBLE
-            rv_other.visibility = View.VISIBLE
-            createAdapterOther()
+            if (healthServiceRequest.other_address != null && healthServiceRequest.other_address.size > 0) {
+                otherList = healthServiceRequest.other_address
+                txt_other.visibility = View.VISIBLE
+                rv_other.visibility = View.VISIBLE
+                createAdapterOther()
+            }
+
+
+        } else if (healthServiceRequest.store_category_id == AppConstants.STORE_CAT_CLOTHING) {
+            serday.visibility = View.GONE
+            lytDaySlots.visibility = View.GONE
+
+            txt_stadium.visibility = View.GONE
+            rv_stadium.visibility = View.GONE
+
+            txt_arena.visibility = View.GONE
+            rv_arena.visibility = View.GONE
+
+            txt_other.visibility = View.GONE
+            rv_other.visibility = View.GONE
+
+            txt_subcat.visibility = View.VISIBLE
+            rv_subcat.visibility = View.VISIBLE
+
+            if(healthServiceRequest.store_subcategory_list != null && healthServiceRequest.store_subcategory_list.size > 0){
+                subcatList = healthServiceRequest.store_subcategory_list
+                txt_subcat.visibility = View.VISIBLE
+                rv_subcat.visibility = View.VISIBLE
+                createAdapterStoreSubCat()
+            }
+        } else if (healthServiceRequest.store_category_id == AppConstants.STORE_CAT_CUSTOM) {
+            serday.visibility = View.GONE
+            lytDaySlots.visibility = View.GONE
+
+            txt_stadium.visibility = View.GONE
+            rv_stadium.visibility = View.GONE
+
+            txt_arena.visibility = View.GONE
+            rv_arena.visibility = View.GONE
+
+            txt_other.visibility = View.GONE
+            rv_other.visibility = View.GONE
+
+            txt_subcat.visibility = View.VISIBLE
+            rv_subcat.visibility = View.VISIBLE
+
+            if(healthServiceRequest.store_subcategory_list != null && healthServiceRequest.store_subcategory_list.size > 0){
+                subcatList = healthServiceRequest.store_subcategory_list
+                txt_subcat.visibility = View.VISIBLE
+                rv_subcat.visibility = View.VISIBLE
+                createAdapterStoreSubCat()
+            }
         }
 
         if (healthServiceRequest.business_images != null && healthServiceRequest.business_images.size > 0) {
             initViewPager(healthServiceRequest.business_images)
         }
+    }
+
+    fun setDaySlots(taxi_Service_Request: VendorStoreServiceRequest) {
+        var isAllDay: Boolean = AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+        if (taxi_Service_Request.dateTime.size == 0) {
+//            if(taxi_Service_Request.monday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Monday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.mon), taxi_Service_Request.monday_time))
+//            if(taxi_Service_Request.tuesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tue), taxi_Service_Request.tuesday_time))
+//            if(taxi_Service_Request.wednesday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wed), taxi_Service_Request.wednesday_time))
+//            if(taxi_Service_Request.thursday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Thursday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thu), taxi_Service_Request.thursday_time))
+//            if(taxi_Service_Request.friday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Friday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.fri), taxi_Service_Request.friday_time))
+//            if(taxi_Service_Request.saturday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Saturday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sat), taxi_Service_Request.saturday_time))
+//            if(taxi_Service_Request.sunday_time.size>0)
+            taxi_Service_Request.dateTime.add(DayAviliability("Sunday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sun), taxi_Service_Request.sunday_time))
+        }
+        txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
+        txtSlotsTue.setText(getSlots(taxi_Service_Request.tuesday_time))
+        txtSlotsWed.setText(getSlots(taxi_Service_Request.wednesday_time))
+        txtSlotsThu.setText(getSlots(taxi_Service_Request.thursday_time))
+        txtSlotsFri.setText(getSlots(taxi_Service_Request.friday_time))
+        txtSlotsSat.setText(getSlots(taxi_Service_Request.saturday_time))
+        txtSlotsSun.setText(getSlots(taxi_Service_Request.sunday_time))
+    }
+
+    private fun getSlots(slots: ArrayList<DayAviliability.TimeSlot>): String {
+        val builder = StringBuilder()
+
+        for (timeSlots in slots) {
+            if (timeSlots.startTime.length > 0 && timeSlots.stopTime.length > 0)
+                builder.append(timeSlots.startTime + " to " + timeSlots.stopTime + "\n")
+        }
+        var str: String = builder.toString()
+
+        if (str.equals(""))
+            str = "none"
+        else
+            str = str.substring(0, str.length - 1)
+
+        return str
     }
 
     private fun createAdapterStadium() {
@@ -226,6 +287,13 @@ class VendorStoreProfileEditActivity : BaseActivity(), View.OnClickListener, Vie
         manager = LinearLayoutManager(this@VendorStoreProfileEditActivity, LinearLayoutManager.VERTICAL, false)
         rv_other.layoutManager = manager
         rv_other.adapter = (storeAddOtherAdapter)
+    }
+
+    private fun createAdapterStoreSubCat() {
+        storeSubCatAdapter = StoreClothSubCategoryAdapter(this@VendorStoreProfileEditActivity,  subcatList)
+        manager = LinearLayoutManager(this@VendorStoreProfileEditActivity, LinearLayoutManager.VERTICAL, false)
+        rv_subcat.layoutManager = manager
+        rv_subcat.adapter = (storeSubCatAdapter)
     }
 
     private fun initViewPager(categories: ArrayList<BusinessImage>) {
@@ -370,6 +438,7 @@ class VendorStoreProfileEditActivity : BaseActivity(), View.OnClickListener, Vie
         }
         parkingRequest.service_id = detailModel.service_id
         parkingRequest.store_category_id = detailModel.store_category_id
+        parkingRequest.store_subcategory_list = detailModel.store_subcategory_list
         parkingRequest.storecategory = detailModel.storecategory
         parkingRequest.description = detailModel.description
         parkingRequest.all_day = detailModel.all_day
@@ -380,12 +449,21 @@ class VendorStoreProfileEditActivity : BaseActivity(), View.OnClickListener, Vie
         parkingRequest.thu = detailModel.thursday
         parkingRequest.fri = detailModel.friday
         parkingRequest.sat = detailModel.saturday
-        parkingRequest.is_24_hours_open = detailModel.is_24_hours_open
+
         parkingRequest.start_time = detailModel.start_time
         parkingRequest.close_time = detailModel.close_time
         parkingRequest.stadium_address = detailModel.stadium_address
         parkingRequest.arena_address = detailModel.arena_address
         parkingRequest.other_address = detailModel.other_address
+
+
+        parkingRequest.monday_time.addAll(detailModel.monday_time)
+        parkingRequest.tuesday_time.addAll(detailModel.tuesday_time)
+        parkingRequest.wednesday_time.addAll(detailModel.wednesday_time)
+        parkingRequest.thursday_time.addAll(detailModel.thursday_time)
+        parkingRequest.friday_time.addAll(detailModel.friday_time)
+        parkingRequest.saturday_time.addAll(detailModel.saturday_time)
+        parkingRequest.sunday_time.addAll(detailModel.sunday_time)
 
         CachingManager.setVendorStoreInfo(parkingRequest)
         setRestaurantData(parkingRequest)

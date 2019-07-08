@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.BaseActivity
+import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.BusinessDetail
 import com.virtual.customervendor.model.ProductCategoryModel
 import com.virtual.customervendor.model.response.ProductCategoryResponse
@@ -44,7 +45,7 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
                 /*
 
 
-                var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
+                var intent: Intent = Intent(this, ClothingCategoryModel::class.java)
                 intent.putExtra(AppKeys.SERVICE_ID, businessDetail.service_id)
                 startActivityForResult(intent, 112)
                 SlideAnimationUtill.slideNextAnimation(this)*/
@@ -98,7 +99,7 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
     fun hitApi() {
         if (AppUtils.isInternetConnected(this)) {
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
-            apiInterface?.getProductCategory()
+            apiInterface?.getProductCategory("Bearer " + SharedPreferenceManager.getAuthToken(),businessDetail.service_id!!)
                     ?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe(object : Observer<ProductCategoryResponse> {

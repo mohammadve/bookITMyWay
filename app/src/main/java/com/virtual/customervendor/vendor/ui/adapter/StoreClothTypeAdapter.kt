@@ -8,15 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.virtual.customervendor.R
+import com.virtual.customervendor.model.ClothingCategoryModel
+import com.virtual.customervendor.model.CustomSubCategoryModel
 import com.virtual.customervendor.model.StoreItemLocationModel
 import com.virtual.customervendor.utills.AppConstants
 import kotlinx.android.synthetic.main.store_cloth_type_single_row.view.*
 import java.util.*
 
 
-class StoreClothTypeAdapter(val mContext: Context, val from: String, val offermodel: ArrayList<StoreItemLocationModel>) : RecyclerView.Adapter<StoreClothTypeAdapter.ResultItemViewHolder>() {
+class StoreClothTypeAdapter(val mContext: Context, val from: String, val offermodel: ArrayList<CustomSubCategoryModel>) : RecyclerView.Adapter<StoreClothTypeAdapter.ResultItemViewHolder>() {
 
-    var lisData: ArrayList<StoreItemLocationModel> = offermodel
+    var lisData: ArrayList<CustomSubCategoryModel> = offermodel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultItemViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.store_cloth_type_single_row, parent, false)
@@ -38,7 +40,7 @@ class StoreClothTypeAdapter(val mContext: Context, val from: String, val offermo
         var datetime: String? = null
 
 
-        fun bind(mContext: Context, from: String, offModel: StoreItemLocationModel) {
+        fun bind(mContext: Context, from: String, offModel: CustomSubCategoryModel) {
             mcontx = mContext
             itemView.ed_itemname.addTextChangedListener(object : TextWatcher {
 
@@ -51,12 +53,12 @@ class StoreClothTypeAdapter(val mContext: Context, val from: String, val offermo
                 override fun onTextChanged(s: CharSequence, start: Int,
                                            before: Int, count: Int) {
                     if (s.length != 0)
-                        offModel.location_name = itemView.ed_itemname.text.toString()
+                        offModel.name = itemView.ed_itemname.text.toString()
                 }
             })
 
 //            itemView.ed_itemname.
-            itemView.ed_itemname.setText(offModel.location_name)
+            itemView.ed_itemname.setText(offModel.name)
             if (from == AppConstants.FROM_REVIEW) {
                 itemView.img_cancel.visibility = View.GONE
                 itemView.ed_itemname.setFocusable(false)

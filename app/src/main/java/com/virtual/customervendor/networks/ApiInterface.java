@@ -23,6 +23,7 @@ import com.virtual.customervendor.model.response.CategoryResponse;
 import com.virtual.customervendor.model.response.CityResponse;
 import com.virtual.customervendor.model.response.ClothColorResponse;
 import com.virtual.customervendor.model.response.ClothSizeResponse;
+import com.virtual.customervendor.model.response.ClothingCategoryResponse;
 import com.virtual.customervendor.model.response.CommonResponse;
 import com.virtual.customervendor.model.response.CountryResponse;
 import com.virtual.customervendor.model.response.CountrycodeResponse;
@@ -47,7 +48,6 @@ import com.virtual.customervendor.model.response.RestaurantMenuListingResponse;
 import com.virtual.customervendor.model.response.SearchResponse;
 import com.virtual.customervendor.model.response.SpecialityResponse;
 import com.virtual.customervendor.model.response.StoreCategoryResponse;
-import com.virtual.customervendor.model.response.StoreClothColorModel;
 import com.virtual.customervendor.model.response.StoreListingResponse;
 import com.virtual.customervendor.model.response.TaxiServiceResponse;
 import com.virtual.customervendor.model.response.UserProfilePicResponse;
@@ -174,9 +174,9 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Observable<CategoryResponse> getCategory();
 
-    @GET(AppConstants.GET_PRODUCT_CATEGORIES)
+    @POST(AppConstants.GET_PRODUCT_CATEGORIES)
     @Headers({"Content-Type: application/json"})
-    Observable<ProductCategoryResponse> getProductCategory();
+    Observable<ProductCategoryResponse> getProductCategory(@Header("Authorization") String auth,  @Query(AppKeys.SERVICE_ID) int service_id);
 
     @POST(AppConstants.GET_CITIES)
     @Headers({"Content-Type: application/json"})
@@ -218,6 +218,10 @@ public interface ApiInterface {
     @GET(AppConstants.VENDOR_STORE_CATEGORY)
     @Headers({"Content-Type: application/json"})
     Observable<StoreCategoryResponse> getStoreCategory();
+
+    @GET(AppConstants.VENDOR_STORE_CLOTH_CAT)
+    @Headers({"Content-Type: application/json"})
+    Observable<ClothingCategoryResponse> getStoreClothSubCategory();
 
     @GET(AppConstants.GET_VENDOR_SERVICE)
     @Headers({"Content-Type: application/json"})

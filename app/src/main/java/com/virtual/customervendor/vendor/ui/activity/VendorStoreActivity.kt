@@ -14,10 +14,7 @@ import android.widget.TextView
 import com.virtual.customer_vendor.utill.UploadBussinessImage
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.BaseActivity
-import com.virtual.customervendor.customer.ui.dialogFragment.CityDialogFragment
-import com.virtual.customervendor.customer.ui.dialogFragment.CityDialogFragmentMulti
-import com.virtual.customervendor.customer.ui.dialogFragment.RegionDialogFragmentSingle
-import com.virtual.customervendor.customer.ui.dialogFragment.StoreListFragment
+import com.virtual.customervendor.customer.ui.dialogFragment.*
 import com.virtual.customervendor.managers.CachingManager
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.*
@@ -40,7 +37,21 @@ import java.io.File
 
 class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFragment.citySelectionInterface,
         RegionDialogFragmentSingle.SingleRegionSelectionInterface,
-        CityDialogFragmentMulti.MultiRegionSelectionInterface, UploadBussinessImage.IBussinessImage1, StoreListFragment.categorySelectionInterface {
+        CityDialogFragmentMulti.MultiRegionSelectionInterface, UploadBussinessImage.IBussinessImage1, StoreListFragment.categorySelectionInterface,
+        ClothingCatFragmentMulti.ClothingSelectionInterface {
+    override fun done(bean: ArrayList<ClothingCategoryModel>) {
+        AppLog.e(TAG, bean.toString())
+        if (storeSubCatListFragment != null) {
+            storeSubCatListFragment!!.dismiss()
+            val fragment = manager!!.findFragmentById(R.id.flContentnew)
+            if (fragment != null && fragment.isVisible) {
+                if (fragment is VendorStoreTwoFragment) fragment.updateClothing(bean)
+            }
+        }
+
+    }
+
+
     override fun done(bean: ArrayList<CityModel>, fromWhere: String?) {
         AppLog.e(TAG, bean.toString())
         if (regionDialogFragmentMulti != null) {
@@ -74,6 +85,7 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
     var cityDialogFragment: CityDialogFragment? = null
     var regionDialogFragmentsingle: RegionDialogFragmentSingle? = null
     var storeListFragment: StoreListFragment? = null
+    var storeSubCatListFragment: ClothingCatFragmentMulti? = null
     var foodList: ArrayList<ItemPriceModel> = ArrayList()
     var vendorstoreRequest = VendorStoreServiceRequest()
     var apiInterface: ApiInterface? = null
@@ -200,6 +212,7 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
             7 -> showRegionSelectionDialogSingle(title)
             8 -> showStoreCategoryList(title)
             9 -> showNationalitySelectionDialogMMutli(region_id)
+            10 -> showStoreSubCategoryList(title)
         }
 
     }
@@ -248,6 +261,13 @@ class VendorStoreActivity : BaseActivity(), View.OnClickListener, CityDialogFrag
         storeListFragment = StoreListFragment.newInstance(from)
         manager = supportFragmentManager
         storeListFragment!!.show(manager, "My Dialog")
+    }
+
+
+    private fun showStoreSubCategoryList(from: String) {
+        storeSubCatListFragment = ClothingCatFragmentMulti.newInstance(from)
+        manager = supportFragmentManager
+        storeSubCatListFragment!!.show(manager, "My Dialog")
     }
 
 
