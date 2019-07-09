@@ -83,6 +83,7 @@ class AppConstants {
         const val VENDOR_DELETE_SIGHTSEEN = "delete-sightseen-service"
         const val VENDOR_STORE_ITEM_LISTING = "store-item-list"
         const val VENDOR_STORE_ADD_EDIT_DELETE = "add-store-item"
+        const val VENDOR_STORE_ADD_EDIT_DELETE_CLOTHS = "add_store_items"
         const val VENDOR_ADD_RESTAURANT_ITEM = "add-restaurant-item"
         const val VENDOR_RESTAURANT_MENU_LISTING = "get-menu-list"
         const val VENDOR_DELETE_RESTAURANT_ITEM = "delete-restaurant-item"

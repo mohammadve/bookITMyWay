@@ -56,14 +56,14 @@ class StoreSelectedSizePArentAdapter(val mContext: AppCompatActivity, val from: 
                 notifyDataSetChanged()
 
             }
-            var storeClothColorQuentityAdapter: StoreClothColorQuentityAdapter? = StoreClothColorQuentityAdapter(mContext, AppConstants.FROM_ADDDATA, offModel.data)
+            var storeClothColorQuentityAdapter: StoreClothColorQuentityAdapter? = StoreClothColorQuentityAdapter(mContext, AppConstants.FROM_ADDDATA, offModel.variants)
             var manager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
             itemView.rv_selected_colors.layoutManager = manager
             itemView.rv_selected_colors.adapter = storeClothColorQuentityAdapter
 //        rv_slected_size.setNestedScrollingEnabled(false)
             itemView.rv_selected_colors.setHasFixedSize(false)
             itemView.rl_color_parent.setOnClickListener {
-                showColorSelectionDialogMMutli(pos, offModel.data)
+                showColorSelectionDialogMMutli(pos, offModel.variants)
             }
 
         }

@@ -89,7 +89,7 @@ public interface ApiInterface {
 
     @POST(AppConstants.CUSTOMER_UPDATE_PROFILE)
     @Headers({"Content-Type: application/json"})
-    Observable<LoginResponse> customerUpdateProfile(@Header("Authorization") String auth,@Query(AppKeys.USER_NAME) String mobile_no);
+    Observable<LoginResponse> customerUpdateProfile(@Header("Authorization") String auth, @Query(AppKeys.USER_NAME) String mobile_no);
 
     @POST(AppConstants.AUTH_FORGOT_URL)
     @Headers({"Content-Type: application/json"})
@@ -147,7 +147,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST(AppConstants.EDIT_USER_IMAGE_URL)
-    Single<UserProfilePicResponse> uploadAvatarAfterLogin(@Header("Authorization") String auth,@Part MultipartBody.Part image);
+    Single<UserProfilePicResponse> uploadAvatarAfterLogin(@Header("Authorization") String auth, @Part MultipartBody.Part image);
 
 
     @Multipart
@@ -176,7 +176,7 @@ public interface ApiInterface {
 
     @POST(AppConstants.GET_PRODUCT_CATEGORIES)
     @Headers({"Content-Type: application/json"})
-    Observable<ProductCategoryResponse> getProductCategory(@Header("Authorization") String auth,  @Query(AppKeys.SERVICE_ID) int service_id);
+    Observable<ProductCategoryResponse> getProductCategory(@Header("Authorization") String auth, @Query(AppKeys.SERVICE_ID) int service_id);
 
     @POST(AppConstants.GET_CITIES)
     @Headers({"Content-Type: application/json"})
@@ -205,7 +205,7 @@ public interface ApiInterface {
 
     @POST(AppConstants.CUSTOMER_INFORM_VENDOR)
     @Headers({"Content-Type: application/json"})
-    Observable<BusinessOrderDetailResponse> customerInformVendor(@Header("Authorization") String auth, @Query(AppKeys.KEY_ORDERID) String orderid,@Query(AppKeys.KEY_ALERT_STATUS) String alert_status);
+    Observable<BusinessOrderDetailResponse> customerInformVendor(@Header("Authorization") String auth, @Query(AppKeys.KEY_ORDERID) String orderid, @Query(AppKeys.KEY_ALERT_STATUS) String alert_status);
 
     @GET(AppConstants.GET_COUNTRY_CODE)
     @Headers({"Content-Type: application/json"})
@@ -261,6 +261,10 @@ public interface ApiInterface {
     @Multipart
     @POST(AppConstants.VENDOR_STORE_ADD_EDIT_DELETE)
     Observable<StoreListingResponse> storeItemAddDeleteEdit(@Header("Authorization") String auth, @PartMap Map<String, RequestBody> map, @Part ArrayList<MultipartBody.Part> image);
+
+    @Multipart
+    @POST(AppConstants.VENDOR_STORE_ADD_EDIT_DELETE_CLOTHS)
+    Observable<String> storeItemAddDeleteEditCloth(@Header("Authorization") String auth, @PartMap Map<String, RequestBody> map, @Part ArrayList<MultipartBody.Part> image);
 
     @Multipart
     @POST(AppConstants.VENDOR_ADD_RESTAURANT_ITEM)
@@ -327,8 +331,8 @@ public interface ApiInterface {
     Observable<CustomerOrderResponse> getBusinessOrderList(@Header("Authorization") String auth, @Query(AppKeys.BUSINESS_ID) String business_id,
                                                            @Query(AppKeys.OFFSET) int offset, @Query(AppKeys.CATEGORY_ID) int ctegoryId,
                                                            @Query(AppKeys.SUBCATEGORY_ID) int subCtegoryId, @Query(AppKeys.ORDER_TYPE) String order_type,
-                                                           @Query(AppKeys.ORDER_KEYWORD) String key,@Query(AppKeys.ORDER_FILTERTYPE) String filtertype,
-                                                           @Query(AppKeys.ORDER_FROM_DATE) String fromdate,@Query(AppKeys.ORDER_TO_DATE) String todate
+                                                           @Query(AppKeys.ORDER_KEYWORD) String key, @Query(AppKeys.ORDER_FILTERTYPE) String filtertype,
+                                                           @Query(AppKeys.ORDER_FROM_DATE) String fromdate, @Query(AppKeys.ORDER_TO_DATE) String todate
 
     );
 

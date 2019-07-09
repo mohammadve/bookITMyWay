@@ -102,7 +102,7 @@ class ClothSizeSelectionAdapterMulti(val mContext: Context, val offermodel: Arra
                 if (filteredList.size == 0) {
                     var noDataBean = StoreClothSizeModel()
                     noDataBean.value = "NODATA"
-                    noDataBean.id= -1
+                    noDataBean.size_id= -1
                     noDataBean.isSelected = false
                     filteredList.add(noDataBean)
                 }

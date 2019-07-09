@@ -101,7 +101,7 @@ class ClothSelectionSelectionAdapterMulti(val mContext: Context, val offermodel:
                 if (filteredList.size == 0) {
                     var noDataBean = StoreClothColorModel()
                     noDataBean.name = "NODATA"
-                    noDataBean.id= -1
+                    noDataBean.color_id= -1
                     noDataBean.isSelected = false
                     filteredList.add(noDataBean)
                 }

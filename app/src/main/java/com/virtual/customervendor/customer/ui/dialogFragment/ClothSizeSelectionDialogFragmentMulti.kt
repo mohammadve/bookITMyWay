@@ -29,6 +29,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 
 class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
@@ -42,7 +43,6 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
     private var mView: View? = null
     private var serviceModelList = ArrayList<StoreClothSizeModel>()
     private var mregionSelectionInterface: MultiSizeSelectionInterface? = null
-    private var fromWhere: String? = null
     private var TAG: String? = ClothSizeSelectionDialogFragmentMulti::class.java.name
     var apiService: ApiInterface? = null
     var name: String? = ""
@@ -93,7 +93,7 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
             progress_select_region?.visibility = View.GONE
             rv_countryList!!.visibility=View.VISIBLE
         }else{
-            fetchRegion("")
+            fetchRegion(name)
 
         }
         return mView
@@ -106,7 +106,7 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
         tv_ok_btn = mView!!.findViewById(R.id.tv_ok_btn) as CustomEditText
 //        progress_select_region = mView!!.findViewById(R.id.progress_select_region) as ProgressBar
 
-        tv_ok_btn!!.setOnClickListener { mregionSelectionInterface!!.doneSize(serviceModelList, this!!.fromWhere)
+        tv_ok_btn!!.setOnClickListener { mregionSelectionInterface!!.doneSize(serviceModelList, this!!.name)
         dismiss()}
  setAdapter(regionResponse)
         performSearch()
@@ -156,11 +156,11 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
         })
     }
 
-    fun fetchRegion(regionId :String) {
+    fun fetchRegion(regionId :String?) {
         if (AppUtils.isInternetConnected(activity)) {
             isCancelable = false
             progress_select_region?.visibility = View.VISIBLE
-            apiService!!.getClothSize("number").subscribeOn(Schedulers.io())
+            apiService!!.getClothSize(regionId).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : Observer<ClothSizeResponse> {
                         override fun onSubscribe(d: Disposable) {

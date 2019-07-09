@@ -108,12 +108,12 @@ var needTochangeSpinnerValue= false
             })
 
 
-            if(!offModel.bookingPrice.equals("")){
-                itemView.tv_price2.setText(offModel.bookingPrice)
+            if(!offModel.pre_order_price.equals("")){
+                itemView.tv_price2.setText(offModel.pre_order_price)
             }
             itemView.tv_price2.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
-                    offModel.bookingPrice=itemView.tv_price2.text.toString().trim()
+                    offModel.pre_order_price=itemView.tv_price2.text.toString().trim()
 
                 }
 

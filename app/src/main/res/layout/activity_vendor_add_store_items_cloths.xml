@@ -191,55 +191,56 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hint_varients" />
 
-            <LinearLayout
-                android:id="@+id/size_selection_checkbox_parent"
+
+
+
+            <RelativeLayout
+                android:id="@+id/rl_size_text_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginRight="@dimen/dp_20"
-                android:orientation="horizontal"
-                android:visibility="visible"
+                android:background="@drawable/round_corners_gray_strocks"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hint_size_chart">
+                >
 
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_size_small"
-                    android:layout_width="0dp"
+                <com.virtual.customervendor.customview.CustomTextView
+                    android:id="@+id/tv_select_text_size"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="S"
-                    android:textSize="@dimen/sp_16" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_toLeftOf="@+id/tv_text_size_add"
+                    android:padding="@dimen/dp_5"
+                    android:text="@string/hint_enter_size_text"
+                    android:textColor="@color/text2_color_7d7d7d"
+                    android:textSize="@dimen/sp_16"
+                    app:customFont="@string/fontRegular" />
 
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_size_meadiuam"
-                    android:layout_width="0dp"
+                <com.virtual.customervendor.customview.CustomTextView
+                    android:id="@+id/tv_text_size_add"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="M"
-                    android:textSize="@dimen/sp_16" />
-
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_size_XL"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="XL"
-                    android:textSize="@dimen/sp_16" />
-
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_size_XXL"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="XXL"
-                    android:textSize="@dimen/sp_16" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/add_btn_bg"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:text="@string/add"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16"
+                    app:customFont="@string/fontRegular" />
 
 
-            </LinearLayout>
+            </RelativeLayout>
+
+
 
             <com.virtual.customervendor.customview.CustomTextView
                 android:id="@+id/hint_or"
@@ -256,7 +257,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
 
-                app:layout_constraintTop_toBottomOf="@+id/size_selection_checkbox_parent" />
+                app:layout_constraintTop_toBottomOf="@+id/rl_size_text_parent" />
 
             <RelativeLayout
                 android:id="@+id/rl_size_parent"

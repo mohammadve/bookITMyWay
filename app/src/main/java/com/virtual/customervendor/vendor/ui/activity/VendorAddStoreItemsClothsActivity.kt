@@ -20,17 +20,27 @@ import com.virtual.customervendor.customer.ui.adapter.HomeSliderAdapter
 import com.virtual.customervendor.customer.ui.dialogFragment.ClothColorSelectionDialogFragmentMulti
 import com.virtual.customervendor.customer.ui.dialogFragment.ClothSizeSelectionDialogFragmentMulti
 import com.virtual.customervendor.listener.ClothSizeRemovedListener
+import com.virtual.customervendor.managers.SharedPreferenceManager
+import com.virtual.customervendor.model.AddItemClothRequest
 import com.virtual.customervendor.model.BusinessImage
+import com.virtual.customervendor.model.ProductCategoryModel
 import com.virtual.customervendor.model.response.StoreClothColorModel
 import com.virtual.customervendor.model.response.StoreClothSizeModel
-import com.virtual.customervendor.utills.AppConstants
-import com.virtual.customervendor.utills.AppLog
-import com.virtual.customervendor.utills.AppUtils
+import com.virtual.customervendor.model.response.StoreListingResponse
+import com.virtual.customervendor.networks.ApiClient
+import com.virtual.customervendor.networks.ApiInterface
+import com.virtual.customervendor.utills.*
 import com.virtual.customervendor.vendor.ui.adapter.StoreSelectedSizePArentAdapter
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.zfdang.multiple_images_selector.ImagesSelectorActivity
 import com.zfdang.multiple_images_selector.SelectorSettings
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_vendor_add_store_items_cloths.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,11 +74,17 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
 
             }
         }
-        selectedSizeBean[pos].data = selectedBean
+        selectedSizeBean[pos].variants = selectedBean
         storeSelectedSizePArentAdapter!!.dismisColorSelectionDialog()
         storeSelectedSizePArentAdapter!!.notifyDataSetChanged()
+        converttomap(selectedSizeBean[pos])
 
     }
+
+    private fun converttomap(storeClothSizeModel: StoreClothSizeModel) {
+
+    }
+
 
     override fun onSizeRemoved(clothSizeModel: StoreClothSizeModel?) {
 
@@ -78,7 +94,6 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
                 item.isSelected = false
             }
         }
-        tv_select_size.text = ""
         var size = ""
         if (allSizeBean != null && allSizeBean.size > 0) {
             for (item in allSizeBean) {
@@ -88,10 +103,27 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
                 }
 
             }
-            if (size.length > 0) {
-                size = size.substring(1, size.length)
+
+        }
+
+        if (size.length > 0) {
+            size = size.substring(1, size.length)
+            if (sizeSelection.equals("size")) {
+                tv_select_text_size.text = size
+                tv_select_size.text = resources.getString(R.string.hint_enter_size_number)
+            } else {
                 tv_select_size.text = size
+                tv_select_text_size.text = resources.getString(R.string.hint_enter_size_text)
+
             }
+        } else {
+            tv_select_text_size.text = resources.getString(R.string.hint_enter_size_text)
+            tv_select_size.text = resources.getString(R.string.hint_enter_size_number)
+
+            rl_size_text_parent.isEnabled = true
+            rl_size_text_parent.isClickable = true
+            rl_size_parent.isEnabled = true
+            rl_size_parent.isClickable = true
         }
 
 
@@ -109,6 +141,21 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
         var size = ""
 
         if (bean != null && bean.size > 0) {
+
+            if (sizeSelection.equals("size", true)) {
+                rl_size_parent.isEnabled = false
+                rl_size_parent.isClickable = false
+
+                rl_size_text_parent.isEnabled = true
+                rl_size_text_parent.isClickable = true
+
+            } else {
+                rl_size_text_parent.isEnabled = false
+                rl_size_text_parent.isClickable = false
+                rl_size_parent.isEnabled = true
+                rl_size_parent.isClickable = true
+            }
+
             for (item in bean) {
 
                 if (item.isSelected) {
@@ -118,8 +165,38 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
 
             }
             storeSelectedSizePArentAdapter!!.notifyDataSetChanged()
-            size = size.substring(1, size.length)
-            tv_select_size.text = size
+
+            if (size.length > 0) {
+                size = size.substring(1, size.length)
+
+                if (sizeSelection.equals("size")) {
+                    tv_select_text_size.text = size
+                    tv_select_size.text = resources.getString(R.string.hint_enter_size_number)
+                } else {
+                    tv_select_size.text = size
+                    tv_select_text_size.text = resources.getString(R.string.hint_enter_size_text)
+
+                }
+            } else {
+
+                tv_select_text_size.text = resources.getString(R.string.hint_enter_size_text)
+                tv_select_size.text = resources.getString(R.string.hint_enter_size_number)
+                rl_size_text_parent.isEnabled = true
+                rl_size_text_parent.isClickable = true
+                rl_size_parent.isEnabled = true
+                rl_size_parent.isClickable = true
+
+            }
+        } else {
+
+            tv_select_text_size.text = resources.getString(R.string.hint_enter_size_text)
+            tv_select_size.text = resources.getString(R.string.hint_enter_size_number)
+            rl_size_text_parent.isEnabled = true
+            rl_size_text_parent.isClickable = true
+            rl_size_parent.isEnabled = true
+            rl_size_parent.isClickable = true
+
+
         }
 
     }
@@ -127,6 +204,8 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
 
     override fun onPagerItemClicked(position: Int) {
     }
+
+    var apiInterface: ApiInterface? = null
 
     private val selectedSizeBean: ArrayList<StoreClothSizeModel> = ArrayList()
     private val allSizeBean: ArrayList<StoreClothSizeModel> = ArrayList()
@@ -138,6 +217,8 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
     var storeSelectedSizePArentAdapter: StoreSelectedSizePArentAdapter? = null
     var manager: RecyclerView.LayoutManager? = null
     var storeClothcolorList: ArrayList<StoreClothColorModel> = ArrayList()
+    var sizeSelection = ""
+    var productModel = ProductCategoryModel()
 
     var toolbar: AppBarLayout? = null
     var mTitle: TextView? = null
@@ -158,6 +239,19 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
                 captureMultipleImages()
             }
             R.id.rl_size_parent -> {
+
+                if (sizeSelection.equals("size")) {
+                    allSizeBean.clear()
+                }
+                sizeSelection = "number"
+                showSizeSelectionDialogMMutli()
+            }
+            R.id.rl_size_text_parent -> {
+                if (sizeSelection.equals("number")) {
+                    allSizeBean.clear()
+                }
+                sizeSelection = "size"
+
                 showSizeSelectionDialogMMutli()
             }
             R.id.tv_selectDate -> {
@@ -167,6 +261,9 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
                 }
                 val daysArray: Array<Calendar> = AppUtils.getEnabledDays(selectedDays)
                 AppUtils.getDate(fragmentManager, this, daysArray)
+            }
+            R.id.btn_save -> {
+               // hitApi(imageFiles)
             }
 
         }
@@ -178,7 +275,7 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
 
         }.type)
 
-        sizeDialogFragmentMulti = ClothSizeSelectionDialogFragmentMulti.newInstance("", beanValue)
+        sizeDialogFragmentMulti = ClothSizeSelectionDialogFragmentMulti.newInstance("" + sizeSelection, beanValue)
         fManager = supportFragmentManager
         sizeDialogFragmentMulti.show(fManager, "My Dialog")
     }
@@ -186,6 +283,8 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vendor_add_store_items_cloths)
+        apiInterface = ApiClient.client.create(ApiInterface::class.java)
+        productModel = intent.extras.get(AppConstants.OREDER_DATA) as ProductCategoryModel
         init()
 
         cb_add_to_relaese.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -206,7 +305,9 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
         iv_back.setOnClickListener(this)
         img_camera.setOnClickListener(this)
         rl_size_parent.setOnClickListener(this)
+        rl_size_text_parent.setOnClickListener(this)
         tv_selectDate.setOnClickListener(this)
+        btn_save.setOnClickListener(this)
         initsizeRecyclerView()
     }
 
@@ -267,5 +368,80 @@ class VendorAddStoreItemsClothsActivity : AppCompatActivity(), View.OnClickListe
         homeSliderAdapter = HomeSliderAdapter(this, mResults, this, fromEdit)
         viewPager!!.adapter = homeSliderAdapter
         AppUtill.handlePager(this, mResults.size, layoutDots, viewPager)
+    }
+
+
+    fun hitApi(addfile: ArrayList<File>) {
+        if (AppUtils.isInternetConnected(this)) {
+            var additemClothRequest: AddItemClothRequest = AddItemClothRequest()
+            additemClothRequest.item_name = ed_itemname.text.toString().trim()
+            additemClothRequest.product_description = ""
+            additemClothRequest.service_id = SharedPreferenceManager.getServiceId().toString()
+            additemClothRequest.action = AppConstants.ACTION_ADD
+            additemClothRequest.product_category = productModel.id
+            additemClothRequest.sizes = selectedSizeBean
+            additemClothRequest.isReleasingSoon = "0"
+
+            var imageList = java.util.ArrayList<MultipartBody.Part>()
+//            var deleteimageList = java.util.ArrayList<MultipartBody.Part>()
+            if (addfile != null) {
+
+                for (imageFile in addfile) {
+                    val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
+                    imageList.add(MultipartBody.Part.createFormData(AppKeys.STORE_PRODUCT_IMAGES, imageFile.name, requestFile))
+                }
+            }
+            var map = HashMap<String, RequestBody>()
+
+            var action = RequestBody.create(MediaType.parse("text/plain"), AppConstants.ACTION_ADD)
+            map.put("action", action)
+
+            var item_name = RequestBody.create(MediaType.parse("text/plain"), additemClothRequest.item_name)
+            map.put("item_name", item_name)
+
+
+            var item_description = RequestBody.create(MediaType.parse("text/plain"), "")
+            map.put("product_description", item_description)
+
+            var product_category = RequestBody.create(MediaType.parse("text/plain"), productModel.id)
+            map.put("product_category", product_category)
+
+            var service_id = RequestBody.create(MediaType.parse("text/plain"), SharedPreferenceManager.getServiceId().toString())
+            map.put("service_id", service_id)
+
+            var beanValue = Gson().toJson(selectedSizeBean, object : TypeToken<List<StoreClothSizeModel>>() {
+
+            }.type)
+
+            var sizes = RequestBody.create(MediaType.parse("text/plain"),beanValue)
+            map.put("sizes", sizes)
+
+
+
+
+            apiInterface?.storeItemAddDeleteEditCloth("Bearer " + SharedPreferenceManager.getAuthToken(), map, imageList)
+                    ?.subscribeOn(Schedulers.io())
+                    ?.observeOn(AndroidSchedulers.mainThread())
+                    ?.subscribe(object : io.reactivex.Observer<String> {
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onNext(detailResponse: String) {
+                            AppLog.e(TAG, detailResponse.toString())
+//                            handleResults(detailResponse)
+                        }
+
+                        override fun onError(e: Throwable) {
+//                            handleError(e)
+                        }
+
+                        override fun onComplete() {}
+                    })
+
+
+
+        } else {
+            UiValidator.displayMsgSnack(start_lay, this, getString(R.string.no_internet_connection))
+        }
     }
 }
