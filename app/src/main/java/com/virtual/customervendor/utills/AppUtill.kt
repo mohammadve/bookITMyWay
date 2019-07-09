@@ -222,8 +222,7 @@ class AppUtill {
         fun loadImageRoundProfile(context: Context, url: String, imageView: ImageView) {
             val options = RequestOptions()
             options.placeholder(R.drawable.place_holder_round)
-            options.override(120, 120)
-
+//            options.override(120, 120)
             options.error(R.drawable.place_holder_round)
             options.circleCrop()
             Glide.with(context).load(url).apply(options).into(imageView)

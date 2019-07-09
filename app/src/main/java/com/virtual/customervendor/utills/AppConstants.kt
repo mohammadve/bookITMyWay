@@ -25,6 +25,7 @@ class AppConstants {
         val FROM_ADDDATA = "from adddata"
         val BUSINESS_DATA = "business data"
         val OREDER_DATA = "order data"
+        val STORE_CAT_ID = "store_category_id"
 
         val STATUS_CHECK_IN = "checkin"
         val STATUS_CHECK_OUT = "checkout"

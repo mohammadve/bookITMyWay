@@ -516,6 +516,7 @@
     <string name="per_unit">/Unit price</string>
     <string name="add_to_release">Add to release soon</string>
     <string name="select_date">Select date</string>
+    <string name="bookprice">Booking Price</string>
     <string-array name="quanlity_arrays">
         <item>1</item>
         <item>2</item>

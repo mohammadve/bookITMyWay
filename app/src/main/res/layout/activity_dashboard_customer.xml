@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:background="@color/screen_background_color">
 
-            <com.virtual.customervendor.customview.CircularImageView
+            <ImageView
                 android:id="@+id/ivUserPic"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
@@ -47,8 +47,7 @@
                 android:src="@drawable/place_holder_round"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:siBorderColor="@color/colorAccent"
-                app:siBorderWidth="1px" />
+              />
 
             <com.virtual.customervendor.customview.CustomTextView
                 android:id="@+id/tvUserName"

@@ -125,7 +125,7 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
     private fun handleResults(eventListingResponse: ProductCategoryResponse) {
         ProgressDialogLoader.progressDialogDismiss()
         if (eventListingResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-            createAdapterEvents(eventListingResponse.data)
+            createAdapterEvents(eventListingResponse.data,eventListingResponse.store_category_id!!)
         } else {
             UiValidator.displayMsgSnack(coordinator, this, eventListingResponse.message)
         }
@@ -137,11 +137,12 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
             AppLog.e(TAG, t.message)
     }
 
-    private fun createAdapterEvents(eventlisting: ArrayList<ProductCategoryModel>) {
+    private fun createAdapterEvents(eventlisting: ArrayList<ProductCategoryModel>,storeCategoryid :Int) {
         storeCategoryAdapter = StoreCategoryAdapter(this, eventlisting) {productModel ->
             var intent: Intent = Intent(this!!, VendorStoreSubcategoryListActivity::class.java)
             var bundle = Bundle()
             bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+            bundle.putInt(AppConstants.STORE_CAT_ID, storeCategoryid)
             intent.putExtras(bundle)
             startActivity(intent)
             SlideAnimationUtill.slideNextAnimation(this@VendorListStoreItemsActivity)

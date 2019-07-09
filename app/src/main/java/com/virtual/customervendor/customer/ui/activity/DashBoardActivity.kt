@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.BaseActivity
@@ -145,11 +147,13 @@ class DashBoardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun initData() {
 
-        tvUserName.setText(SharedPreferenceManager.getCustomerName())
-        if (SharedPreferenceManager.getCustomerImage() != null && !SharedPreferenceManager.getCustomerImage().equals("")) {
-            AppLog.e("SharedPreferenceManager.getCustomerImage()", "" + SharedPreferenceManager.getCustomerImage())
-            AppUtill.loadImageRoundProfile(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
-        }
+//        tvUserName.setText(SharedPreferenceManager.getCustomerName())
+//        if (SharedPreferenceManager.getCustomerImage() != null && !SharedPreferenceManager.getCustomerImage().equals("")) {
+//            AppLog.e("SharedPreferenceManager.getCustomerImage()", "" + SharedPreferenceManager.getCustomerImage())
+//            AppUtill.loadImageRoundProfile(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
+//        }
+
+        updateProfile()
 
         val rvNumbers = findViewById(R.id.list) as ListView
 
@@ -448,16 +452,20 @@ class DashBoardActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
         super.onActivityResult(requestCode, resultCode, data)
         AppLog.e(TAG, "checkcall")
         if (requestCode == 222 && resultCode == Activity.RESULT_OK) {
-            if (SharedPreferenceManager.getCustomerImage() != null && !SharedPreferenceManager.getCustomerImage().equals("")) {
-                AppLog.e("SharedPreferenceManager.getCustomerImage()", "" + SharedPreferenceManager.getCustomerImage())
-                AppUtill.loadImageRound(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
-            }
-            tvUserName.setText(SharedPreferenceManager.getCustomerName())
+            updateProfile()
+//            if (SharedPreferenceManager.getCustomerImage() != null && !SharedPreferenceManager.getCustomerImage().equals("")) {
+//                AppLog.e("SharedPreferenceManager.getCustomerImage()", "" + SharedPreferenceManager.getCustomerImage())
+//                AppUtill.loadImageRound(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
+//            }
+//            tvUserName.setText(SharedPreferenceManager.getCustomerName())
         }
     }
 
-    fun updateProfile(){
-        AppUtill.loadImageRound(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
+    fun updateProfile() {
+        if (SharedPreferenceManager.getCustomerImage() != null && !SharedPreferenceManager.getCustomerImage().equals("")) {
+            Glide.with(this).load(SharedPreferenceManager.getCustomerImage()).apply(RequestOptions().circleCrop().placeholder(R.drawable.place_holder_round)).into(ivUserPic)
+//            AppUtill.loadImageRound(this, SharedPreferenceManager.getCustomerImage(), ivUserPic)
+        }
         tvUserName.setText(SharedPreferenceManager.getCustomerName())
     }
 }

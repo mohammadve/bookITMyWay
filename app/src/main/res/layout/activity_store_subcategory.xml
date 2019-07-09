@@ -14,16 +14,16 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/start_lay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            android:layout_height="match_parent"
+           >
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_upload"
@@ -42,6 +42,23 @@
                 android:layout_marginRight="@dimen/dp_20"
                 android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@+id/img_upload" />
+
+
+            <com.virtual.customervendor.customview.CustomTextView
+                android:id="@+id/emptyString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data_found"
+                android:textColor="@color/textColorHint"
+                android:textSize="@dimen/sp_17"
+
+                app:customFont="@string/fontRegular"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_upload"
+             />
+
 
 
         </android.support.constraint.ConstraintLayout>

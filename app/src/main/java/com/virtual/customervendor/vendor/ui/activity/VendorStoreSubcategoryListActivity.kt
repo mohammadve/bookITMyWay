@@ -35,6 +35,7 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
     var mTitle: TextView? = null
     var apiInterface: ApiInterface? = null
     var productModel = ProductCategoryModel()
+    var store_cat_id: Int = 0
 
 
     override fun onClick(v: View?) {
@@ -43,18 +44,28 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
                 onBackPressed()
             }
             R.id.iv_add -> {
-/*                var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
-                var bundle = Bundle()
-                bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
-                intent.putExtras(bundle)
-                startActivityForResult(intent, 112)
-                SlideAnimationUtill.slideNextAnimation(this)*/
-                var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
-                var bundle = Bundle()
-                bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
-                intent.putExtras(bundle)
-                startActivityForResult(intent, 112)
-                SlideAnimationUtill.slideNextAnimation(this)
+                if (store_cat_id.toString() == AppConstants.STORE_CAT_SEAT_SERVICE) {
+                    var intent: Intent = Intent(this, VendorAddStoreItemsActivity::class.java)
+                    var bundle = Bundle()
+                    bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+                    intent.putExtras(bundle)
+                    startActivityForResult(intent, 112)
+                    SlideAnimationUtill.slideNextAnimation(this)
+                } else if (store_cat_id.toString() == AppConstants.STORE_CAT_CLOTHING) {
+                    var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
+                    var bundle = Bundle()
+                    bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+                    intent.putExtras(bundle)
+                    startActivityForResult(intent, 112)
+                    SlideAnimationUtill.slideNextAnimation(this)
+                }else if (store_cat_id.toString() == AppConstants.STORE_CAT_CUSTOM) {
+                    var intent: Intent = Intent(this, VendorAddStoreItemsOtherActivity::class.java)
+                    var bundle = Bundle()
+                    bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+                    intent.putExtras(bundle)
+                    startActivityForResult(intent, 112)
+                    SlideAnimationUtill.slideNextAnimation(this)
+                }
             }
 
         }
@@ -65,10 +76,12 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
         setContentView(R.layout.activity_store_subcategory)
         UiValidator.hideSoftKeyboard(this)
         productModel = intent.extras.get(AppConstants.OREDER_DATA) as ProductCategoryModel
+        store_cat_id = intent.extras.get(AppConstants.STORE_CAT_ID) as Int
+
         apiInterface = ApiClient.client.create(ApiInterface::class.java)
         init()
         if (productModel != null) {
-            Glide.with(this).load(productModel.newimage).into(img_upload)
+            Glide.with(this).load(productModel.newimage!!).into(img_upload)
             hitApi()
         }
 
@@ -126,7 +139,12 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
     private fun handleResults(eventListingResponse: StoreListingResponse) {
         ProgressDialogLoader.progressDialogDismiss()
         if (eventListingResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-            createAdapterEvents(eventListingResponse.itemlisting)
+            if (eventListingResponse.itemlisting.size > 0) {
+                emptyString.visibility = View.GONE
+                createAdapterEvents(eventListingResponse.itemlisting)
+            } else {
+                emptyString.visibility = View.VISIBLE
+            }
         } else {
             UiValidator.displayMsgSnack(coordinator, this, eventListingResponse.message)
         }
