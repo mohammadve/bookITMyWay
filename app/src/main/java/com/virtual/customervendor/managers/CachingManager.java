@@ -126,13 +126,13 @@ public class CachingManager {
     }
 
 
-    public static CountryCodeModel getCurrentCountry() {
-        ApplicationCache applicationCache = ApplicationCache.getApplicationCache();
-        return applicationCache.getCurrentCountry();
-    }
-
-    public static void setCurrentCountry(CountryCodeModel sightSeenInfo) {
-        ApplicationCache applicationCache = ApplicationCache.getApplicationCache();
-        applicationCache.setCurrentCountry(sightSeenInfo);
-    }
+//    public static CountryCodeModel getCurrentCountry() {
+//        ApplicationCache applicationCache = ApplicationCache.getApplicationCache();
+//        return applicationCache.getCurrentCountry();
+//    }
+//
+//    public static void setCurrentCountry(CountryCodeModel sightSeenInfo) {
+//        ApplicationCache applicationCache = ApplicationCache.getApplicationCache();
+//        applicationCache.setCurrentCountry(sightSeenInfo);
+//    }
 }

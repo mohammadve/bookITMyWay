@@ -32,7 +32,7 @@ class StoreItemsConfirmOrderAdapter(var context: Context, var restaurantList: Ar
             AppLog.e("CHECK DATA", restaurant.toString())
             itemView.tv_item_name.setText(restaurant.item_name)
             itemView.tv_quantity.setText(restaurant.quantity.toString())
-            var price = (restaurant.item_price.toInt() * restaurant.quantity).toString()
+            var price = (restaurant.item_price.toDouble() * restaurant.quantity).toString()
             itemView.tv_price.setText(price)
             if (!restaurant.add_on_one.isEmpty()) {
                 itemView.tv_addone.visibility = View.VISIBLE

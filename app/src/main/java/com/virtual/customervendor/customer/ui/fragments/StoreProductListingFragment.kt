@@ -64,7 +64,7 @@ class StoreProductListingFragment : Fragment() {
     fun getStoreItems() {
         if (AppUtils.isInternetConnected(activity)) {
             ProgressDialogLoader.progressDialogCreation(activity, getString(R.string.please_wait))
-            apiService?.getStoreItemListing("Bearer " + SharedPreferenceManager.getAuthToken(), businessDetailModel.service_id?.toInt()!!, productCategoryModel.id.toInt())
+            apiService?.getStoreItemListing("Bearer " + SharedPreferenceManager.getAuthToken(), businessDetailModel.service_id?.toInt()!!, productCategoryModel.id.toInt(),businessDetailModel.store_category_id?.toInt()!!)
                     ?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe(object : Observer<StoreListingResponse> {
@@ -91,7 +91,12 @@ class StoreProductListingFragment : Fragment() {
     private fun handleResults(eventListingResponse: StoreListingResponse) {
         ProgressDialogLoader.progressDialogDismiss()
         if (eventListingResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-            createAdapterEvents(eventListingResponse.itemlisting)
+            if (eventListingResponse.itemlisting.size > 0) {
+                nodatafound.visibility = View.GONE
+                createAdapterEvents(eventListingResponse.itemlisting)
+            } else {
+                nodatafound.visibility = View.VISIBLE
+            }
         } else {
             UiValidator.displayMsgSnack(cons, activity, eventListingResponse.message)
         }
@@ -116,16 +121,7 @@ class StoreProductListingFragment : Fragment() {
         rv_items.isNestedScrollingEnabled = false
     }
 
-//    fun callActivity(model: ItemPriceStoreModel) {
-//        count++
-//        val storeCartModel: StoreCartModel = StoreCartModel()
-//        storeCartModel.item_id = "" + model.item_id
-//        storeCartModel.item_name = model.item_name
-//        storeCartModel.price = model.item_price
-//        storeCartModel.quantity = "1"
-//        (activity as PurchaseItemsActivity).setCartValueVisible(true, count.toString())
-//        (activity as PurchaseItemsActivity).addedItemsList.add(storeCartModel)
-//    }
+
 
 
 }

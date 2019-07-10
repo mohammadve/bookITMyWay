@@ -40,8 +40,6 @@ class SplashActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
-//        getCountryCode();
-
         AppUtils.updateLanguageResources(applicationContext, SharedPreferenceManager.getUserLanguage())
 
         val animZoomOut = AnimationUtils.loadAnimation(applicationContext, R.anim.zoom_in)
@@ -58,13 +56,12 @@ class SplashActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(Intent(intent))
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
-                    finish()
+
                 } else {
                     var intent: Intent = Intent(this@SplashActivity, DashBoardActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
-                    finish()
                 }
             }
 
@@ -78,22 +75,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-//        handler = Handler()
-//        runnable = ActivityRunnable()
-//        handler.postDelayed(runnable, 1000)
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        handler.removeCallbacks(runnable)
-    }
-
     private inner class ActivityRunnable : Runnable {
         override fun run() {
 
-//            if (ISAPIHit) {
+
             if (SharedPreferenceManager.getAuthToken().equals("")) {
                 var intent: Intent = Intent(this@SplashActivity, com.virtual.customervendor.vendor.ui.activity.LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -108,65 +93,7 @@ class SplashActivity : AppCompatActivity() {
                 SlideAnimationUtill.slideNextAnimation(this@SplashActivity)
                 finish()
             }
-//            } else {
-//                handler.postDelayed(runnable, 1000)
-//            }
         }
     }
-
-
-    fun getCountryCode() {
-        if (AppUtils.isInternetConnected(this)) {
-            ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
-            apiInterface!!.getCountryCode()!!.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : Observer<CountrycodeResponse> {
-                        override fun onSubscribe(d: Disposable) {
-                            AppLog.e(TAG, "onSubscribe")
-                        }
-
-                        override fun onNext(userResponse: CountrycodeResponse) {
-                            AppLog.e(TAG, userResponse.toString())
-                            ProgressDialogLoader.progressDialogDismiss()
-                            if (userResponse.status!!.equals(AppConstants.KEY_SUCCESS)) {
-
-//                               /*testing canada*/
-                                var model = CountryCodeModel()
-                                model.code = "1"
-                                model.countryCode = "CA"
-                                model.name = "CANADA"
-                                CachingManager.setCurrentCountry(model)
-//                                /*testing*/
-
-
-//                                CachingManager.setCurrentCountry(userResponse.data)
-                                AppLog.e("@@JAVA CLASS", "-----" + CachingManager.getCurrentCountry())
-                                ISAPIHit = true
-                            } else {
-                                UiValidator.displayMsgSnack(cordinate, this@SplashActivity, userResponse.message)
-                            }
-                        }
-
-                        override fun onError(e: Throwable) {
-                            handleError(e)
-                        }
-
-                        override fun onComplete() {
-                            AppLog.e(TAG, "onComplete: ")
-                        }
-                    })
-        } else {
-            UiValidator.displayMsgSnack(cordinate, this, getString(R.string.no_internet_connection))
-        }
-    }
-
-    private fun handleError(t: Throwable) {
-        ProgressDialogLoader.progressDialogDismiss()
-        if (t != null) {
-            UiValidator.displayMsgSnack(cordinate, this, t.message)
-            AppLog.e(TAG, t?.message)
-        }
-    }
-
 
 }

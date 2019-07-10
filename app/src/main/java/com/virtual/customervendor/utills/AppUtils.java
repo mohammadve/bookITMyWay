@@ -334,16 +334,10 @@ public class AppUtils {
         Locale locale;
         if (val != null && !val.isEmpty()) {
             Double currencyValue = Double.valueOf(val);
-//        Locale locale = new Locale("en", "" + SharedPreferenceManager.getCurrentCountryDetails().getData().getCountryCode());
-            /*surender*/
-//            if (CachingManager.getCurrentCountry() != null) {
-//                locale = new Locale("en", "" + CachingManager.getCurrentCountry().getCountryCode());
-//            } else
             locale = new Locale("en", "US");
-            // Currency currency = Currency.getInstance(locale);
-            //String symbol = currency.getSymbol();
             NumberFormat mCurrencyFormat = NumberFormat.getCurrencyInstance(locale);
-            return mCurrencyFormat.format(currencyValue);
+            return "US"+mCurrencyFormat.format(currencyValue);
+
         } else {
             return "";
         }
@@ -367,29 +361,16 @@ public class AppUtils {
     }
 
     public static String getCurrencySymbol() {
-//        Locale locale = new Locale("en", "" + SharedPreferenceManager.getRegisterCountryDetails().getData().getCountryCode());
-//
-//        String currencyCode = Currency.getInstance(locale).getCurrencyCode();
-//        Currency currency = Currency.getInstance(currencyCode);
-//        return currency.getSymbol(currencyLocaleMap.get(currency));
-
-        return "$";
+        return "US$";
     }
 
     public static String getRegisterRateWithSymbol(String val) {
         Locale locale;
         if (val != null && !val.equals("")) {
             Double currencyValue = Double.valueOf(val);
-//        Locale locale = new Locale("en", "" + SharedPreferenceManager.getCurrentCountryDetails().getData().getCountryCode());
-            /*surender*/
-//            if (SharedPreferenceManager.getRegisterCountryDetails() != null && SharedPreferenceManager.getRegisterCountryDetails().getData() != null)
-//                locale = new Locale("en", "" + SharedPreferenceManager.getRegisterCountryDetails().getData().getCountryCode());
-//            else
             locale = new Locale("en", "US");
-            // Currency currency = Currency.getInstance(locale);
-            //String symbol = currency.getSymbol();
             NumberFormat mCurrencyFormat = NumberFormat.getCurrencyInstance(locale);
-            return mCurrencyFormat.format(currencyValue);
+            return "US"+mCurrencyFormat.format(currencyValue);
         } else return "";
     }
 

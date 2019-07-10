@@ -94,7 +94,7 @@ class StoreCartFragment : Fragment(), View.OnClickListener {
     fun callActivity() {
         add = 0
         for (storeCartModel in addedItemsListNew) {
-            add = add + (storeCartModel.item_price!!.toInt() * storeCartModel.quantity)
+            add = add + (storeCartModel.item_price!!.toDouble() * storeCartModel.quantity).toInt()
         }
         tv_total_value.text = AppUtils.getRateWithSymbol("" + add)
 

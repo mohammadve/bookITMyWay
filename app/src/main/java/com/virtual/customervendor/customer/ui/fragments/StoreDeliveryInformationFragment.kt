@@ -71,7 +71,7 @@ class StoreDeliveryInformationFragment : Fragment(), View.OnClickListener {
             ed_phone_number.addTextChangedListener(PhoneNumberTextWatcher(ed_phone_number))
 
             if (SharedPreferenceManager.getRegisterCountryDetails() != null) {
-                ed_code.setText("+" + CachingManager.getCurrentCountry().code)
+                ed_code.setText("+" + SharedPreferenceManager.getRegisterCountryDetails().data.code)
             } else {
                 ed_code.setText("+91")
             }

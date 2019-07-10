@@ -256,7 +256,7 @@ public interface ApiInterface {
 
     @POST(AppConstants.VENDOR_STORE_ITEM_LISTING)
     @Headers({"Content-Type: application/json"})
-    Observable<StoreListingResponse> getStoreItemListing(@Header("Authorization") String auth, @Query(AppKeys.SERVICE_ID) int service_id, @Query(AppKeys.PRODUCT_CATEGORY) int product_category);
+    Observable<StoreListingResponse> getStoreItemListing(@Header("Authorization") String auth, @Query(AppKeys.SERVICE_ID) int service_id, @Query(AppKeys.PRODUCT_CATEGORY) int product_category, @Query(AppKeys.STORE_CATEGORY_ID) int store_category_id);
 
     @Multipart
     @POST(AppConstants.VENDOR_STORE_ADD_EDIT_DELETE)

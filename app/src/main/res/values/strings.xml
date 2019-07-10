@@ -256,7 +256,8 @@
     <string name="food_menu">Food Menu</string>
     <string name="dessert_menu">Dessert Menu</string>
     <string name="item_name">Item Name</string>
-    <string name="price">Price($)</string>
+    <string name="price">Price(US$)</string>
+    <string name="bookingprice">Booking Price(US$)</string>
     <string name="vendor_success_msg">Your Application is successfully submitted \nTo the Admin and is under review, soon the \nAdmin will contact you via given information,\nOnce your application is approved, We\'ll \nNotify you</string>
     <string name="go_to_home">Go To Home</string>
     <string name="application_status">Application Status</string>
@@ -519,6 +520,7 @@
     <string name="hint_enter_size_text">Enter size S, M, X, XL</string>
     <string name="bookprice">Booking Price</string>
     <string name="releasinon">Releasing on</string>
+    <string name="selectcolor">Select Color</string>
     <string-array name="quanlity_arrays">
         <item>1</item>
         <item>2</item>

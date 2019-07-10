@@ -135,7 +135,7 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener,
     fun hitApi() {
         if (AppUtils.isInternetConnected(this)) {
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
-            apiInterface?.getStoreItemListing("Bearer " + SharedPreferenceManager.getAuthToken(), SharedPreferenceManager.getServiceId(), productModel.id.toInt())
+            apiInterface?.getStoreItemListing("Bearer " + SharedPreferenceManager.getAuthToken(), SharedPreferenceManager.getServiceId(), productModel.id.toInt(),store_cat_id)
                     ?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe(object : Observer<StoreListingResponse> {
