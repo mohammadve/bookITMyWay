@@ -19,16 +19,38 @@ import com.virtual.customervendor.model.response.StoreListingResponse
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.*
-import com.virtual.customervendor.vendor.ui.adapter.StoreSubCategoryAdapter
+import com.virtual.customervendor.vendor.ui.adapter.VendorStoreSubCategoryAdapter
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_store_subcategory.*
 
-class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener {
-    var storeSubCategoryAdapter: StoreSubCategoryAdapter? = null
+class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener, VendorStoreSubCategoryAdapter.UpdateItems {
 
+    override fun deleteItem(itempriceModel: ItemPriceStoreModel) {
+    }
+
+    override fun updateItem(itemPriceModel: ItemPriceStoreModel) {
+            if (store_cat_id == AppConstants.STORE_CAT_SEAT_SERVICE.toInt()) {
+                var intent: Intent = Intent(this!!, VendorListEditStoreItemsActivity::class.java)
+                var bundle = Bundle()
+                bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
+                intent.putExtras(bundle)
+                startActivityForResult(intent, 113)
+            }else if(store_cat_id == AppConstants.STORE_CAT_CUSTOM.toInt()){
+                var intent: Intent = Intent(this!!, VendorListEditStoreCustomItemActivity::class.java)
+                var bundle = Bundle()
+                bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
+                intent.putExtras(bundle)
+                startActivityForResult(intent, 113)
+            }
+
+            SlideAnimationUtill.slideNextAnimation(this@VendorStoreSubcategoryListActivity)
+
+    }
+
+    var storeSubCategoryAdapter: VendorStoreSubCategoryAdapter? = null
     var TAG: String = VendorStoreSubcategoryListActivity::class.java.simpleName
     var fragmentManager: FragmentManager? = null
     var toolbar: AppBarLayout? = null
@@ -58,7 +80,7 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
                     intent.putExtras(bundle)
                     startActivityForResult(intent, 112)
                     SlideAnimationUtill.slideNextAnimation(this)
-                }else if (store_cat_id.toString() == AppConstants.STORE_CAT_CUSTOM) {
+                } else if (store_cat_id.toString() == AppConstants.STORE_CAT_CUSTOM) {
                     var intent: Intent = Intent(this, VendorAddStoreItemsOtherActivity::class.java)
                     var bundle = Bundle()
                     bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
@@ -157,14 +179,8 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener 
     }
 
     private fun createAdapterEvents(eventlisting: ArrayList<ItemPriceStoreModel>) {
-        storeSubCategoryAdapter = StoreSubCategoryAdapter(this, eventlisting) { itemPriceModel ->
-            var intent: Intent = Intent(this!!, VendorListEditStoreItemsActivity::class.java)
-            var bundle = Bundle()
-            bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
-            intent.putExtras(bundle)
-            startActivityForResult(intent, 113)
-            SlideAnimationUtill.slideNextAnimation(this@VendorStoreSubcategoryListActivity)
-        }
+        storeSubCategoryAdapter = VendorStoreSubCategoryAdapter(this, eventlisting,this)
+
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_event.layoutManager = manager
         rv_event.adapter = (storeSubCategoryAdapter)

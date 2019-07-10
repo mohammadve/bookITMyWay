@@ -250,28 +250,30 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
             rate.visibility = View.GONE
             vehiclecap.visibility = View.GONE
 
-            if (detailModel.stadium_address != null && detailModel.stadium_address.size > 0) {
-                stadiumList = detailModel.stadium_address
-                txt_stadium.visibility = View.VISIBLE
-                rv_stadium.visibility = View.VISIBLE
-                txt_servicearea.visibility = View.VISIBLE
-                createAdapterStadium()
-            }
+            if (detailModel.store_category_id == "1") {
+                if (detailModel.stadium_address != null && detailModel.stadium_address.size > 0) {
+                    stadiumList = detailModel.stadium_address
+                    txt_stadium.visibility = View.VISIBLE
+                    rv_stadium.visibility = View.VISIBLE
+                    txt_servicearea.visibility = View.VISIBLE
+                    createAdapterStadium()
+                }
 
-            if (detailModel.arena_address != null && detailModel.arena_address.size > 0) {
-                arenaList = detailModel.arena_address
-                txt_arena.visibility = View.VISIBLE
-                rv_arena.visibility = View.VISIBLE
-                txt_servicearea.visibility = View.VISIBLE
-                createAdapterArena()
-            }
+                if (detailModel.arena_address != null && detailModel.arena_address.size > 0) {
+                    arenaList = detailModel.arena_address
+                    txt_arena.visibility = View.VISIBLE
+                    rv_arena.visibility = View.VISIBLE
+                    txt_servicearea.visibility = View.VISIBLE
+                    createAdapterArena()
+                }
 
-            if (detailModel.other_address != null && detailModel.other_address.size > 0) {
-                otherList = detailModel.other_address
-                txt_other.visibility = View.VISIBLE
-                rv_other.visibility = View.VISIBLE
-                txt_servicearea.visibility = View.VISIBLE
-                createAdapterOther()
+                if (detailModel.other_address != null && detailModel.other_address.size > 0) {
+                    otherList = detailModel.other_address
+                    txt_other.visibility = View.VISIBLE
+                    rv_other.visibility = View.VISIBLE
+                    txt_servicearea.visibility = View.VISIBLE
+                    createAdapterOther()
+                }
             }
 
         } else if (activity is BookRideTaxiActivity || activity is BookRideLimoActivity
@@ -332,8 +334,22 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
 
 
         if (activity is PurchaseItemsActivity) {
-            ed_serviceregion.visibility = View.GONE
             btn_next.text = resources.getString(R.string.go_to_store)
+
+            if (detailModel.store_category_id == "1") {
+                ed_serviceregion.visibility = View.GONE
+            } else {
+                lytDaySlots.visibility = View.GONE
+//                var data = StringBuilder()
+//                for (regionModel: RegionModel in detailModel.) {
+//                    if (data.length > 0) {
+//                        data.append(", ")
+//                    }
+//                    data.append(regionModel.regionname)
+//                }
+//                ed_serviceregion.setText(data)
+            }
+
         } else {
             var data = StringBuilder()
             for (regionModel: RegionModel in detailModel.region_ids) {
@@ -353,23 +369,23 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
     }
 
 
-    fun setDaySlots(taxi_Service_Request: VendorServiceDetailModel){
-        var isAllDay: Boolean=AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
-        if(taxi_Service_Request.dateTime.size==0){
+    fun setDaySlots(taxi_Service_Request: VendorServiceDetailModel) {
+        var isAllDay: Boolean = AppUtils.getStatusBoolean(taxi_Service_Request.all_day)
+        if (taxi_Service_Request.dateTime.size == 0) {
 //            if(taxi_Service_Request.monday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Monday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.monday) ,taxi_Service_Request.monday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Monday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.monday), taxi_Service_Request.monday_time))
 //            if(taxi_Service_Request.tuesday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tuesday) ,taxi_Service_Request.tuesday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Tuesday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.tuesday), taxi_Service_Request.tuesday_time))
 //            if(taxi_Service_Request.wednesday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wednesday) ,taxi_Service_Request.wednesday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Wednesday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.wednesday), taxi_Service_Request.wednesday_time))
 //            if(taxi_Service_Request.thursday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Thursday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thursday) ,taxi_Service_Request.thursday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Thursday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.thursday), taxi_Service_Request.thursday_time))
 //            if(taxi_Service_Request.friday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Friday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.friday) ,taxi_Service_Request.friday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Friday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.friday), taxi_Service_Request.friday_time))
 //            if(taxi_Service_Request.saturday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Saturday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.saturday) ,taxi_Service_Request.saturday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Saturday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.saturday), taxi_Service_Request.saturday_time))
 //            if(taxi_Service_Request.sunday_time.size>0)
-            taxi_Service_Request.dateTime.add(DayAviliability("Sunday",if(isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sunday) ,taxi_Service_Request.sunday_time))
+            taxi_Service_Request.dateTime.add(DayAviliability("Sunday", if (isAllDay) true else AppUtils.getStatusBoolean(taxi_Service_Request.sunday), taxi_Service_Request.sunday_time))
         }
 
         txtSlotsMon.setText(getSlots(taxi_Service_Request.monday_time))
@@ -385,15 +401,15 @@ class BookingFragmentSeviceDetail : Fragment(), View.OnClickListener, ViewPagerI
         val builder = StringBuilder()
 
         for (timeSlots in slots) {
-            if(timeSlots.startTime.length>0 && timeSlots.stopTime.length>0  )
-                builder.append(timeSlots.startTime+" to "+timeSlots.stopTime+"\n")
+            if (timeSlots.startTime.length > 0 && timeSlots.stopTime.length > 0)
+                builder.append(timeSlots.startTime + " to " + timeSlots.stopTime + "\n")
         }
-        var str:String=builder.toString()
+        var str: String = builder.toString()
 
-        if(str.equals(""))
-            str="none"
+        if (str.equals(""))
+            str = "none"
         else
-            str=str.substring(0,str.length-1)
+            str = str.substring(0, str.length - 1)
         return str
     }
 

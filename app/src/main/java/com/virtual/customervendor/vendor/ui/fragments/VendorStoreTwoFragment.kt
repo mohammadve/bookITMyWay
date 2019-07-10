@@ -237,6 +237,8 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, TextWatcher {
 
                 ed_desc.setText(vendorStoreRequest.description)
 
+
+
                 if (vendorStoreRequest.stadium_address.size > 0)
                     stadiumList.addAll(vendorStoreRequest.stadium_address)
                 else {
@@ -253,6 +255,90 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, TextWatcher {
                     otherList = vendorStoreRequest.other_address
                 else {
                     otherList.add(StoreItemLocationModel())
+                }
+
+                if (vendorStoreRequest.store_category_id == AppConstants.STORE_CAT_SEAT_SERVICE) {
+                    til_storeSubcategory.visibility = View.GONE
+                    addClothType.visibility = View.GONE
+                    til_Service_area.visibility = View.GONE
+
+                    txtDays.visibility = View.VISIBLE
+
+                    txt_stadium.visibility = View.VISIBLE
+                    rv_stadium.visibility = View.VISIBLE
+                    addstadium.visibility = View.VISIBLE
+
+                    txt_arena.visibility = View.VISIBLE
+                    rv_arena.visibility = View.VISIBLE
+                    addarena.visibility = View.VISIBLE
+
+                    txt_others.visibility = View.VISIBLE
+                    rv_other.visibility = View.VISIBLE
+                    addother.visibility = View.VISIBLE
+
+
+                } else if (vendorStoreRequest.store_category_id== AppConstants.STORE_CAT_CLOTHING) {
+
+                    til_storeSubcategory.visibility = View.VISIBLE
+                    addClothType.visibility = View.VISIBLE
+                    rv_cloths_type.visibility = View.VISIBLE
+                    til_Service_area.visibility = View.VISIBLE
+
+                    txtDays.visibility = View.GONE
+
+                    txt_stadium.visibility = View.GONE
+                    rv_stadium.visibility = View.GONE
+                    addstadium.visibility = View.GONE
+
+                    txt_arena.visibility = View.GONE
+                    rv_arena.visibility = View.GONE
+                    addarena.visibility = View.GONE
+
+                    txt_others.visibility = View.GONE
+                    rv_other.visibility = View.GONE
+                    addother.visibility = View.GONE
+
+                    val data = StringBuilder()
+
+                    val filledList: ArrayList<ClothingCategoryModel> = ArrayList()
+                    var subcatId: ArrayList<Int> = ArrayList()
+
+                    for (temp in vendorStoreRequest.store_subcategory_list) {
+                            filledList.add(temp)
+                            if (data.length > 0) {
+                                data.append(", ")
+                            }
+                            data.append(temp.name)
+                            subcatId.add(temp.id!!.toInt())
+                    }
+                    vendorStoreRequest.store_subcategory_ids = subcatId
+                    vendorStoreRequest.store_subcategory = filledList
+
+                    ed_storesub.setText(data.toString())
+
+
+                } else if (vendorStoreRequest.store_category_id== AppConstants.STORE_CAT_CUSTOM) {
+
+                    til_storeSubcategory.visibility = View.GONE
+                    addClothType.visibility = View.VISIBLE
+                    rv_cloths_type.visibility = View.VISIBLE
+                    til_Service_area.visibility = View.VISIBLE
+
+                    txtDays.visibility = View.GONE
+
+                    txt_stadium.visibility = View.GONE
+                    rv_stadium.visibility = View.GONE
+                    addstadium.visibility = View.GONE
+
+                    txt_arena.visibility = View.GONE
+                    rv_arena.visibility = View.GONE
+                    addarena.visibility = View.GONE
+
+                    txt_others.visibility = View.GONE
+                    rv_other.visibility = View.GONE
+                    addother.visibility = View.GONE
+
+
                 }
             }
         } catch (e: Exception) {
@@ -408,7 +494,6 @@ class VendorStoreTwoFragment : Fragment(), View.OnClickListener, TextWatcher {
 
 
             if (bean.id == AppConstants.STORE_CAT_SEAT_SERVICE) {
-
                 til_storeSubcategory.visibility = View.GONE
                 addClothType.visibility = View.GONE
                 til_Service_area.visibility = View.GONE

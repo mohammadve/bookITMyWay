@@ -20,6 +20,7 @@ import com.virtual.customervendor.model.response.StoreListingResponse
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.*
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.zfdang.multiple_images_selector.ImagesSelectorActivity
 import com.zfdang.multiple_images_selector.SelectorSettings
 import io.reactivex.Observer
@@ -31,8 +32,20 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
-class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener, View.OnClickListener, ViewPagerItemClicked {
+class  VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener, View.OnClickListener, ViewPagerItemClicked, DatePickerDialog.OnDateSetListener {
+
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        val c = Calendar.getInstance()
+        c.set(Calendar.YEAR, year)
+        c.set(Calendar.MONTH, monthOfYear)
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val dat1e = SimpleDateFormat("yyyy-MM-dd").format(c.time)
+        ed_date.setText(dat1e)
+    }
+
     override fun onPagerItemClicked(position: Int) {
     }
 
@@ -49,20 +62,39 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
+
+            R.id.iv_back -> {
+                onBackPressed()
+            }
+
             R.id.btn_save -> {
                 validate()
             }
+
             R.id.img_camera -> {
                 captureMultipleImages()
             }
+
+            R.id.ed_date -> {
+                var selectedDays = java.util.ArrayList<Int>()
+                for (i in 1..7) {
+                    selectedDays.add(i)
+                }
+                val daysArray: Array<Calendar> = AppUtils.getEnabledDays(selectedDays)
+                AppUtils.getDate(fragmentManager, this, daysArray)
+            }
+
         }
     }
 
     override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+
         if (p1) {
             til_bookprice.visibility = View.VISIBLE
+            til_date.visibility = View.VISIBLE
         } else {
             til_bookprice.visibility = View.GONE
+            til_date.visibility = View.GONE
         }
     }
 
@@ -81,7 +113,7 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
         mTitle!!.text = getString(R.string.add_item)
         val iv_back = toolbar!!.findViewById(R.id.iv_back) as ImageView
         iv_back.setOnClickListener(this)
-
+        ed_date.setOnClickListener(this)
         img_camera.setOnClickListener(this)
 
         cb_add_to_relaese.setOnCheckedChangeListener(this)
@@ -112,6 +144,25 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
         if (til_desc.isErrorEnabled()) {
             UiValidator.disableValidationError(til_desc)
         }
+
+        if (cb_add_to_relaese.isChecked) {
+            if (ed_date.getText().toString().isEmpty()) {
+                UiValidator.setValidationError(til_date, getString(R.string.field_required))
+                return
+            }
+            if (til_date.isErrorEnabled()) {
+                UiValidator.disableValidationError(til_date)
+            }
+
+            if (ed_bookprice.getText().toString().isEmpty()) {
+                UiValidator.setValidationError(til_bookprice, getString(R.string.field_required))
+                return
+            }
+            if (til_bookprice.isErrorEnabled()) {
+                UiValidator.disableValidationError(til_bookprice)
+            }
+
+        }
         hitApi(imageFiles)
     }
 
@@ -121,7 +172,6 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
 
             var imageList = java.util.ArrayList<MultipartBody.Part>()
-//            var deleteimageList = java.util.ArrayList<MultipartBody.Part>()
             if (addfile != null) {
 
                 for (imageFile in addfile) {
@@ -149,6 +199,20 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
 
             var service_id = RequestBody.create(MediaType.parse("text/plain"), SharedPreferenceManager.getServiceId().toString())
             map.put("service_id", service_id)
+
+            if (cb_add_to_relaese.isChecked) {
+                var isReleasingSoon = RequestBody.create(MediaType.parse("text/plain"), "1")
+                map.put("isReleasingSoon", isReleasingSoon)
+
+                var releaseDate = RequestBody.create(MediaType.parse("text/plain"), ed_date.text.toString())
+                map.put("releasingDate", releaseDate)
+
+                var bookingPrice = RequestBody.create(MediaType.parse("text/plain"), ed_bookprice.text.toString())
+                map.put("pre_order_price", bookingPrice)
+            } else {
+                var isReleasingSoon = RequestBody.create(MediaType.parse("text/plain"), "0")
+                map.put("isReleasingSoon", isReleasingSoon)
+            }
 
 
 
@@ -206,6 +270,7 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
 // start the selector
         startActivityForResult(intent, REQUEST_CODE)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode === REQUEST_CODE) {
@@ -222,6 +287,7 @@ class VendorAddStoreItemsOtherActivity : AppCompatActivity(), CompoundButton.OnC
             }
         }
     }
+
     fun capturedImage(mResults: ArrayList<BusinessImage>) {
         initViewPager(mResults, false)
         for (imgUrl in mResults) {

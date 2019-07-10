@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vendor.ui.activity.VendorAddStoreItemsOtherActivity">
-
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar_appbar" />
+        layout="@layout/custom_toolbar_appbar_event" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:paddingBottom="@dimen/dp_20"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/start_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:paddingBottom="?attr/actionBarSize"
+           android:paddingBottom="@dimen/dp_20"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -34,8 +31,7 @@
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/place_holder_banner"
-                app:layout_constraintDimensionRatio="2:1"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintDimensionRatio="8:4" />
 
 
             <android.support.v4.view.ViewPager
@@ -47,6 +43,18 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10"
+                android:src="@drawable/camera_alt_black"
+                android:tint="@color/themecolor_022E8D"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/img_upload"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
             <LinearLayout
                 android:id="@+id/layoutDots"
                 android:layout_width="wrap_content"
@@ -57,24 +65,13 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/img_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:tint="@color/themecolor_022E8D"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@id/img_upload"
-                app:layout_constraintRight_toRightOf="parent"
-                app:srcCompat="@drawable/camera_alt_black" />
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_itemname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
                 android:focusable="true"
                 android:imeOptions="actionNext"
                 android:theme="@style/StyleTextInputLayout"
@@ -99,7 +96,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_20"
                 android:focusable="true"
                 android:imeOptions="actionNext"
@@ -115,6 +111,7 @@
                     android:focusable="true"
                     android:hint="@string/price"
                     android:inputType="numberDecimal"
+                    android:maxLength="4"
                     android:textColor="@color/text2_color_7d7d7d"
                     android:textColorHint="@color/menu_bg_color_cccccc"
                     app:customFont="@string/fontRegular" />
@@ -125,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_20"
                 android:focusable="true"
                 android:imeOptions="actionNext"
@@ -140,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:hint="@string/description"
-                    android:inputType="textCapWords"
+                    android:inputType="text"
                     android:textColor="@color/text2_color_7d7d7d"
                     android:textColorHint="@color/menu_bg_color_cccccc"
                     app:customFont="@string/fontRegular" />
@@ -230,6 +226,10 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_bookprice" />
 
+
+
+
+
             <com.virtual.customervendor.customview.CustomTextView
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
@@ -239,18 +239,24 @@
                 android:layout_marginRight="@dimen/dp_40"
                 android:background="@drawable/btn_bg_click"
                 android:gravity="center"
+                android:clickable="false"
                 android:stateListAnimator="@animator/us_button_selector"
                 android:text="@string/save"
                 android:textColor="@color/text_color_white"
                 android:textSize="@dimen/sp_20"
                 app:customFont="@string/fontBold"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date_view" />
 
 
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+
+
+

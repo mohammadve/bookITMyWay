@@ -30,40 +30,40 @@
         android:text="Subcategory Name"
         android:textColor="@color/text1_color_101010"
         android:textSize="@dimen/sp_18"
-        app:customFont="@string/fontRegular"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@+id/release"
-        app:layout_constraintLeft_toRightOf="@+id/ivUserPic"
-        app:layout_constraintTop_toTopOf="@+id/ivUserPic" />
-
-    <com.virtual.customervendor.customview.CustomTextView
-        android:id="@+id/release"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:text="@string/releasinon"
-        android:textColor="@color/text2_color_7d7d7d"
-        android:textSize="@dimen/sp_14"
-        android:visibility="gone"
-        app:customFont="@string/fontThin"
-        app:layout_constraintBottom_toTopOf="@+id/date"
-        app:layout_constraintLeft_toRightOf="@+id/ivUserPic"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-    <com.virtual.customervendor.customview.CustomTextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-
-        android:visibility="gone"
-        android:textColor="@color/themecolor_022E8D"
-        android:textSize="@dimen/sp_14"
+        android:ellipsize="end"
         app:customFont="@string/fontRegular"
         app:layout_constraintBottom_toBottomOf="@+id/ivUserPic"
         app:layout_constraintLeft_toRightOf="@+id/ivUserPic"
-        app:layout_constraintTop_toBottomOf="@+id/release" />
+        app:layout_constraintTop_toTopOf="@+id/ivUserPic" />
 
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/ivedit"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        app:srcCompat="@drawable/ic_edit"
+        android:padding="@dimen/dp_3"
+        android:foreground="?android:selectableItemBackground"
+        android:layout_marginRight="@dimen/dp_10"
+        app:layout_constraintRight_toLeftOf="@+id/iv_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@id/name"
+         />
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:padding="@dimen/dp_3"
+        android:foreground="?android:selectableItemBackground"
+        android:layout_marginRight="@dimen/dp_5"
+        app:srcCompat="@drawable/ic_delete"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@id/name"
+        />
 
     <View
         android:layout_width="match_parent"

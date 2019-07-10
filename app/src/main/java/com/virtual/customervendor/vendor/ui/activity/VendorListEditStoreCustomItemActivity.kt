@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.FragmentManager
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -22,32 +23,47 @@ import com.virtual.customervendor.model.response.StoreListingResponse
 import com.virtual.customervendor.networks.ApiClient
 import com.virtual.customervendor.networks.ApiInterface
 import com.virtual.customervendor.utills.*
-import com.virtual.customervendor.vendor.ui.adapter.StoreUpdateItemsAdapter
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
+
 import com.zfdang.multiple_images_selector.ImagesSelectorActivity
 import com.zfdang.multiple_images_selector.SelectorSettings
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity__store_edit_items_vendor.*
+import kotlinx.android.synthetic.main.activity__store_edit_custom_items_vendor.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
-class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*, StoreUpdateItemsAdapter.UpdateItems*/, ViewPagerItemClicked {
+class VendorListEditStoreCustomItemActivity : BaseActivity(), View.OnClickListener, ViewPagerItemClicked, CompoundButton.OnCheckedChangeListener, DatePickerDialog.OnDateSetListener {
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        val c = Calendar.getInstance()
+        c.set(Calendar.YEAR, year)
+        c.set(Calendar.MONTH, monthOfYear)
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val dat1e = SimpleDateFormat("yyyy-MM-dd").format(c.time)
+        ed_date.setText(dat1e)
+    }
+
+    override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+        if (p1) {
+            til_bookprice.visibility = View.VISIBLE
+            til_date.visibility = View.VISIBLE
+        } else {
+            til_bookprice.visibility = View.GONE
+            til_date.visibility = View.GONE
+        }
+    }
+
     override fun onPagerItemClicked(position: Int) {
     }
 
-//    override fun deleteItem(itempriceModel: ItemPriceStoreModel, adapterPosition: Int) {
-//        hitApiEditUpdate(itempriceModel, AppConstants.ACTION_DELETE, adapterPosition)
-//    }
-//
-//    override fun updateItem(itempriceModel: ItemPriceStoreModel, adapterPosition: Int) {
-//    }
 
-    var TAG: String = VendorListEditStoreItemsActivity::class.java.simpleName
-    var fragmentManager: FragmentManager? = null
+    var TAG: String = VendorListEditStoreCustomItemActivity::class.java.simpleName
     var toolbar: AppBarLayout? = null
     var mTitle: TextView? = null
     var apiInterface: ApiInterface? = null
@@ -61,14 +77,15 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
     var itempriceModel = ItemPriceStoreModel()
 
 
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back -> {
                 onBackPressed()
             }
 
-
+            R.id.iv_edit -> {
+                btn_save.isClickable = true
+            }
             R.id.btn_save -> {
                 validate()
             }
@@ -76,16 +93,22 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
                 captureMultipleImages()
             }
 
+            R.id.ed_date -> {
+                var selectedDays = java.util.ArrayList<Int>()
+                for (i in 1..7) {
+                    selectedDays.add(i)
+                }
+                val daysArray: Array<Calendar> = AppUtils.getEnabledDays(selectedDays)
+                AppUtils.getDate(fragmentManager, this, daysArray)
+            }
+
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__store_edit_items_vendor)
-
+        setContentView(R.layout.activity__store_edit_custom_items_vendor)
         itempriceModel = intent.extras.get(AppConstants.OREDER_DATA) as ItemPriceStoreModel
-
-
         apiInterface = ApiClient.client.create(ApiInterface::class.java)
         init()
     }
@@ -95,22 +118,31 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
         mTitle = toolbar!!.findViewById(R.id.tv_toolbarTitleText) as TextView
         mTitle!!.text = getString(R.string.store_items)
         val iv_back = toolbar!!.findViewById(R.id.iv_back) as ImageView
+
         iv_back.setOnClickListener(this)
-
-
-
-
+        cb_add_to_relaese.setOnCheckedChangeListener(this)
         img_camera.setOnClickListener(this)
         btn_save.setOnClickListener(this)
+        ed_date.setOnClickListener(this)
 
         if (itempriceModel != null) {
             ed_itemname.setText(itempriceModel.item_name)
             ed_price.setText(itempriceModel.item_price)
             ed_desc.setText(itempriceModel.item_description)
-            ed_addone.setText(itempriceModel.add_on_one)
-            ed_addtwo.setText(itempriceModel.add_on_two)
+
             if (itempriceModel.item_image.size > 0)
                 Glide.with(this).load(itempriceModel.item_image.get(0)).into(img_upload)
+
+            if (itempriceModel.isReleasingSoon == "0") {
+                til_bookprice.visibility = View.GONE
+                til_date.visibility = View.GONE
+            } else if (itempriceModel.isReleasingSoon == "1") {
+                cb_add_to_relaese.isChecked = true
+                til_bookprice.visibility = View.VISIBLE
+                til_date.visibility = View.VISIBLE
+                ed_date.setText(itempriceModel.releasingDate)
+                ed_bookprice.setText(itempriceModel.pre_order_price)
+            }
         }
 
     }
@@ -156,9 +188,7 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
 
             var imageList = java.util.ArrayList<MultipartBody.Part>()
-//            var deleteimageList = java.util.ArrayList<MultipartBody.Part>()
             if (addfile != null) {
-
                 for (imageFile in addfile) {
                     val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
                     imageList.add(MultipartBody.Part.createFormData(AppKeys.STORE_PRODUCT_IMAGES, imageFile.name, requestFile))
@@ -188,15 +218,20 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
             var service_id = RequestBody.create(MediaType.parse("text/plain"), SharedPreferenceManager.getServiceId().toString())
             map.put("service_id", service_id)
 
-            if (!ed_addone.text.toString().isEmpty()) {
-                var addonOne = RequestBody.create(MediaType.parse("text/plain"), ed_addone.text.toString())
-                map.put("add_on_one", addonOne)
+            if (cb_add_to_relaese.isChecked) {
+                var isReleasingSoon = RequestBody.create(MediaType.parse("text/plain"), "1")
+                map.put("isReleasingSoon", isReleasingSoon)
+
+                var releaseDate = RequestBody.create(MediaType.parse("text/plain"), ed_date.text.toString())
+                map.put("releasingDate", releaseDate)
+
+                var bookingPrice = RequestBody.create(MediaType.parse("text/plain"), ed_bookprice.text.toString())
+                map.put("pre_order_price", bookingPrice)
+            } else {
+                var isReleasingSoon = RequestBody.create(MediaType.parse("text/plain"), "0")
+                map.put("isReleasingSoon", isReleasingSoon)
             }
 
-            if (!ed_addtwo.text.toString().isEmpty()) {
-                var addonTwo = RequestBody.create(MediaType.parse("text/plain"), ed_addtwo.text.toString())
-                map.put("add_on_two", addonTwo)
-            }
 
 
             apiInterface?.storeItemAddDeleteEdit("Bearer " + SharedPreferenceManager.getAuthToken(), map, imageList)
@@ -240,6 +275,47 @@ class VendorListEditStoreItemsActivity : BaseActivity(), View.OnClickListener/*,
     }
 
 
+    fun hitApiEditUpdate(itempriceModel: ItemPriceStoreModel, action: String, adapterPosition: Int) {
+        AppLog.e(TAG, itempriceModel.toString() + action)
+        ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
+        storeItemAlterRequest.action = action
+        storeItemAlterRequest.item_id = itempriceModel.item_id
+        storeItemAlterRequest.item_name = itempriceModel.item_name
+        storeItemAlterRequest.item_price = itempriceModel.item_price
+        storeItemAlterRequest.service_id = SharedPreferenceManager.getServiceId().toString()
+
+//        apiInterface?.storeItemAddDeleteEdit("Bearer " + SharedPreferenceManager.getAuthToken(), storeItemAlterRequest)
+//                ?.subscribeOn(Schedulers.io())
+//                ?.observeOn(AndroidSchedulers.mainThread())
+//                ?.subscribe(object : Observer<StoreListingResponse> {
+//                    override fun onSubscribe(d: Disposable) {
+//                    }
+//
+//                    override fun onNext(detailResponse: StoreListingResponse) {
+//                        ProgressDialogLoader.progressDialogDismiss()
+//                        AppLog.e(TAG, detailResponse.toString())
+//
+//                        if (detailResponse.status.equals(AppConstants.KEY_SUCCESS)) {
+//                            setResult(Activity.RESULT_OK)
+//                            if (action.equals(AppConstants.ACTION_DELETE)) {
+//                                eventlisting.removeAt(adapterPosition)
+//                                storeAddItemsAdapter!!.notifyItemRemoved(adapterPosition)
+//                            } else if (action.equals(AppConstants.ACTION_EDIT)) {
+//                                eventlisting.set(adapterPosition, itempriceModel)
+//                                storeAddItemsAdapter!!.notifyItemRemoved(adapterPosition)
+//                            }
+//                        } else {
+//                            UiValidator.displayMsgSnack(coordinator, this@VendorListEditStoreItemsActivity, detailResponse.message)
+//                        }
+//                    }
+//
+//                    override fun onError(e: Throwable) {
+//                        handleError(e)
+//                    }
+//
+//                    override fun onComplete() {}
+//                })
+    }
 
     private fun captureMultipleImages() {
 // start multiple photos selector

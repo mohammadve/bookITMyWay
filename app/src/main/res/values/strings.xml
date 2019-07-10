@@ -518,6 +518,7 @@
     <string name="select_date">Select date</string>
     <string name="hint_enter_size_text">Enter size S, M, X, XL</string>
     <string name="bookprice">Booking Price</string>
+    <string name="releasinon">Releasing on</string>
     <string-array name="quanlity_arrays">
         <item>1</item>
         <item>2</item>

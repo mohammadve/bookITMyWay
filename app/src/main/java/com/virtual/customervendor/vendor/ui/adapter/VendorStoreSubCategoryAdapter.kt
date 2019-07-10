@@ -8,21 +8,22 @@ import android.view.ViewGroup
 import com.virtual.customer_vendor.utill.AppUtill
 import com.virtual.customervendor.R
 import com.virtual.customervendor.model.ItemPriceStoreModel
-import kotlinx.android.synthetic.main.fragment_store_subcategory_single_row.view.*
+import kotlinx.android.synthetic.main.fragment_vendor_store_subcategory_single_row.view.*
 import java.util.*
 
 
-class StoreSubCategoryAdapter(val mContext: Context, val offermodel: ArrayList<ItemPriceStoreModel>, val clickListener: (ItemPriceStoreModel) -> Unit) : RecyclerView.Adapter<StoreSubCategoryAdapter.ResultItemViewHolder>() {
+class VendorStoreSubCategoryAdapter(val mContext: Context, val offermodel: ArrayList<ItemPriceStoreModel>, val clickListener: UpdateItems) : RecyclerView.Adapter<VendorStoreSubCategoryAdapter.ResultItemViewHolder>() {
 
     var lisData: ArrayList<ItemPriceStoreModel> = offermodel
+    var clickListener1 = clickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultItemViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.fragment_store_subcategory_single_row, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.fragment_vendor_store_subcategory_single_row, parent, false)
         return ResultItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ResultItemViewHolder, position: Int) {
-        holder.bind(mContext, lisData[position], clickListener)
+        holder.bind(mContext, lisData[position], clickListener1)
     }
 
 
@@ -36,24 +37,22 @@ class StoreSubCategoryAdapter(val mContext: Context, val offermodel: ArrayList<I
         var datetime: String? = null
 
 
-        fun bind(mContext: Context, offModel: ItemPriceStoreModel, clickListener: (ItemPriceStoreModel) -> Unit) {
+        fun bind(mContext: Context, offModel: ItemPriceStoreModel, clickListener: UpdateItems) {
             mcontx = mContext
             itemView.name.text = offModel.item_name
 
-            if(offModel.isReleasingSoon =="1"){
-                itemView.release.visibility = View.VISIBLE
-                itemView.date.visibility = View.VISIBLE
-                itemView.date.text = offModel.releasingDate
-            }else {
-                itemView.release.visibility = View.GONE
-                itemView.date.visibility = View.GONE
-            }
-
             if (offModel.item_image.size > 0)
                 AppUtill.loadImageList(mContext, offModel.item_image.get(0), itemView.ivUserPic)
-            itemView.setOnClickListener { clickListener(offModel) }
+            itemView.ivedit.setOnClickListener { clickListener.updateItem(offModel) }
+            itemView.iv_delete.setOnClickListener { clickListener.deleteItem(offModel) }
 
         }
+    }
+
+
+    public interface UpdateItems {
+        fun deleteItem(itempriceModel: ItemPriceStoreModel)
+        fun updateItem(itempriceModel: ItemPriceStoreModel)
     }
 
 }
