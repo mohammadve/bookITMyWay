@@ -45,13 +45,15 @@ class ClothColorSelectionDialogFragmentMulti : DialogFragment() {
     private var TAG: String? = ClothColorSelectionDialogFragmentMulti::class.java.name
     var apiService: ApiInterface? = null
     var JsonSizeArr : String?=""
+    var JsonSelectedArr : String?=""
 
 
     companion object {
-        fun newInstance(from: String,JsonSizeArr: String): ClothColorSelectionDialogFragmentMulti {
+        fun newInstance(from: String,JsonSizeArr: String,JsonSelectedArr: String): ClothColorSelectionDialogFragmentMulti {
             val args = Bundle()
             args.putString("name", from)
             args.putString("JsonSizeArr", JsonSizeArr)
+            args.putString("JsonSelectedArr", JsonSelectedArr)
 //            args.putInt("value", value)
             val fragment = ClothColorSelectionDialogFragmentMulti()
             fragment.arguments = args
@@ -68,6 +70,7 @@ class ClothColorSelectionDialogFragmentMulti : DialogFragment() {
         fromWhere=name
 
         JsonSizeArr = arguments?.getString("JsonSizeArr")
+        JsonSelectedArr = arguments?.getString("JsonSelectedArr")
 
 
     }
@@ -165,6 +168,44 @@ class ClothColorSelectionDialogFragmentMulti : DialogFragment() {
 
                         override fun onNext(regionResponse: ClothColorResponse) {
                             AppLog.e(TAG, regionResponse.toString())
+
+
+
+                            val listType = object : TypeToken<ArrayList<StoreClothColorModel>>() {
+
+                            }.type
+
+                            val regionSelectedResponse: ArrayList<StoreClothColorModel> = Gson().fromJson(JsonSelectedArr, listType)
+
+                            var i = 0
+                            var j = 0
+                            while (i < regionSelectedResponse.size) {
+
+                                var isPresent = false
+                                var p = 0
+                                while (j < regionResponse.data.size) {
+                                    if (regionSelectedResponse[i].name.equals(regionResponse.data[j].name)) {
+                                        isPresent = true
+                                        p = j
+                                        break
+
+                                    }
+                                    j++
+
+
+                                }
+
+                                if (isPresent) {
+                                    regionResponse.data.set(p,regionSelectedResponse[i])
+                                    regionResponse.data[p].isSelected = true
+                                }
+
+
+                                i++
+                            }
+
+
+
                             handleResults(regionResponse)
                         }
 

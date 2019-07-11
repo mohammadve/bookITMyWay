@@ -47,12 +47,14 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
     var apiService: ApiInterface? = null
     var name: String? = ""
     var JsonSizeArr : String?=""
+    var JsonSelectedSizeArr : String?=""
 
     companion object {
-        fun newInstance(from: String,JsonSizeArr: String): ClothSizeSelectionDialogFragmentMulti {
+        fun newInstance(from: String,JsonSizeArr: String,JsonSelectedSizeArr: String): ClothSizeSelectionDialogFragmentMulti {
             val args = Bundle()
             args.putString("name", from)
             args.putString("JsonSizeArr", JsonSizeArr)
+            args.putString("JsonSelectedSizeArr", JsonSelectedSizeArr)
 //            args.putInt("value", value)
             val fragment = ClothSizeSelectionDialogFragmentMulti()
             fragment.arguments = args
@@ -64,6 +66,7 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
         super.onCreate(savedInstanceState)
          name = arguments?.getString("name")
          JsonSizeArr = arguments?.getString("JsonSizeArr")
+        JsonSelectedSizeArr = arguments?.getString("JsonSelectedSizeArr")
         AppLog.e(TAG, name)
         apiService = ApiClient.client.create(ApiInterface::class.java)
         mActivity = activity
@@ -169,6 +172,41 @@ class ClothSizeSelectionDialogFragmentMulti : DialogFragment() {
 
                         override fun onNext(regionResponse: ClothSizeResponse) {
                             AppLog.e(TAG, regionResponse.toString())
+
+                            val listType = object : TypeToken<ArrayList<StoreClothSizeModel>>() {
+
+                            }.type
+
+                            val selectedSize : ArrayList<StoreClothSizeModel> = Gson().fromJson(JsonSelectedSizeArr, listType)
+
+                            var i = 0
+                            var j = 0
+                            while (i < selectedSize.size) {
+
+                                var isPresent = false
+                                var p = 0
+                                while (j < regionResponse.data.size) {
+                                    if (selectedSize[i].size_id.equals(regionResponse.data[j].size_id)) {
+                                        isPresent = true
+                                        p = j
+                                        break
+
+                                    }
+                                    j++
+
+
+                                }
+
+                                if (isPresent) {
+
+                                    regionResponse.data.set(p,selectedSize[i])
+                                    regionResponse.data[p].isSelected = true
+                                }
+
+
+                                i++
+                            }
+
                             handleResults(regionResponse)
                         }
 

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.store_cloth_size_single_row.view.*
 import java.util.*
 
 
-class StoreSelectedSizePArentAdapter(val mContext: AppCompatActivity, val from: String, var offermodel: ArrayList<StoreClothSizeModel>, var colormodels: ArrayList<StoreClothColorModel>,var clothsizeRemovedListemner: ClothSizeRemovedListener) : RecyclerView.Adapter<StoreSelectedSizePArentAdapter.ResultItemViewHolder>() {
+class StoreSelectedSizePArentAdapter(val mContext: AppCompatActivity, val from: String, var offermodel: ArrayList<StoreClothSizeModel>, var colormodels: ArrayList<StoreClothColorModel>, var isReleasingSoon: String,var clothsizeRemovedListemner: ClothSizeRemovedListener) : RecyclerView.Adapter<StoreSelectedSizePArentAdapter.ResultItemViewHolder>() {
 
     var lisData: ArrayList<StoreClothSizeModel> = offermodel
     private lateinit var colorDialogFragmentMulti: ClothColorSelectionDialogFragmentMulti
@@ -56,7 +56,7 @@ class StoreSelectedSizePArentAdapter(val mContext: AppCompatActivity, val from: 
                 notifyDataSetChanged()
 
             }
-            var storeClothColorQuentityAdapter: StoreClothColorQuentityAdapter? = StoreClothColorQuentityAdapter(mContext, AppConstants.FROM_ADDDATA, offModel.variants)
+            var storeClothColorQuentityAdapter: StoreClothColorQuentityAdapter? = StoreClothColorQuentityAdapter(mContext, AppConstants.FROM_ADDDATA, offModel.variants,isReleasingSoon)
             var manager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
             itemView.rv_selected_colors.layoutManager = manager
             itemView.rv_selected_colors.adapter = storeClothColorQuentityAdapter
@@ -106,11 +106,15 @@ class StoreSelectedSizePArentAdapter(val mContext: AppCompatActivity, val from: 
 
         }.type)
 
+        var selectedBeanValue = Gson().toJson(selectedColormodels, object : TypeToken<List<StoreClothColorModel>>() {
+
+        }.type)
 
 
 
 
-        colorDialogFragmentMulti = ClothColorSelectionDialogFragmentMulti.newInstance("" + pos, beanValue)
+
+        colorDialogFragmentMulti = ClothColorSelectionDialogFragmentMulti.newInstance("" + pos, beanValue,selectedBeanValue)
         fManager = mContext.supportFragmentManager
         colorDialogFragmentMulti.show(fManager, "My Dialog")
     }

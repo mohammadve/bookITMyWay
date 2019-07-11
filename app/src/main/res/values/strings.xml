@@ -520,6 +520,12 @@
     <string name="hint_enter_size_text">Enter size S, M, X, XL</string>
     <string name="bookprice">Booking Price</string>
     <string name="releasinon">Releasing on</string>
+    <string name="release_date_required">Release date required</string>
+    <string name="product_name_required">Product name Required</string>
+    <string name="product_size_required">Select size for product</string>
+    <string name="valid_feilds_required">Enter valid product details</string>
+    <string name="product_image_required">Please select product image</string>
+    <string name="product_des_required">Product description required</string>
     <string name="selectcolor">Select Color</string>
     <string-array name="quanlity_arrays">
         <item>1</item>

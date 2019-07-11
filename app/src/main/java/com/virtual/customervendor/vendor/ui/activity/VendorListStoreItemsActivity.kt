@@ -13,6 +13,7 @@ import com.virtual.customervendor.R
 import com.virtual.customervendor.commonActivity.BaseActivity
 import com.virtual.customervendor.managers.SharedPreferenceManager
 import com.virtual.customervendor.model.BusinessDetail
+import com.virtual.customervendor.model.ClothingCategoryModel
 import com.virtual.customervendor.model.ProductCategoryModel
 import com.virtual.customervendor.model.response.ProductCategoryResponse
 import com.virtual.customervendor.networks.ApiClient
@@ -42,18 +43,13 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
                 onBackPressed()
             }
             R.id.iv_add -> {
-                /*
 
 
                 var intent: Intent = Intent(this, ClothingCategoryModel::class.java)
                 intent.putExtra(AppKeys.SERVICE_ID, businessDetail.service_id)
                 startActivityForResult(intent, 112)
-                SlideAnimationUtill.slideNextAnimation(this)*/
-
-                var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
-                intent.putExtra(AppKeys.SERVICE_ID, businessDetail.service_id)
-                startActivityForResult(intent, 112)
                 SlideAnimationUtill.slideNextAnimation(this)
+
 
             }
             R.id.iv_edit -> {
@@ -99,7 +95,7 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
     fun hitApi() {
         if (AppUtils.isInternetConnected(this)) {
             ProgressDialogLoader.progressDialogCreation(this, getString(R.string.please_wait))
-            apiInterface?.getProductCategory("Bearer " + SharedPreferenceManager.getAuthToken(),businessDetail.service_id!!)
+            apiInterface?.getProductCategory("Bearer " + SharedPreferenceManager.getAuthToken(), businessDetail.service_id!!)
                     ?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe(object : Observer<ProductCategoryResponse> {
@@ -125,7 +121,7 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
     private fun handleResults(eventListingResponse: ProductCategoryResponse) {
         ProgressDialogLoader.progressDialogDismiss()
         if (eventListingResponse.status.equals(AppConstants.KEY_SUCCESS)) {
-            createAdapterEvents(eventListingResponse.data,eventListingResponse.store_category_id!!)
+            createAdapterEvents(eventListingResponse.data, eventListingResponse.store_category_id!!)
         } else {
             UiValidator.displayMsgSnack(coordinator, this, eventListingResponse.message)
         }
@@ -137,8 +133,8 @@ class VendorListStoreItemsActivity : BaseActivity(), View.OnClickListener {
             AppLog.e(TAG, t.message)
     }
 
-    private fun createAdapterEvents(eventlisting: ArrayList<ProductCategoryModel>,storeCategoryid :Int) {
-        storeCategoryAdapter = StoreCategoryAdapter(this, eventlisting) {productModel ->
+    private fun createAdapterEvents(eventlisting: ArrayList<ProductCategoryModel>, storeCategoryid: Int) {
+        storeCategoryAdapter = StoreCategoryAdapter(this, eventlisting) { productModel ->
             var intent: Intent = Intent(this!!, VendorStoreSubcategoryListActivity::class.java)
             var bundle = Bundle()
             bundle.putSerializable(AppConstants.OREDER_DATA, productModel)

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.store_cloth_type_single_row.view.*
 import java.util.*
 
 
-class StoreClothColorQuentityAdapter(val mContext: AppCompatActivity, val from: String, var offermodel: ArrayList<StoreClothColorModel>) : RecyclerView.Adapter<StoreClothColorQuentityAdapter.ResultItemViewHolder>() {
+class StoreClothColorQuentityAdapter(val mContext: AppCompatActivity, val from: String, var offermodel: ArrayList<StoreClothColorModel>, var isReleasingSoon: String) : RecyclerView.Adapter<StoreClothColorQuentityAdapter.ResultItemViewHolder>() {
 
     var lisData: ArrayList<StoreClothColorModel> = offermodel
 var needTochangeSpinnerValue= false
@@ -69,10 +69,29 @@ var needTochangeSpinnerValue= false
                 }
 
             }
+            if(isReleasingSoon.equals("0")){
+                itemView.tv_price2.visibility=View.INVISIBLE
+            }else{
+                itemView.tv_price2.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(p0: Editable?) {
+                        offModel.pre_order_price=itemView.tv_price2.text.toString().trim()
+
+                    }
+
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    }
+
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    }
+                })
+
+            }
 
 
             if(!offModel.quantity.equals("")){
                 itemView.tv_quantity.text=offModel.quantity
+            }else{
+                itemView.tv_quantity.text = "1"
             }
 
 
@@ -111,18 +130,6 @@ var needTochangeSpinnerValue= false
             if(!offModel.pre_order_price.equals("")){
                 itemView.tv_price2.setText(offModel.pre_order_price)
             }
-            itemView.tv_price2.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(p0: Editable?) {
-                    offModel.pre_order_price=itemView.tv_price2.text.toString().trim()
-
-                }
-
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-            })
 
 
         }

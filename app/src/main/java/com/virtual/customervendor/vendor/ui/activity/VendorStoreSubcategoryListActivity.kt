@@ -32,21 +32,30 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener,
     }
 
     override fun updateItem(itemPriceModel: ItemPriceStoreModel) {
-            if (store_cat_id == AppConstants.STORE_CAT_SEAT_SERVICE.toInt()) {
-                var intent: Intent = Intent(this!!, VendorListEditStoreItemsActivity::class.java)
-                var bundle = Bundle()
-                bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
-                intent.putExtras(bundle)
-                startActivityForResult(intent, 113)
-            }else if(store_cat_id == AppConstants.STORE_CAT_CUSTOM.toInt()){
-                var intent: Intent = Intent(this!!, VendorListEditStoreCustomItemActivity::class.java)
-                var bundle = Bundle()
-                bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
-                intent.putExtras(bundle)
-                startActivityForResult(intent, 113)
-            }
+        if (store_cat_id == AppConstants.STORE_CAT_SEAT_SERVICE.toInt()) {
+            var intent: Intent = Intent(this!!, VendorListEditStoreItemsActivity::class.java)
+            var bundle = Bundle()
+            bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
+            intent.putExtras(bundle)
+            startActivityForResult(intent, 113)
+        } else if (store_cat_id == AppConstants.STORE_CAT_CUSTOM.toInt()) {
+            var intent: Intent = Intent(this!!, VendorListEditStoreCustomItemActivity::class.java)
+            var bundle = Bundle()
+            bundle.putSerializable(AppConstants.OREDER_DATA, itemPriceModel)
+            intent.putExtras(bundle)
+            startActivityForResult(intent, 113)
+        } else if (store_cat_id == AppConstants.STORE_CAT_CLOTHING.toInt()) {
+            var intent: Intent = Intent(this, VendorAddStoreItemsClothsActivity::class.java)
+            var bundle = Bundle()
+            bundle.putSerializable(AppConstants.OREDER_DATA, productModel)
+            bundle.putSerializable(AppConstants.ITEM_DETAILS, itemPriceModel)
+            bundle.putBoolean(AppConstants.IS_EDIT, true)
+            intent.putExtras(bundle)
+            startActivityForResult(intent, 112)
+            SlideAnimationUtill.slideNextAnimation(this)
+        }
 
-            SlideAnimationUtill.slideNextAnimation(this@VendorStoreSubcategoryListActivity)
+        SlideAnimationUtill.slideNextAnimation(this@VendorStoreSubcategoryListActivity)
 
     }
 
@@ -179,7 +188,7 @@ class VendorStoreSubcategoryListActivity : BaseActivity(), View.OnClickListener,
     }
 
     private fun createAdapterEvents(eventlisting: ArrayList<ItemPriceStoreModel>) {
-        storeSubCategoryAdapter = VendorStoreSubCategoryAdapter(this, eventlisting,this)
+        storeSubCategoryAdapter = VendorStoreSubCategoryAdapter(this, eventlisting, this)
 
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_event.layoutManager = manager

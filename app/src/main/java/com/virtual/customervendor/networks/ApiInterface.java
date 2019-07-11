@@ -264,7 +264,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST(AppConstants.VENDOR_STORE_ADD_EDIT_DELETE_CLOTHS)
-    Observable<String> storeItemAddDeleteEditCloth(@Header("Authorization") String auth, @PartMap Map<String, RequestBody> map, @Part ArrayList<MultipartBody.Part> image);
+    Observable<CommonResponse> storeItemAddDeleteEditCloth(@Header("Authorization") String auth, @PartMap Map<String, RequestBody> map, @Part ArrayList<MultipartBody.Part> image);
 
     @Multipart
     @POST(AppConstants.VENDOR_ADD_RESTAURANT_ITEM)
